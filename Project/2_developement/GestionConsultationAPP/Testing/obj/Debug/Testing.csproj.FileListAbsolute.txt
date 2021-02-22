@@ -1,0 +1,15 @@
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\Testing.exe.config
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\Testing.exe
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\Testing.pdb
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\DAL.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\EntityFramework.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\DAL.pdb
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\DAL.dll.config
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\EntityFramework.xml
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\obj\Debug\Testing.csprojAssemblyReference.cache
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\obj\Debug\Testing.csproj.CoreCompileInputs.cache
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\obj\Debug\Testing.csproj.CopyComplete
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\obj\Debug\Testing.exe
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\obj\Debug\Testing.pdb
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Testing\bin\Debug\EntityFramework.SqlServer.xml

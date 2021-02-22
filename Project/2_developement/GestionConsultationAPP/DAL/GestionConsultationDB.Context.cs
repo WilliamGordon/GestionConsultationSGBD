@@ -18,7 +18,7 @@ namespace DAL
     public partial class GestionConsultationEntities : DbContext
     {
         public GestionConsultationEntities()
-            : base("GestionConsultationEntities")
+            : base("name=GestionConsultationEntities")
         {
         }
     
@@ -67,7 +67,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddMaisonMedicaleForMedecin", medecinSpecialite_IDParameter, maisonMedicale_IDParameter, minimalDurationParameter, isActifParameter);
         }
     
-        public virtual ObjectResult<AddMedecin_Result> AddMedecin(string firstname, string lastname)
+        public virtual ObjectResult<Medecin> AddMedecin(string firstname, string lastname)
         {
             var firstnameParameter = firstname != null ?
                 new ObjectParameter("Firstname", firstname) :
@@ -77,7 +77,20 @@ namespace DAL
                 new ObjectParameter("Lastname", lastname) :
                 new ObjectParameter("Lastname", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AddMedecin_Result>("AddMedecin", firstnameParameter, lastnameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("AddMedecin", firstnameParameter, lastnameParameter);
+        }
+    
+        public virtual ObjectResult<Medecin> AddMedecin(string firstname, string lastname, MergeOption mergeOption)
+        {
+            var firstnameParameter = firstname != null ?
+                new ObjectParameter("Firstname", firstname) :
+                new ObjectParameter("Firstname", typeof(string));
+    
+            var lastnameParameter = lastname != null ?
+                new ObjectParameter("Lastname", lastname) :
+                new ObjectParameter("Lastname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("AddMedecin", mergeOption, firstnameParameter, lastnameParameter);
         }
     
         public virtual int AddPatient(string firstname, string lastname)
@@ -145,6 +158,147 @@ namespace DAL
                 new ObjectParameter("MinimalDuration", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMinimalDurationOfConsultation", medecinSpecialiteMaisonMedicale_IDParameter, minimalDurationParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> AddSpecialite(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("AddSpecialite", nameParameter);
+        }
+    
+        public virtual int DeleteMaisonMedicale(Nullable<int> maisonMedicale_ID)
+        {
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteMaisonMedicale", maisonMedicale_IDParameter);
+        }
+    
+        public virtual int DeleteMedecin(Nullable<int> medecin_ID)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteMedecin", medecin_IDParameter);
+        }
+    
+        public virtual int DeletePatient(Nullable<int> patient_ID)
+        {
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePatient", patient_IDParameter);
+        }
+    
+        public virtual int DeleteSpecialite(Nullable<int> specialite_ID)
+        {
+            var specialite_IDParameter = specialite_ID.HasValue ?
+                new ObjectParameter("Specialite_ID", specialite_ID) :
+                new ObjectParameter("Specialite_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteSpecialite", specialite_IDParameter);
+        }
+    
+        public virtual int UpdateMaisonMedicale(Nullable<int> maisonMedicale_ID, string name)
+        {
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMaisonMedicale", maisonMedicale_IDParameter, nameParameter);
+        }
+    
+        public virtual int UpdateMedecin(Nullable<int> medecin_ID, string firstname, string lastname)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            var firstnameParameter = firstname != null ?
+                new ObjectParameter("Firstname", firstname) :
+                new ObjectParameter("Firstname", typeof(string));
+    
+            var lastnameParameter = lastname != null ?
+                new ObjectParameter("Lastname", lastname) :
+                new ObjectParameter("Lastname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMedecin", medecin_IDParameter, firstnameParameter, lastnameParameter);
+        }
+    
+        public virtual int UpdatePatient(Nullable<int> patient_ID, string firstname, string lastname)
+        {
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            var firstnameParameter = firstname != null ?
+                new ObjectParameter("Firstname", firstname) :
+                new ObjectParameter("Firstname", typeof(string));
+    
+            var lastnameParameter = lastname != null ?
+                new ObjectParameter("Lastname", lastname) :
+                new ObjectParameter("Lastname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePatient", patient_IDParameter, firstnameParameter, lastnameParameter);
+        }
+    
+        public virtual int UpdateSpecialite(Nullable<int> specialite_ID, string name)
+        {
+            var specialite_IDParameter = specialite_ID.HasValue ?
+                new ObjectParameter("Specialite_ID", specialite_ID) :
+                new ObjectParameter("Specialite_ID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateSpecialite", specialite_IDParameter, nameParameter);
+        }
+    
+        public virtual ObjectResult<Medecin> GetMedecinById(Nullable<int> medecin_ID)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("GetMedecinById", medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<Medecin> GetMedecinById(Nullable<int> medecin_ID, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("GetMedecinById", mergeOption, medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<Patient> GetPatientById(Nullable<int> patient_ID)
+        {
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Patient>("GetPatientById", patient_IDParameter);
+        }
+    
+        public virtual ObjectResult<Patient> GetPatientById(Nullable<int> patient_ID, MergeOption mergeOption)
+        {
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Patient>("GetPatientById", mergeOption, patient_IDParameter);
         }
     }
 }

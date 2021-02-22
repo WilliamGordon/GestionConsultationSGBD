@@ -10,3 +10,15 @@ C:\Users\willi\Desktop\SGBD\Project\2_developement\GestionConsultationAPP\DAL\ob
 C:\Users\willi\Desktop\SGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\willi\Desktop\SGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.dll
 C:\Users\willi\Desktop\SGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.pdb
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\bin\Debug\DAL.dll.config
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\bin\Debug\DAL.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\bin\Debug\DAL.pdb
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\bin\Debug\EntityFramework.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\bin\Debug\EntityFramework.xml
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.pdb

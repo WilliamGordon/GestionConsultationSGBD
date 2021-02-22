@@ -12,11 +12,22 @@ namespace ConsoleTesting
         static void Main(string[] args)
         {
             var context = new GestionConsultationEntities();
-            var spec = context.Specialites.ToList();
+
+            var med = new Medecin();
+
+            med.Firstname = "Achile";
+            med.Lastname = "Dachou";
+
+            context.Medecins.Add(med);
+            context.SaveChanges();
+
+            Console.WriteLine(med.Medecin_ID);
+
+            var spec = context.GetAllMedecin();
 
             foreach (var sp in spec)
             {
-                Console.WriteLine(sp.Name);
+                Console.WriteLine(sp.Medecin_ID + ")" + sp.Firstname + " " + sp.Lastname);
             }
 
             Console.ReadLine();

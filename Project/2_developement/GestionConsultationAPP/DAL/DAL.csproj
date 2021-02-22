@@ -80,6 +80,12 @@
     <Compile Include="GetAllSpecialite_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetMedecinById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPatientById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Local.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
@@ -102,6 +108,8 @@
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MedecinRepository.cs" />
+    <Compile Include="Repositories\PatientRepository.cs" />
     <Compile Include="Specialite.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>

@@ -199,7 +199,7 @@
     </ReferentialConstraint>
   </Association>
   <Function Name="AddMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
   </Function>
   <Function Name="AddMaisonMedicaleForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
@@ -212,12 +212,27 @@
     <Parameter Name="Lastname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="AddPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Firstname" Type="nvarchar" Mode="In" />
-    <Parameter Name="Lastname" Type="nvarchar" Mode="In" />
+    <Parameter Name="Firstname" Type="varchar" Mode="In" />
+    <Parameter Name="Lastname" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AddSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
   </Function>
   <Function Name="AddSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Specialite_ID" Type="int" Mode="In" />
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeletePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Patient_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Specialite_ID" Type="int" Mode="In" />
   </Function>
   <Function Name="DeleteSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
@@ -227,9 +242,33 @@
   <Function Name="GetAllSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetMedecinById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetPatientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Patient_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+    <Parameter Name="Firstname" Type="varchar" Mode="In" />
+    <Parameter Name="Lastname" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="UpdateMinimalDurationOfConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
     <Parameter Name="MinimalDuration" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdatePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Patient_ID" Type="int" Mode="In" />
+    <Parameter Name="Firstname" Type="varchar" Mode="In" />
+    <Parameter Name="Lastname" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="GestionConsultationModelStoreContainer">
     <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />

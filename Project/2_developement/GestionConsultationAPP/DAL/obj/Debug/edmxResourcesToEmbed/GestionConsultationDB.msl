@@ -30,6 +30,21 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="GestionConsultationModel.MaisonMedicale">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="GestionConsultationModel.Store.AddMaisonMedicale">
+            <ScalarProperty Name="Name" ParameterName="Name" />
+            <ResultBinding Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateMaisonMedicale">
+            <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+            <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteMaisonMedicale">
+            <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Medecins">
       <EntityTypeMapping TypeName="GestionConsultationModel.Medecin">
@@ -38,6 +53,23 @@
           <ScalarProperty Name="Firstname" ColumnName="Firstname" />
           <ScalarProperty Name="Lastname" ColumnName="Lastname" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="GestionConsultationModel.Medecin">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="GestionConsultationModel.Store.AddMedecin">
+            <ScalarProperty Name="Lastname" ParameterName="Lastname" />
+            <ScalarProperty Name="Firstname" ParameterName="Firstname" />
+            <ResultBinding Name="Medecin_ID" ColumnName="Medecin_ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateMedecin">
+            <ScalarProperty Name="Lastname" ParameterName="Lastname" Version="Current" />
+            <ScalarProperty Name="Firstname" ParameterName="Firstname" Version="Current" />
+            <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteMedecin">
+            <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MedecinSpecialites">
@@ -68,6 +100,23 @@
           <ScalarProperty Name="Lastname" ColumnName="Lastname" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="GestionConsultationModel.Patient">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="GestionConsultationModel.Store.AddPatient">
+            <ScalarProperty Name="Lastname" ParameterName="Lastname" />
+            <ScalarProperty Name="Firstname" ParameterName="Firstname" />
+            <ResultBinding Name="Patient_ID" ColumnName="Patient_ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdatePatient">
+            <ScalarProperty Name="Lastname" ParameterName="Lastname" Version="Current" />
+            <ScalarProperty Name="Firstname" ParameterName="Firstname" Version="Current" />
+            <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="GestionConsultationModel.Store.DeletePatient">
+            <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Presences">
       <EntityTypeMapping TypeName="GestionConsultationModel.Presence">
@@ -87,18 +136,25 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="GestionConsultationModel.Specialite">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="GestionConsultationModel.Store.AddSpecialite">
+            <ScalarProperty Name="Name" ParameterName="Name" />
+            <ResultBinding Name="Specialite_ID" ColumnName="Specialite_ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateSpecialite">
+            <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+            <ScalarProperty Name="Specialite_ID" ParameterName="Specialite_ID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteSpecialite">
+            <ScalarProperty Name="Specialite_ID" ParameterName="Specialite_ID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="AddMaisonMedicale" FunctionName="GestionConsultationModel.Store.AddMaisonMedicale" />
     <FunctionImportMapping FunctionImportName="AddMaisonMedicaleForMedecin" FunctionName="GestionConsultationModel.Store.AddMaisonMedicaleForMedecin" />
-    <FunctionImportMapping FunctionImportName="AddMedecin" FunctionName="GestionConsultationModel.Store.AddMedecin">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GestionConsultationModel.AddMedecin_Result">
-          <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
-          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AddMedecin" FunctionName="GestionConsultationModel.Store.AddMedecin" />
     <FunctionImportMapping FunctionImportName="AddPatient" FunctionName="GestionConsultationModel.Store.AddPatient" />
     <FunctionImportMapping FunctionImportName="AddSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.AddSpecialiteForMedecin" />
     <FunctionImportMapping FunctionImportName="DeleteSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.DeleteSpecialiteForMedecin" />
@@ -128,5 +184,16 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UpdateMinimalDurationOfConsultation" FunctionName="GestionConsultationModel.Store.UpdateMinimalDurationOfConsultation" />
+    <FunctionImportMapping FunctionImportName="AddSpecialite" FunctionName="GestionConsultationModel.Store.AddSpecialite" />
+    <FunctionImportMapping FunctionImportName="DeleteMaisonMedicale" FunctionName="GestionConsultationModel.Store.DeleteMaisonMedicale" />
+    <FunctionImportMapping FunctionImportName="DeleteMedecin" FunctionName="GestionConsultationModel.Store.DeleteMedecin" />
+    <FunctionImportMapping FunctionImportName="DeletePatient" FunctionName="GestionConsultationModel.Store.DeletePatient" />
+    <FunctionImportMapping FunctionImportName="DeleteSpecialite" FunctionName="GestionConsultationModel.Store.DeleteSpecialite" />
+    <FunctionImportMapping FunctionImportName="UpdateMaisonMedicale" FunctionName="GestionConsultationModel.Store.UpdateMaisonMedicale" />
+    <FunctionImportMapping FunctionImportName="UpdateMedecin" FunctionName="GestionConsultationModel.Store.UpdateMedecin" />
+    <FunctionImportMapping FunctionImportName="UpdatePatient" FunctionName="GestionConsultationModel.Store.UpdatePatient" />
+    <FunctionImportMapping FunctionImportName="UpdateSpecialite" FunctionName="GestionConsultationModel.Store.UpdateSpecialite" />
+    <FunctionImportMapping FunctionImportName="GetMedecinById" FunctionName="GestionConsultationModel.Store.GetMedecinById" />
+    <FunctionImportMapping FunctionImportName="GetPatientById" FunctionName="GestionConsultationModel.Store.GetPatientById" />
   </EntityContainerMapping>
 </Mapping>

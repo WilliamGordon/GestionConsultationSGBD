@@ -1,0 +1,2 @@
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
