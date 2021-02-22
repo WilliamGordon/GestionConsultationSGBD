@@ -1,0 +1,44 @@
+\contentsline {section}{\numberline {1}Contexte}{4}{}%
+\contentsline {subsection}{\numberline {1.1}Cadre}{4}{}%
+\contentsline {subsection}{\numberline {1.2}Projet}{4}{}%
+\contentsline {section}{\numberline {2}Analyse métier}{5}{}%
+\contentsline {subsection}{\numberline {2.1}Description de la solution envisagée}{5}{}%
+\contentsline {subsection}{\numberline {2.2}Intervenants}{5}{}%
+\contentsline {subsection}{\numberline {2.3}Fonctions attendues}{6}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}Exigences fonctionnelles}{6}{}%
+\contentsline {paragraph}{\numberline {2.3.1.1}Fonctionnalité obligatoire application patient}{6}{}%
+\contentsline {paragraph}{\numberline {2.3.1.2}Fonctionnalité obligatoire application médecin}{6}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}Exigences non fonctionnelles}{6}{}%
+\contentsline {subsection}{\numberline {2.4}Contraintes business}{7}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Point de vue technique}{7}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}Composition du cahier des charges}{7}{}%
+\contentsline {subsubsection}{\numberline {2.4.3}Architecture du projet, à respecter}{7}{}%
+\contentsline {section}{\numberline {3}Analyse fonctionnelle}{8}{}%
+\contentsline {subsection}{\numberline {3.1}Diagramme USE CASES (Les principaux)}{8}{}%
+\contentsline {subsection}{\numberline {3.2}Descriptions textuelles des différents USE CASES}{8}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Application Patient}{8}{}%
+\contentsline {paragraph}{\numberline {3.2.1.1}EF-AP-001 -- Faire une demande de consultation}{8}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Application Médecin}{8}{}%
+\contentsline {paragraph}{\numberline {3.2.2.1}EF-AM-001 -- Ajouter ces présences}{8}{}%
+\contentsline {paragraph}{\numberline {3.2.2.2}EF-AM-002 -- Confirmer une consultation}{8}{}%
+\contentsline {section}{\numberline {4}Contraintes fonctionnelles}{9}{}%
+\contentsline {subsection}{\numberline {4.1}Règles d'accès et autorisation}{9}{}%
+\contentsline {subsection}{\numberline {4.2}Règles de structure}{9}{}%
+\contentsline {subsection}{\numberline {4.3}Règles de validation}{9}{}%
+\contentsline {subsection}{\numberline {4.4}Règles de calcul}{9}{}%
+\contentsline {section}{\numberline {5}Description des entités}{10}{}%
+\contentsline {subsection}{\numberline {5.1}Patient}{10}{}%
+\contentsline {subsection}{\numberline {5.2}Médecin}{10}{}%
+\contentsline {subsection}{\numberline {5.3}Spécialité}{10}{}%
+\contentsline {subsection}{\numberline {5.4}Maison médicale}{10}{}%
+\contentsline {subsection}{\numberline {5.5}Consultation}{10}{}%
+\contentsline {section}{\numberline {6}Schéma relationnel de la solution}{11}{}%
+\contentsline {subsection}{\numberline {6.1}Schéma entité-association}{11}{}%
+\contentsline {subsection}{\numberline {6.2}Schéma relationnel}{11}{}%
+\contentsline {subsection}{\numberline {6.3}Implémentation des contraintes}{11}{}%
+\contentsline {section}{\numberline {7}Analyse technique}{12}{}%
+\contentsline {subsection}{\numberline {7.1}Technologies proposées}{12}{}%
+\contentsline {subsection}{\numberline {7.2}Architecture applicative}{12}{}%
+\contentsline {subsection}{\numberline {7.3}Algorithmes spécifiques}{12}{}%
+\contentsline {subsection}{\numberline {7.4}Erreurs}{12}{}%
+\contentsline {section}{\numberline {8}ANNEXES}{13}{}%

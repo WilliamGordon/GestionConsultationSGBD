@@ -1,0 +1,250 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[a4paper,bindingoffset=0.2in,left=1in,right=1in,top=1in,bottom=1in,footskip=.25in]{geometry}
+\usepackage{blindtext}
+\usepackage{titlesec}
+\usepackage[parfill]{parskip}
+\usepackage{array}
+\usepackage{float}
+\restylefloat{table}
+
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+% https://tex.stackexchange.com/questions/78772/creating-a-bold-and-indented-title
+\renewcommand\thesection{\arabic{section}} 
+\renewcommand\thesubsection{\thesection.\arabic{subsection}} 
+\titleformat{\section}[block]{\bfseries}{\thesection.}{1em}{} 
+\titleformat{\subsection}[block]{\bfseries\hspace{2em}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]{\bfseries\hspace{3em}}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}{\normalfont\normalsize}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{50pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\title{	
+	\normalfont\normalsize
+	\textsc{EPHEC, Bachelier en Informatique de Gestion}\\ % Your university, school and/or department name(s)
+	\vspace{25pt} % Whitespace
+	\rule{\linewidth}{0.5pt}\\ % Thin top horizontal rule
+	\vspace{20pt} % Whitespace
+	{\huge Analyse SGBD}\\ % The assignment title
+	\vspace{12pt} % Whitespace
+	\rule{\linewidth}{2pt}\\ % Thick bottom horizontal rule
+	\vspace{12pt} % Whitespace
+}
+
+\author{William Wauters} % Your name
+
+\date{\normalsize\today} % Today's date (\today) or a custom date
+
+\begin{document}
+	\maketitle % Print the title
+	\newpage
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Contexte}
+	\subsection{Cadre}
+	Expliquer pourquoi nous faisons ce projet
+	
+	Ce projet est développé dans le cadre du cours de Projet de développement SGBD de Monsieur Fievez.
+	
+	A travers ce projet plusieurs points sont demandés à l'étudiant:
+	
+	\begin{itemize}
+		\item Analyse d'une demande d'un client (pas toujours claire et précise)
+		\item Réalisation d'une entité association
+		\item Réalisation d'une base de données
+		\item Réalisation de triggers et procédures stockées pour appliquer les contraintes
+		\item Réalisation d'un code en 3 couches - DAL/ BL / View
+		\item Utilisations de modèles et d'erreurs séparées de la couche business
+		\item Accès aux données en lecture et écriture uniquement par procédures stockées
+	\end{itemize}
+
+	\subsection{Projet}
+	Le projet en lui-même consiste au développement d'un système d'information permettant de faire fonctionner deux systèmes applicatifs avec des fonctionnalités différentes.
+	\begin{itemize}
+		\item Application permettant la gestion des maisons médicales et des médecins
+		\item Application permettant la gestion des réservations des patients
+	\end{itemize}
+	Ces deux applications doivent utiliser une même base de données mais des utilisateurs et vues différentes.
+	\newpage
+	
+	\section{Analyse métier}	
+	\subsection{Description de la solution envisagée}
+	
+	Notre solution permet la gestion des réservations de consultations entre patients et médecins dans des maisons médicales. Cette solution sera composé de deux applications distinctes.
+	
+	Partie médecin
+	
+	Partie patients
+	
+	\subsection{Intervenants}
+	
+	Les intervenants prévus pour notre solutions
+	\begin{itemize}
+		\item Médecin: Ajoute ces disponibilités, confirme des consultations
+		\item Patient: Effectue des réservations
+	\end{itemize}
+	
+	\newpage
+	
+	\subsection{Fonctions attendues}
+	
+	\subsubsection{Exigences fonctionnelles}
+	
+	\paragraph{Fonctionnalité obligatoire application patient}
+	
+	\begin{table}[ht]
+		\begin{tabular}{|m{2.5cm}|m{12.5cm}|}
+			\hline
+			\textbf{Code} & \textbf{Description} \\ \hline
+			EF-AP-001 & Créer un nouveau patient \\ \hline
+			EF-AP-002 & Sélectionner un patient dans la liste de patients \\ \hline
+			EF-AP-003 & Consulter la liste des prochaines consultations \\ \hline
+			EF-AP-004 & Consulter la liste des consultations confirmées \\ \hline
+			EF-AP-005 & Consulter la liste des consultations non confirmées \\ \hline
+			EF-AP-006 & Faire une demande de consultation \\ \hline
+			EF-AP-007 & Modifier une demande de consultation \\ \hline
+			EF-AP-008 & Supprimer une demande de consultation \\ \hline
+		\end{tabular}
+	\end{table}
+
+	\paragraph{Fonctionnalité obligatoire application médecin}
+	
+	\begin{table}[ht]
+		\begin{tabular}{|m{2.5cm}|m{12.5cm}|}
+			\hline
+			\textbf{Code} & \textbf{Description} \\ \hline
+			EF-AM-001 & Créer un nouveau médecin \\ \hline
+			EF-AM-002 & Sélectionner un médecin dans la liste des médecins \\ \hline
+			EF-AM-003 & Visualiser son planning \\ \hline
+			EF-AM-004 & Visualiser la liste de ces consultations \\ \hline
+			EF-AM-005 & Visualiser la liste de ces consultations non confirmées \\ \hline
+			EF-AM-006 & Confirmer une demande de consultation \\ \hline
+			EF-AM-007 & Ajouter ces présences dans une maison médicale \\ \hline
+			EF-AM-008 & Modifier ces présences dans une maison médicale \\ \hline
+			EF-AM-009 & Visualiser la liste des maisons médicales dans lesquelles il travail \\ \hline
+			EF-AM-010 & S'inscrire dans une maison médicale \\ \hline
+			EF-AM-011 & Modifier durée minimum d'une consultation dans une maison médicale \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	\subsubsection{Exigences non fonctionnelles}
+	
+	\begin{table}[ht]
+		\begin{tabular}{|m{2.5cm}|m{12.5cm}|}
+			\hline
+			\textbf{Code} & \textbf{Description} \\ \hline
+			ENF-001 & Facilité d'encodage pour l'ajout des présences du médecin \\ \hline
+			ENF-002 & Être ergonomique pour l'utilisateur \\ \hline
+			ENF-003 & Permettre une vue complète et simplifiée des informations \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	\newpage
+	
+	\subsection{Contraintes business}
+
+	Avoir une découpe en 3 couches (DAL, BL, GUI)
+	
+	Être divisé en deux parties
+	
+	Accéder à la base de données vie Entity Framework DB First
+	
+	Avoir une seule base de données dédiée pour les deux parties
+	
+	Autoriser l'accès aux tables de la base de données uniquement par l'utilisateur admin (sa)
+	
+	Avoir deux schéma différents (patient, médecin)
+	
+	Accéder aux données et les modifier via des procédures stockées spécifiques par schéma.
+
+	\subsubsection{Point de vue technique}
+	
+	\subsubsection{Composition du cahier des charges}
+	
+	\subsubsection{Architecture du projet, à respecter}
+
+	\newpage
+	
+	\section{Analyse fonctionnelle}
+	
+	Pas pour le création des locaux, mais bien pour les scénarios de réservations 
+		
+	\subsection{Diagramme USE CASES (Les principaux)}
+
+	\subsection{Descriptions textuelles des différents USE CASES}
+
+	\subsubsection{Application Patient}
+
+	\paragraph{EF-AP-001 -- Faire une demande de consultation}
+
+	\subsubsection{Application Médecin}
+	
+	\paragraph{EF-AM-001 -- Ajouter ces présences}
+
+	\paragraph{EF-AM-002 -- Confirmer une consultation}
+	
+	\newpage
+	
+	\section{Contraintes fonctionnelles}
+	
+	\subsection{Règles d'accès et autorisation}
+	
+	L'application patient est uniquement accessible aux utilisateurs patients
+	
+	...
+	
+	\subsection{Règles de structure}
+	
+	\subsection{Règles de validation}
+	
+	\subsection{Règles de calcul}
+	
+	\newpage
+	
+	\section{Description des entités}
+	
+	\subsection{Patient}
+	
+	\subsection{Médecin}
+	
+	\subsection{Spécialité}
+	
+	\subsection{Maison médicale}
+	
+	\subsection{Consultation}
+	
+	\newpage
+	
+	\section{Schéma relationnel de la solution}
+	
+	\subsection{Schéma entité-association}
+	
+	\subsection{Schéma relationnel}
+	
+	\subsection{Implémentation des contraintes}
+	
+	\newpage
+	
+	\section{Analyse technique}
+	
+	\subsection{Technologies proposées}
+	
+	La base de données a été réalisée en SQL Server
+	
+	Les applications sont réalisées avec ASP.NET MVC
+	
+	Utilisation d'une API ASP.NET avec Entity Framework DB first
+
+	\subsection{Architecture applicative}
+
+	\subsection{Algorithmes spécifiques}
+
+	\subsection{Erreurs}
+
+	\newpage
+	
+	\section{ANNEXES}
+	
+\end{document}

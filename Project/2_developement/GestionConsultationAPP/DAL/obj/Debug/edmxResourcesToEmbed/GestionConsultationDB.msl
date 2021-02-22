@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestionConsultationModelStoreContainer" CdmEntityContainer="GestionConsultationEntities">
+    <EntitySetMapping Name="Consultations">
+      <EntityTypeMapping TypeName="GestionConsultationModel.Consultation">
+        <MappingFragment StoreEntitySet="Consultation">
+          <ScalarProperty Name="Consultation_ID" ColumnName="Consultation_ID" />
+          <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+          <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ColumnName="MedecinSpecialiteMaisonMedicale_ID" />
+          <ScalarProperty Name="Local_ID" ColumnName="Local_ID" />
+          <ScalarProperty Name="Starting" ColumnName="Starting" />
+          <ScalarProperty Name="Ending" ColumnName="Ending" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locals">
+      <EntityTypeMapping TypeName="GestionConsultationModel.Local">
+        <MappingFragment StoreEntitySet="Local">
+          <ScalarProperty Name="Local_ID" ColumnName="Local_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaisonMedicales">
+      <EntityTypeMapping TypeName="GestionConsultationModel.MaisonMedicale">
+        <MappingFragment StoreEntitySet="MaisonMedicale">
+          <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medecins">
+      <EntityTypeMapping TypeName="GestionConsultationModel.Medecin">
+        <MappingFragment StoreEntitySet="Medecin">
+          <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedecinSpecialites">
+      <EntityTypeMapping TypeName="GestionConsultationModel.MedecinSpecialite">
+        <MappingFragment StoreEntitySet="MedecinSpecialite">
+          <ScalarProperty Name="MedecinSpecialite_ID" ColumnName="MedecinSpecialite_ID" />
+          <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
+          <ScalarProperty Name="Specialite_ID" ColumnName="Specialite_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedecinSpecialiteMaisonMedicales">
+      <EntityTypeMapping TypeName="GestionConsultationModel.MedecinSpecialiteMaisonMedicale">
+        <MappingFragment StoreEntitySet="MedecinSpecialiteMaisonMedicale">
+          <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ColumnName="MedecinSpecialiteMaisonMedicale_ID" />
+          <ScalarProperty Name="MedecinSpecialite_ID" ColumnName="MedecinSpecialite_ID" />
+          <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+          <ScalarProperty Name="MinimalDuration" ColumnName="MinimalDuration" />
+          <ScalarProperty Name="IsActif" ColumnName="IsActif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="GestionConsultationModel.Patient">
+        <MappingFragment StoreEntitySet="Patient">
+          <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Presences">
+      <EntityTypeMapping TypeName="GestionConsultationModel.Presence">
+        <MappingFragment StoreEntitySet="Presence">
+          <ScalarProperty Name="Presence_ID" ColumnName="Presence_ID" />
+          <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
+          <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+          <ScalarProperty Name="Starting" ColumnName="Starting" />
+          <ScalarProperty Name="Ending" ColumnName="Ending" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialites">
+      <EntityTypeMapping TypeName="GestionConsultationModel.Specialite">
+        <MappingFragment StoreEntitySet="Specialite">
+          <ScalarProperty Name="Specialite_ID" ColumnName="Specialite_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddMaisonMedicale" FunctionName="GestionConsultationModel.Store.AddMaisonMedicale" />
+    <FunctionImportMapping FunctionImportName="AddMaisonMedicaleForMedecin" FunctionName="GestionConsultationModel.Store.AddMaisonMedicaleForMedecin" />
+    <FunctionImportMapping FunctionImportName="AddMedecin" FunctionName="GestionConsultationModel.Store.AddMedecin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionConsultationModel.AddMedecin_Result">
+          <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AddPatient" FunctionName="GestionConsultationModel.Store.AddPatient" />
+    <FunctionImportMapping FunctionImportName="AddSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.AddSpecialiteForMedecin" />
+    <FunctionImportMapping FunctionImportName="DeleteSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.DeleteSpecialiteForMedecin" />
+    <FunctionImportMapping FunctionImportName="GetAllMedecin" FunctionName="GestionConsultationModel.Store.GetAllMedecin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionConsultationModel.GetAllMedecin_Result">
+          <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllSpecialite" FunctionName="GestionConsultationModel.Store.GetAllSpecialite">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionConsultationModel.GetAllSpecialite_Result">
+          <ScalarProperty Name="Specialite_ID" ColumnName="Specialite_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForMedecin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionConsultationModel.GetAllSpecialiteForMedecin_Result">
+          <ScalarProperty Name="Specialite_ID" ColumnName="Specialite_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateMinimalDurationOfConsultation" FunctionName="GestionConsultationModel.Store.UpdateMinimalDurationOfConsultation" />
+  </EntityContainerMapping>
+</Mapping>

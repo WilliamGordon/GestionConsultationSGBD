@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionConsultationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Consultation">
+    <Key>
+      <PropertyRef Name="Consultation_ID" />
+    </Key>
+    <Property Name="Consultation_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+    <Property Name="MedecinSpecialiteMaisonMedicale_ID" Type="Int32" Nullable="false" />
+    <Property Name="Local_ID" Type="Int32" Nullable="false" />
+    <Property Name="Starting" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Ending" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Local" Relationship="Self.FK_Consultation_Local" FromRole="Consultation" ToRole="Local" />
+    <NavigationProperty Name="MedecinSpecialiteMaisonMedicale" Relationship="Self.FK_Consultation_MedecinSpecialiteMaisonMedicale" FromRole="Consultation" ToRole="MedecinSpecialiteMaisonMedicale" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_Consultation_Patient" FromRole="Consultation" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Local">
+    <Key>
+      <PropertyRef Name="Local_ID" />
+    </Key>
+    <Property Name="Local_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaisonMedicale_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultation_Local" FromRole="Local" ToRole="Consultation" />
+    <NavigationProperty Name="MaisonMedicale" Relationship="Self.FK_Local_MaisonMedicale" FromRole="Local" ToRole="MaisonMedicale" />
+  </EntityType>
+  <EntityType Name="MaisonMedicale">
+    <Key>
+      <PropertyRef Name="MaisonMedicale_ID" />
+    </Key>
+    <Property Name="MaisonMedicale_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Locals" Relationship="Self.FK_Local_MaisonMedicale" FromRole="MaisonMedicale" ToRole="Local" />
+    <NavigationProperty Name="MedecinSpecialiteMaisonMedicales" Relationship="Self.FK_MedecinSpecialiteMaisonMedicale_MaisonMedicale" FromRole="MaisonMedicale" ToRole="MedecinSpecialiteMaisonMedicale" />
+    <NavigationProperty Name="Presences" Relationship="Self.FK_Presence_MaisonMedicale" FromRole="MaisonMedicale" ToRole="Presence" />
+  </EntityType>
+  <EntityType Name="Medecin">
+    <Key>
+      <PropertyRef Name="Medecin_ID" />
+    </Key>
+    <Property Name="Medecin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MedecinSpecialites" Relationship="Self.FK_MedecinSpecialite_Medecin" FromRole="Medecin" ToRole="MedecinSpecialite" />
+    <NavigationProperty Name="Presences" Relationship="Self.FK_Presence_Medecin" FromRole="Medecin" ToRole="Presence" />
+  </EntityType>
+  <EntityType Name="MedecinSpecialite">
+    <Key>
+      <PropertyRef Name="MedecinSpecialite_ID" />
+    </Key>
+    <Property Name="MedecinSpecialite_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Medecin_ID" Type="Int32" Nullable="false" />
+    <Property Name="Specialite_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medecin" Relationship="Self.FK_MedecinSpecialite_Medecin" FromRole="MedecinSpecialite" ToRole="Medecin" />
+    <NavigationProperty Name="Specialite" Relationship="Self.FK_MedecinSpecialite_Specialite" FromRole="MedecinSpecialite" ToRole="Specialite" />
+    <NavigationProperty Name="MedecinSpecialiteMaisonMedicales" Relationship="Self.FK_MedecinSpecialiteMaisonMedicale_MedecinSpecialite" FromRole="MedecinSpecialite" ToRole="MedecinSpecialiteMaisonMedicale" />
+  </EntityType>
+  <EntityType Name="MedecinSpecialiteMaisonMedicale">
+    <Key>
+      <PropertyRef Name="MedecinSpecialiteMaisonMedicale_ID" />
+    </Key>
+    <Property Name="MedecinSpecialiteMaisonMedicale_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MedecinSpecialite_ID" Type="Int32" Nullable="false" />
+    <Property Name="MaisonMedicale_ID" Type="Int32" Nullable="false" />
+    <Property Name="MinimalDuration" Type="Int32" Nullable="false" />
+    <Property Name="IsActif" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultation_MedecinSpecialiteMaisonMedicale" FromRole="MedecinSpecialiteMaisonMedicale" ToRole="Consultation" />
+    <NavigationProperty Name="MaisonMedicale" Relationship="Self.FK_MedecinSpecialiteMaisonMedicale_MaisonMedicale" FromRole="MedecinSpecialiteMaisonMedicale" ToRole="MaisonMedicale" />
+    <NavigationProperty Name="MedecinSpecialite" Relationship="Self.FK_MedecinSpecialiteMaisonMedicale_MedecinSpecialite" FromRole="MedecinSpecialiteMaisonMedicale" ToRole="MedecinSpecialite" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Patient_ID" />
+    </Key>
+    <Property Name="Patient_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultation_Patient" FromRole="Patient" ToRole="Consultation" />
+  </EntityType>
+  <EntityType Name="Presence">
+    <Key>
+      <PropertyRef Name="Presence_ID" />
+    </Key>
+    <Property Name="Presence_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Medecin_ID" Type="Int32" Nullable="false" />
+    <Property Name="MaisonMedicale_ID" Type="Int32" Nullable="false" />
+    <Property Name="Starting" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Ending" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="MaisonMedicale" Relationship="Self.FK_Presence_MaisonMedicale" FromRole="Presence" ToRole="MaisonMedicale" />
+    <NavigationProperty Name="Medecin" Relationship="Self.FK_Presence_Medecin" FromRole="Presence" ToRole="Medecin" />
+  </EntityType>
+  <EntityType Name="Specialite">
+    <Key>
+      <PropertyRef Name="Specialite_ID" />
+    </Key>
+    <Property Name="Specialite_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MedecinSpecialites" Relationship="Self.FK_MedecinSpecialite_Specialite" FromRole="Specialite" ToRole="MedecinSpecialite" />
+  </EntityType>
+  <Association Name="FK_Consultation_Local">
+    <End Role="Local" Type="Self.Local" Multiplicity="1" />
+    <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Local">
+        <PropertyRef Name="Local_ID" />
+      </Principal>
+      <Dependent Role="Consultation">
+        <PropertyRef Name="Local_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultation_MedecinSpecialiteMaisonMedicale">
+    <End Role="MedecinSpecialiteMaisonMedicale" Type="Self.MedecinSpecialiteMaisonMedicale" Multiplicity="1" />
+    <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedecinSpecialiteMaisonMedicale">
+        <PropertyRef Name="MedecinSpecialiteMaisonMedicale_ID" />
+      </Principal>
+      <Dependent Role="Consultation">
+        <PropertyRef Name="MedecinSpecialiteMaisonMedicale_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultation_Patient">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Patient_ID" />
+      </Principal>
+      <Dependent Role="Consultation">
+        <PropertyRef Name="Patient_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Local_MaisonMedicale">
+    <End Role="MaisonMedicale" Type="Self.MaisonMedicale" Multiplicity="1" />
+    <End Role="Local" Type="Self.Local" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaisonMedicale">
+        <PropertyRef Name="MaisonMedicale_ID" />
+      </Principal>
+      <Dependent Role="Local">
+        <PropertyRef Name="MaisonMedicale_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedecinSpecialiteMaisonMedicale_MaisonMedicale">
+    <End Role="MaisonMedicale" Type="Self.MaisonMedicale" Multiplicity="1" />
+    <End Role="MedecinSpecialiteMaisonMedicale" Type="Self.MedecinSpecialiteMaisonMedicale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaisonMedicale">
+        <PropertyRef Name="MaisonMedicale_ID" />
+      </Principal>
+      <Dependent Role="MedecinSpecialiteMaisonMedicale">
+        <PropertyRef Name="MaisonMedicale_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Presence_MaisonMedicale">
+    <End Role="MaisonMedicale" Type="Self.MaisonMedicale" Multiplicity="1" />
+    <End Role="Presence" Type="Self.Presence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaisonMedicale">
+        <PropertyRef Name="MaisonMedicale_ID" />
+      </Principal>
+      <Dependent Role="Presence">
+        <PropertyRef Name="MaisonMedicale_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedecinSpecialite_Medecin">
+    <End Role="Medecin" Type="Self.Medecin" Multiplicity="1" />
+    <End Role="MedecinSpecialite" Type="Self.MedecinSpecialite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medecin">
+        <PropertyRef Name="Medecin_ID" />
+      </Principal>
+      <Dependent Role="MedecinSpecialite">
+        <PropertyRef Name="Medecin_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Presence_Medecin">
+    <End Role="Medecin" Type="Self.Medecin" Multiplicity="1" />
+    <End Role="Presence" Type="Self.Presence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medecin">
+        <PropertyRef Name="Medecin_ID" />
+      </Principal>
+      <Dependent Role="Presence">
+        <PropertyRef Name="Medecin_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedecinSpecialite_Specialite">
+    <End Role="Specialite" Type="Self.Specialite" Multiplicity="1" />
+    <End Role="MedecinSpecialite" Type="Self.MedecinSpecialite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialite">
+        <PropertyRef Name="Specialite_ID" />
+      </Principal>
+      <Dependent Role="MedecinSpecialite">
+        <PropertyRef Name="Specialite_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedecinSpecialiteMaisonMedicale_MedecinSpecialite">
+    <End Role="MedecinSpecialite" Type="Self.MedecinSpecialite" Multiplicity="1" />
+    <End Role="MedecinSpecialiteMaisonMedicale" Type="Self.MedecinSpecialiteMaisonMedicale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedecinSpecialite">
+        <PropertyRef Name="MedecinSpecialite_ID" />
+      </Principal>
+      <Dependent Role="MedecinSpecialiteMaisonMedicale">
+        <PropertyRef Name="MedecinSpecialite_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestionConsultationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Consultations" EntityType="Self.Consultation" />
+    <EntitySet Name="Locals" EntityType="Self.Local" />
+    <EntitySet Name="MaisonMedicales" EntityType="Self.MaisonMedicale" />
+    <EntitySet Name="Medecins" EntityType="Self.Medecin" />
+    <EntitySet Name="MedecinSpecialites" EntityType="Self.MedecinSpecialite" />
+    <EntitySet Name="MedecinSpecialiteMaisonMedicales" EntityType="Self.MedecinSpecialiteMaisonMedicale" />
+    <EntitySet Name="Patients" EntityType="Self.Patient" />
+    <EntitySet Name="Presences" EntityType="Self.Presence" />
+    <EntitySet Name="Specialites" EntityType="Self.Specialite" />
+    <AssociationSet Name="FK_Consultation_Local" Association="Self.FK_Consultation_Local">
+      <End Role="Local" EntitySet="Locals" />
+      <End Role="Consultation" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultation_MedecinSpecialiteMaisonMedicale" Association="Self.FK_Consultation_MedecinSpecialiteMaisonMedicale">
+      <End Role="MedecinSpecialiteMaisonMedicale" EntitySet="MedecinSpecialiteMaisonMedicales" />
+      <End Role="Consultation" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultation_Patient" Association="Self.FK_Consultation_Patient">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="Consultation" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Local_MaisonMedicale" Association="Self.FK_Local_MaisonMedicale">
+      <End Role="MaisonMedicale" EntitySet="MaisonMedicales" />
+      <End Role="Local" EntitySet="Locals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedecinSpecialiteMaisonMedicale_MaisonMedicale" Association="Self.FK_MedecinSpecialiteMaisonMedicale_MaisonMedicale">
+      <End Role="MaisonMedicale" EntitySet="MaisonMedicales" />
+      <End Role="MedecinSpecialiteMaisonMedicale" EntitySet="MedecinSpecialiteMaisonMedicales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Presence_MaisonMedicale" Association="Self.FK_Presence_MaisonMedicale">
+      <End Role="MaisonMedicale" EntitySet="MaisonMedicales" />
+      <End Role="Presence" EntitySet="Presences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedecinSpecialite_Medecin" Association="Self.FK_MedecinSpecialite_Medecin">
+      <End Role="Medecin" EntitySet="Medecins" />
+      <End Role="MedecinSpecialite" EntitySet="MedecinSpecialites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Presence_Medecin" Association="Self.FK_Presence_Medecin">
+      <End Role="Medecin" EntitySet="Medecins" />
+      <End Role="Presence" EntitySet="Presences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedecinSpecialite_Specialite" Association="Self.FK_MedecinSpecialite_Specialite">
+      <End Role="Specialite" EntitySet="Specialites" />
+      <End Role="MedecinSpecialite" EntitySet="MedecinSpecialites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedecinSpecialiteMaisonMedicale_MedecinSpecialite" Association="Self.FK_MedecinSpecialiteMaisonMedicale_MedecinSpecialite">
+      <End Role="MedecinSpecialite" EntitySet="MedecinSpecialites" />
+      <End Role="MedecinSpecialiteMaisonMedicale" EntitySet="MedecinSpecialiteMaisonMedicales" />
+    </AssociationSet>
+    <FunctionImport Name="AddMaisonMedicale">
+      <Parameter Name="Name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddMaisonMedicaleForMedecin">
+      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
+      <Parameter Name="IsActif" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="AddMedecin" ReturnType="Collection(GestionConsultationModel.AddMedecin_Result)">
+      <Parameter Name="Firstname" Mode="In" Type="String" />
+      <Parameter Name="Lastname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddPatient">
+      <Parameter Name="Firstname" Mode="In" Type="String" />
+      <Parameter Name="Lastname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddSpecialiteForMedecin">
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteSpecialiteForMedecin">
+      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllMedecin" ReturnType="Collection(GestionConsultationModel.GetAllMedecin_Result)" />
+    <FunctionImport Name="GetAllSpecialite" ReturnType="Collection(GestionConsultationModel.GetAllSpecialite_Result)" />
+    <FunctionImport Name="GetAllSpecialiteForMedecin" ReturnType="Collection(GestionConsultationModel.GetAllSpecialiteForMedecin_Result)">
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateMinimalDurationOfConsultation">
+      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="AddMedecin_Result">
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllMedecin_Result">
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllSpecialite_Result">
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllSpecialiteForMedecin_Result">
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+</Schema>
