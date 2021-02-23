@@ -56,6 +56,18 @@
     <Compile Include="Consultation.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DeleteConsultation_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteLocal_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteMedecinSpecialiteMaisonMedicale_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeletePresence_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GestionConsultationDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,13 +92,28 @@
     <Compile Include="GetAllSpecialite_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetConsultationById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetLocalById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetMaisonMedicaleById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetMedecinById_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetMedecinSpecialiteById_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetMedecinSpecialiteMaisonMedicaleById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetPatientById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPresenceById_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetSpecialiteById_Result.cs">
@@ -114,9 +141,14 @@
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ConsultationRepository.cs" />
+    <Compile Include="Repositories\LocalRepository.cs" />
+    <Compile Include="Repositories\MaisonMedicaleRepository.cs" />
     <Compile Include="Repositories\MedecinRepository.cs" />
+    <Compile Include="Repositories\MedecinSpecialiteMaisonMedicaleRepository.cs" />
     <Compile Include="Repositories\MedecinSpecialiteRepository.cs" />
     <Compile Include="Repositories\PatientRepository.cs" />
+    <Compile Include="Repositories\PresenceRepository.cs" />
     <Compile Include="Repositories\SpecialiteRepository.cs" />
     <Compile Include="Specialite.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>

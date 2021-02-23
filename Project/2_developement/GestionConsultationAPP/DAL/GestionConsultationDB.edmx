@@ -203,6 +203,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AddConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Patient_ID" Type="int" Mode="In" />
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Local_ID" Type="int" Mode="In" />
+          <Parameter Name="Starting" Type="datetime" Mode="In" />
+          <Parameter Name="Ending" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="AddLocal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="AddMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="varchar" Mode="In" />
         </Function>
@@ -220,9 +231,21 @@
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="AddMedecinSpecialiteMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="MinimalDuration" Type="int" Mode="In" />
+          <Parameter Name="IsActif" Type="bit" Mode="In" />
+        </Function>
         <Function Name="AddPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Firstname" Type="varchar" Mode="In" />
           <Parameter Name="Lastname" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddPresence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Starting" Type="datetime" Mode="In" />
+          <Parameter Name="Ending" Type="datetime" Mode="In" />
         </Function>
         <Function Name="AddSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="varchar" Mode="In" />
@@ -230,6 +253,12 @@
         <Function Name="AddSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Consultation_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteLocal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Local_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="DeleteMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
@@ -240,8 +269,14 @@
         <Function Name="DeleteMedecinSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="DeleteMedecinSpecialiteMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeletePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Patient_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeletePresence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Presence_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="DeleteSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
@@ -254,17 +289,46 @@
         <Function Name="GetAllSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetConsultationById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Consultation_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetLocalById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Local_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMaisonMedicaleById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetMedecinById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetMedecinSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetMedecinSpecialiteMaisonMedicaleById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetPatientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Patient_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetPresenceById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Presence_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Consultation_ID" Type="int" Mode="In" />
+          <Parameter Name="Patient_ID" Type="int" Mode="In" />
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Local_ID" Type="int" Mode="In" />
+          <Parameter Name="Starting" Type="datetime" Mode="In" />
+          <Parameter Name="Ending" Type="datetime" Mode="In" />
+          <Parameter Name="IsConfirmed" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UpdateLocal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Local_ID" Type="int" Mode="In" />
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
         </Function>
         <Function Name="UpdateMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
@@ -280,6 +344,13 @@
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="UpdateMedecinSpecialiteMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="MinimalDuration" Type="int" Mode="In" />
+          <Parameter Name="IsActif" Type="bit" Mode="In" />
+        </Function>
         <Function Name="UpdateMinimalDurationOfConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
           <Parameter Name="MinimalDuration" Type="int" Mode="In" />
@@ -288,6 +359,13 @@
           <Parameter Name="Patient_ID" Type="int" Mode="In" />
           <Parameter Name="Firstname" Type="varchar" Mode="In" />
           <Parameter Name="Lastname" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePresence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Presence_ID" Type="int" Mode="In" />
+          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Starting" Type="datetime" Mode="In" />
+          <Parameter Name="Ending" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UpdateSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
@@ -706,6 +784,84 @@
             <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
             <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetMaisonMedicaleById" EntitySet="MaisonMedicales" ReturnType="Collection(GestionConsultationModel.MaisonMedicale)">
+          <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddConsultation" ReturnType="Collection(Decimal)">
+            <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Local_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Starting" Mode="In" Type="DateTime" />
+            <Parameter Name="Ending" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="AddLocal" ReturnType="Collection(Decimal)">
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddMedecinSpecialiteMaisonMedicale" ReturnType="Collection(Decimal)">
+            <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
+            <Parameter Name="IsActif" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddPresence" ReturnType="Collection(Decimal)">
+            <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Starting" Mode="In" Type="DateTime" />
+            <Parameter Name="Ending" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteConsultation" ReturnType="Collection(GestionConsultationModel.DeleteConsultation_Result)">
+            <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLocal" ReturnType="Collection(GestionConsultationModel.DeleteLocal_Result)">
+            <Parameter Name="Local_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMedecinSpecialiteMaisonMedicale" ReturnType="Collection(GestionConsultationModel.DeleteMedecinSpecialiteMaisonMedicale_Result)">
+            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePresence" ReturnType="Collection(GestionConsultationModel.DeletePresence_Result)">
+            <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetConsultationById" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
+            <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLocalById" EntitySet="Locals" ReturnType="Collection(GestionConsultationModel.Local)">
+            <Parameter Name="Local_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMedecinSpecialiteMaisonMedicaleById" EntitySet="MedecinSpecialiteMaisonMedicales" ReturnType="Collection(GestionConsultationModel.MedecinSpecialiteMaisonMedicale)">
+            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPresenceById" EntitySet="Presences" ReturnType="Collection(GestionConsultationModel.Presence)">
+            <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateConsultation">
+            <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Local_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Starting" Mode="In" Type="DateTime" />
+            <Parameter Name="Ending" Mode="In" Type="DateTime" />
+            <Parameter Name="IsConfirmed" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateLocal">
+            <Parameter Name="Local_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMedecinSpecialiteMaisonMedicale">
+            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
+            <Parameter Name="IsActif" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePresence">
+            <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Starting" Mode="In" Type="DateTime" />
+            <Parameter Name="Ending" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AddMedecin_Result">
           <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -744,6 +900,66 @@
           <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
           <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="GetMaisonMedicaleById_Result">
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="DeleteConsultation_Result">
+          <Property Type="Int32" Name="Consultation_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="Local_ID" Nullable="false" />
+          <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DeleteLocal_Result">
+          <Property Type="Int32" Name="Local_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DeleteMedecinSpecialiteMaisonMedicale_Result">
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MinimalDuration" Nullable="false" />
+          <Property Type="Boolean" Name="IsActif" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DeletePresence_Result">
+          <Property Type="Int32" Name="Presence_ID" Nullable="false" />
+          <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetConsultationById_Result">
+          <Property Type="Int32" Name="Consultation_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="Local_ID" Nullable="false" />
+          <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetLocalById_Result">
+          <Property Type="Int32" Name="Local_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetMedecinSpecialiteMaisonMedicaleById_Result">
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MinimalDuration" Nullable="false" />
+          <Property Type="Boolean" Name="IsActif" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPresenceById_Result">
+          <Property Type="Int32" Name="Presence_ID" Nullable="false" />
+          <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -762,6 +978,30 @@
                 <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GestionConsultationModel.Consultation">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="GestionConsultationModel.Store.AddConsultation">
+                  <ScalarProperty Name="Ending" ParameterName="Ending" />
+                  <ScalarProperty Name="Starting" ParameterName="Starting" />
+                  <ScalarProperty Name="Local_ID" ParameterName="Local_ID" />
+                  <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ParameterName="MedecinSpecialiteMaisonMedicale_ID" />
+                  <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" />
+                  <ResultBinding Name="Consultation_ID" ColumnName="Consultation_ID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateConsultation">
+                  <ScalarProperty Name="IsConfirmed" ParameterName="IsConfirmed" Version="Current" />
+                  <ScalarProperty Name="Ending" ParameterName="Ending" Version="Current" />
+                  <ScalarProperty Name="Starting" ParameterName="Starting" Version="Current" />
+                  <ScalarProperty Name="Local_ID" ParameterName="Local_ID" Version="Current" />
+                  <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ParameterName="MedecinSpecialiteMaisonMedicale_ID" Version="Current" />
+                  <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" Version="Current" />
+                  <ScalarProperty Name="Consultation_ID" ParameterName="Consultation_ID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteConsultation">
+                  <ScalarProperty Name="Consultation_ID" ParameterName="Consultation_ID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Locals">
             <EntityTypeMapping TypeName="GestionConsultationModel.Local">
@@ -770,6 +1010,23 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GestionConsultationModel.Local">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="GestionConsultationModel.Store.AddLocal">
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" />
+                  <ResultBinding Name="Local_ID" ColumnName="Local_ID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateLocal">
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" Version="Current" />
+                  <ScalarProperty Name="Local_ID" ParameterName="Local_ID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteLocal">
+                  <ScalarProperty Name="Local_ID" ParameterName="Local_ID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MaisonMedicales">
@@ -857,6 +1114,27 @@
                 <ScalarProperty Name="IsActif" ColumnName="IsActif" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GestionConsultationModel.MedecinSpecialiteMaisonMedicale">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="GestionConsultationModel.Store.AddMedecinSpecialiteMaisonMedicale">
+                  <ScalarProperty Name="IsActif" ParameterName="IsActif" />
+                  <ScalarProperty Name="MinimalDuration" ParameterName="MinimalDuration" />
+                  <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" />
+                  <ScalarProperty Name="MedecinSpecialite_ID" ParameterName="MedecinSpecialite_ID" />
+                  <ResultBinding Name="MedecinSpecialiteMaisonMedicale_ID" ColumnName="MedecinSpecialiteMaisonMedicale_ID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialiteMaisonMedicale">
+                  <ScalarProperty Name="IsActif" ParameterName="IsActif" Version="Current" />
+                  <ScalarProperty Name="MinimalDuration" ParameterName="MinimalDuration" Version="Current" />
+                  <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" Version="Current" />
+                  <ScalarProperty Name="MedecinSpecialite_ID" ParameterName="MedecinSpecialite_ID" Version="Current" />
+                  <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ParameterName="MedecinSpecialiteMaisonMedicale_ID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteMedecinSpecialiteMaisonMedicale">
+                  <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ParameterName="MedecinSpecialiteMaisonMedicale_ID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="GestionConsultationModel.Patient">
@@ -893,6 +1171,27 @@
                 <ScalarProperty Name="Starting" ColumnName="Starting" />
                 <ScalarProperty Name="Ending" ColumnName="Ending" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GestionConsultationModel.Presence">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="GestionConsultationModel.Store.AddPresence">
+                  <ScalarProperty Name="Ending" ParameterName="Ending" />
+                  <ScalarProperty Name="Starting" ParameterName="Starting" />
+                  <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" />
+                  <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" />
+                  <ResultBinding Name="Presence_ID" ColumnName="Presence_ID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdatePresence">
+                  <ScalarProperty Name="Ending" ParameterName="Ending" Version="Current" />
+                  <ScalarProperty Name="Starting" ParameterName="Starting" Version="Current" />
+                  <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" Version="Current" />
+                  <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" Version="Current" />
+                  <ScalarProperty Name="Presence_ID" ParameterName="Presence_ID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="GestionConsultationModel.Store.DeletePresence">
+                  <ScalarProperty Name="Presence_ID" ParameterName="Presence_ID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Specialites">
@@ -971,6 +1270,68 @@
           <FunctionImportMapping FunctionImportName="GetMedecinSpecialiteById" FunctionName="GestionConsultationModel.Store.GetMedecinSpecialiteById">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateMedecinSpecialite" FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialite" />
+          <FunctionImportMapping FunctionImportName="GetMaisonMedicaleById" FunctionName="GestionConsultationModel.Store.GetMaisonMedicaleById">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddConsultation" FunctionName="GestionConsultationModel.Store.AddConsultation" />
+          <FunctionImportMapping FunctionImportName="AddLocal" FunctionName="GestionConsultationModel.Store.AddLocal" />
+          <FunctionImportMapping FunctionImportName="AddMedecinSpecialiteMaisonMedicale" FunctionName="GestionConsultationModel.Store.AddMedecinSpecialiteMaisonMedicale" />
+          <FunctionImportMapping FunctionImportName="AddPresence" FunctionName="GestionConsultationModel.Store.AddPresence" />
+          <FunctionImportMapping FunctionImportName="DeleteConsultation" FunctionName="GestionConsultationModel.Store.DeleteConsultation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionConsultationModel.DeleteConsultation_Result">
+                <ScalarProperty Name="Consultation_ID" ColumnName="Consultation_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ColumnName="MedecinSpecialiteMaisonMedicale_ID" />
+                <ScalarProperty Name="Local_ID" ColumnName="Local_ID" />
+                <ScalarProperty Name="Starting" ColumnName="Starting" />
+                <ScalarProperty Name="Ending" ColumnName="Ending" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteLocal" FunctionName="GestionConsultationModel.Store.DeleteLocal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionConsultationModel.DeleteLocal_Result">
+                <ScalarProperty Name="Local_ID" ColumnName="Local_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteMedecinSpecialiteMaisonMedicale" FunctionName="GestionConsultationModel.Store.DeleteMedecinSpecialiteMaisonMedicale">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionConsultationModel.DeleteMedecinSpecialiteMaisonMedicale_Result">
+                <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ColumnName="MedecinSpecialiteMaisonMedicale_ID" />
+                <ScalarProperty Name="MedecinSpecialite_ID" ColumnName="MedecinSpecialite_ID" />
+                <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+                <ScalarProperty Name="MinimalDuration" ColumnName="MinimalDuration" />
+                <ScalarProperty Name="IsActif" ColumnName="IsActif" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeletePresence" FunctionName="GestionConsultationModel.Store.DeletePresence">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionConsultationModel.DeletePresence_Result">
+                <ScalarProperty Name="Presence_ID" ColumnName="Presence_ID" />
+                <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
+                <ScalarProperty Name="MaisonMedicale_ID" ColumnName="MaisonMedicale_ID" />
+                <ScalarProperty Name="Starting" ColumnName="Starting" />
+                <ScalarProperty Name="Ending" ColumnName="Ending" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetConsultationById" FunctionName="GestionConsultationModel.Store.GetConsultationById">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLocalById" FunctionName="GestionConsultationModel.Store.GetLocalById">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMedecinSpecialiteMaisonMedicaleById" FunctionName="GestionConsultationModel.Store.GetMedecinSpecialiteMaisonMedicaleById">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPresenceById" FunctionName="GestionConsultationModel.Store.GetPresenceById">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation" />
+          <FunctionImportMapping FunctionImportName="UpdateLocal" FunctionName="GestionConsultationModel.Store.UpdateLocal" />
+          <FunctionImportMapping FunctionImportName="UpdateMedecinSpecialiteMaisonMedicale" FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialiteMaisonMedicale" />
+          <FunctionImportMapping FunctionImportName="UpdatePresence" FunctionName="GestionConsultationModel.Store.UpdatePresence" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

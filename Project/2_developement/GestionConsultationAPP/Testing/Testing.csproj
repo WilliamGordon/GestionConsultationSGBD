@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F263615E-C80D-4083-B4C6-4E05414FE0C7}</ProjectGuid>
+    <ProjectGuid>{77CF5585-AE9E-46ED-9A57-EBF9EC988020}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Testing</RootNamespace>
     <AssemblyName>Testing</AssemblyName>
@@ -53,9 +53,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{2bd56db0-e6cb-43bc-8030-b5d2aed799b3}</Project>
-      <Name>DAL</Name>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{6ad369fd-529b-483c-adf0-3405bf21247e}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{ebe36deb-dd48-43cb-88aa-a63bc1c44dc2}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

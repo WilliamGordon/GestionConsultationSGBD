@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="GestionConsultationModel.Local" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionConsultationModel.MaisonMedicale" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionConsultationModel.Medecin" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionConsultationModel.MedecinSpecialite" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionConsultationModel.MedecinSpecialite" Width="2.25" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionConsultationModel.MedecinSpecialiteMaisonMedicale" Width="3" PointX="3" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionConsultationModel.Patient" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionConsultationModel.Presence" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
