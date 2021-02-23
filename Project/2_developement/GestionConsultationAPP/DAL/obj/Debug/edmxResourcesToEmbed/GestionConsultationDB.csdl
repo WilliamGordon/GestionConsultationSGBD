@@ -340,6 +340,24 @@
     <FunctionImport Name="GetPatientById" EntitySet="Patients" ReturnType="Collection(GestionConsultationModel.Patient)">
       <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetSpecialiteById" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddMedecinSpecialite" ReturnType="Collection(Int32)">
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteMedecinSpecialite">
+      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetMedecinSpecialiteById" EntitySet="MedecinSpecialites" ReturnType="Collection(GestionConsultationModel.MedecinSpecialite)">
+      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateMedecinSpecialite">
+      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AddMedecin_Result">
     <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -368,5 +386,14 @@
     <Property Type="Int32" Name="Patient_ID" Nullable="false" />
     <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetSpecialiteById_Result">
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetMedecinSpecialiteById_Result">
+    <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
   </ComplexType>
 </Schema>

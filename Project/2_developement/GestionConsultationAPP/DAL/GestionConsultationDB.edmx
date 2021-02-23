@@ -216,6 +216,10 @@
           <Parameter Name="Firstname" Type="nvarchar" Mode="In" />
           <Parameter Name="Lastname" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="AddMedecinSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+          <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="AddPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Firstname" Type="varchar" Mode="In" />
           <Parameter Name="Lastname" Type="varchar" Mode="In" />
@@ -232,6 +236,9 @@
         </Function>
         <Function Name="DeleteMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteMedecinSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="DeletePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Patient_ID" Type="int" Mode="In" />
@@ -250,8 +257,14 @@
         <Function Name="GetMedecinById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetMedecinSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetPatientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Patient_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Specialite_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="UpdateMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
@@ -261,6 +274,11 @@
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
           <Parameter Name="Firstname" Type="varchar" Mode="In" />
           <Parameter Name="Lastname" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateMedecinSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
+          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+          <Parameter Name="Specialite_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="UpdateMinimalDurationOfConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
@@ -668,7 +686,25 @@
           <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPatientById" EntitySet="Patients" ReturnType="Collection(GestionConsultationModel.Patient)">
-            <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+          <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSpecialiteById" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
+          <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddMedecinSpecialite" ReturnType="Collection(Int32)">
+            <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMedecinSpecialite">
+          <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMedecinSpecialiteById" EntitySet="MedecinSpecialites" ReturnType="Collection(GestionConsultationModel.MedecinSpecialite)">
+          <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMedecinSpecialite">
+            <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AddMedecin_Result">
@@ -698,6 +734,15 @@
           <Property Type="Int32" Name="Patient_ID" Nullable="false" />
           <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetSpecialiteById_Result">
+          <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetMedecinSpecialiteById_Result">
+          <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+          <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+          <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -783,6 +828,23 @@
                 <ScalarProperty Name="Medecin_ID" ColumnName="Medecin_ID" />
                 <ScalarProperty Name="Specialite_ID" ColumnName="Specialite_ID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="GestionConsultationModel.MedecinSpecialite">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="GestionConsultationModel.Store.AddMedecinSpecialite">
+                  <ScalarProperty Name="Specialite_ID" ParameterName="Specialite_ID" />
+                  <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" />
+                  <ResultBinding Name="MedecinSpecialite_ID" ColumnName="MedecinSpecialite_ID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialite">
+                  <ScalarProperty Name="Specialite_ID" ParameterName="Specialite_ID" Version="Current" />
+                  <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" Version="Current" />
+                  <ScalarProperty Name="MedecinSpecialite_ID" ParameterName="MedecinSpecialite_ID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteMedecinSpecialite">
+                  <ScalarProperty Name="MedecinSpecialite_ID" ParameterName="MedecinSpecialite_ID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MedecinSpecialiteMaisonMedicales">
@@ -902,6 +964,13 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPatientById" FunctionName="GestionConsultationModel.Store.GetPatientById">
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSpecialiteById" FunctionName="GestionConsultationModel.Store.GetSpecialiteById">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddMedecinSpecialite" FunctionName="GestionConsultationModel.Store.AddMedecinSpecialite" />
+          <FunctionImportMapping FunctionImportName="DeleteMedecinSpecialite" FunctionName="GestionConsultationModel.Store.DeleteMedecinSpecialite" />
+          <FunctionImportMapping FunctionImportName="GetMedecinSpecialiteById" FunctionName="GestionConsultationModel.Store.GetMedecinSpecialiteById">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateMedecinSpecialite" FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialite" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

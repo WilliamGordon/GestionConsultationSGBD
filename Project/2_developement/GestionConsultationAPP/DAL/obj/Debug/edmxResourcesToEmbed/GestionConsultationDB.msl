@@ -80,6 +80,23 @@
           <ScalarProperty Name="Specialite_ID" ColumnName="Specialite_ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="GestionConsultationModel.MedecinSpecialite">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="GestionConsultationModel.Store.AddMedecinSpecialite">
+            <ScalarProperty Name="Specialite_ID" ParameterName="Specialite_ID" />
+            <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" />
+            <ResultBinding Name="MedecinSpecialite_ID" ColumnName="MedecinSpecialite_ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialite">
+            <ScalarProperty Name="Specialite_ID" ParameterName="Specialite_ID" Version="Current" />
+            <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" Version="Current" />
+            <ScalarProperty Name="MedecinSpecialite_ID" ParameterName="MedecinSpecialite_ID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteMedecinSpecialite">
+            <ScalarProperty Name="MedecinSpecialite_ID" ParameterName="MedecinSpecialite_ID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MedecinSpecialiteMaisonMedicales">
       <EntityTypeMapping TypeName="GestionConsultationModel.MedecinSpecialiteMaisonMedicale">
@@ -195,5 +212,10 @@
     <FunctionImportMapping FunctionImportName="UpdateSpecialite" FunctionName="GestionConsultationModel.Store.UpdateSpecialite" />
     <FunctionImportMapping FunctionImportName="GetMedecinById" FunctionName="GestionConsultationModel.Store.GetMedecinById" />
     <FunctionImportMapping FunctionImportName="GetPatientById" FunctionName="GestionConsultationModel.Store.GetPatientById" />
+    <FunctionImportMapping FunctionImportName="GetSpecialiteById" FunctionName="GestionConsultationModel.Store.GetSpecialiteById" />
+    <FunctionImportMapping FunctionImportName="AddMedecinSpecialite" FunctionName="GestionConsultationModel.Store.AddMedecinSpecialite" />
+    <FunctionImportMapping FunctionImportName="DeleteMedecinSpecialite" FunctionName="GestionConsultationModel.Store.DeleteMedecinSpecialite" />
+    <FunctionImportMapping FunctionImportName="GetMedecinSpecialiteById" FunctionName="GestionConsultationModel.Store.GetMedecinSpecialiteById" />
+    <FunctionImportMapping FunctionImportName="UpdateMedecinSpecialite" FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialite" />
   </EntityContainerMapping>
 </Mapping>
