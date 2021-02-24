@@ -37,15 +37,5 @@ namespace API.Controllers
         {
             return Ok(MedecinService.AddMedecin(medecin));
         }
-
-        // PUT: api/Medecin/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Medecin/5
-        public void Delete(int id)
-        {
-        }
     }
 }
