@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - @ViewBag.Medecin_ID</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,10 +16,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                  @Html.ActionLink("Application Médecin", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="/">Dashboard @ViewBag.Firstname @ViewBag.Lastname</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (true)
+                    {
+                        <li>@Html.ActionLink("Mon planning", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Mes consultations", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Mes spécialités", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Mes maisons médicales", "Index", "Home")</li>
+                    }
                 </ul>
             </div>
         </div>

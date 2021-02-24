@@ -11,8 +11,9 @@ namespace WebClientMedecin.Controllers
 {
     public class MedecinController : Controller
     {
-        // GET: Medecin
+        
         public string Baseurl = "https://localhost:44307/";
+        // GET: Medecin
         public async Task<ActionResult> GetAllMedecins()
         {
             List<Models.Medecin> medecins = new List<Models.Medecin>();
@@ -32,10 +33,43 @@ namespace WebClientMedecin.Controllers
             }
         }
 
-        // GET: Medecin/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> SelectMedecins()
         {
-            return View();
+            List<Models.Medecin> medecins = new List<Models.Medecin>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/Medecin");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var MedResponse = Res.Content.ReadAsStringAsync().Result;
+                    medecins = JsonConvert.DeserializeObject<List<Models.Medecin>>(MedResponse);
+                }
+                return View(medecins);
+            }
+        }
+
+        // GET: Medecin/Details/5
+        public async Task<ActionResult> GetDashboardMedecin(int id)
+        {
+            Models.Medecin medecin = new Models.Medecin();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/Medecin/" + id);
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var MedResponse = Res.Content.ReadAsStringAsync().Result;
+                    medecin = JsonConvert.DeserializeObject<Models.Medecin>(MedResponse);
+                }
+                return View(medecin);
+            }
         }
 
         // GET: Medecin/Create
@@ -46,12 +80,16 @@ namespace WebClientMedecin.Controllers
 
         // POST: Medecin/Create
         [HttpPost]
-        public ActionResult Create(Models.Medecin medecin)
+        public ActionResult Create(ModelView.MedecinCreate medecinCreate)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
+                    Models.Medecin medecin = new Models.Medecin();
+                    medecin.Firstname = medecinCreate.Firstname;
+                    medecin.Lastname = medecinCreate.Lastname;
+
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -59,7 +97,7 @@ namespace WebClientMedecin.Controllers
 
                     if (Res.Result.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("GetAllMedecins");
+                        return RedirectToAction("GetDashboardMedecin/" + Res.Id);
                     }
                     else
                     {
