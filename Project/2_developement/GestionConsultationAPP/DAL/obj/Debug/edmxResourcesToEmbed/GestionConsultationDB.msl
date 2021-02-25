@@ -275,14 +275,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GetAllSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForMedecin">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GestionConsultationModel.GetAllSpecialiteForMedecin_Result">
-          <ScalarProperty Name="Specialite_ID" ColumnName="Specialite_ID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForMedecin" />
     <FunctionImportMapping FunctionImportName="UpdateMinimalDurationOfConsultation" FunctionName="GestionConsultationModel.Store.UpdateMinimalDurationOfConsultation" />
     <FunctionImportMapping FunctionImportName="AddSpecialite" FunctionName="GestionConsultationModel.Store.AddSpecialite" />
     <FunctionImportMapping FunctionImportName="DeleteMaisonMedicale" FunctionName="GestionConsultationModel.Store.DeleteMaisonMedicale" />

@@ -50,6 +50,7 @@
     <Compile Include="BusinessServices\MedecinService.cs" />
     <Compile Include="BusinessServices\MedecinSpecialiteService.cs" />
     <Compile Include="BusinessServices\PatientService.cs" />
+    <Compile Include="BusinessServices\SpecialiteService.cs" />
     <Compile Include="Mappings\AutoMapperProfileConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

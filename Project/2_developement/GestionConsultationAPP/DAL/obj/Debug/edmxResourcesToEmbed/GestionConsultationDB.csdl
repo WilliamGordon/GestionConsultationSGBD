@@ -294,7 +294,7 @@
     </FunctionImport>
     <FunctionImport Name="GetAllMedecin" ReturnType="Collection(GestionConsultationModel.GetAllMedecin_Result)" />
     <FunctionImport Name="GetAllSpecialite" ReturnType="Collection(GestionConsultationModel.GetAllSpecialite_Result)" />
-    <FunctionImport Name="GetAllSpecialiteForMedecin" ReturnType="Collection(GestionConsultationModel.GetAllSpecialiteForMedecin_Result)">
+    <FunctionImport Name="GetAllSpecialiteForMedecin" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
       <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="UpdateMinimalDurationOfConsultation">

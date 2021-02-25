@@ -24,7 +24,7 @@
                     {
                         <li>@Html.ActionLink("Mon planning", "Index", "Home")</li>
                         <li>@Html.ActionLink("Mes consultations", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Mes spécialités", "Index", "Home")</li>
+                        <li><a href="/Medecin/GetSpecialiteForMedecin/@ViewBag.Medecin_ID">Mes spécialités</a></li>
                         <li>@Html.ActionLink("Mes maisons médicales", "Index", "Home")</li>
                     }
                 </ul>

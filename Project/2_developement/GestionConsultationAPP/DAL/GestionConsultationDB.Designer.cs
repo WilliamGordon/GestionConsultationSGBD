@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\GestionConsultationDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\GestionConsultationDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

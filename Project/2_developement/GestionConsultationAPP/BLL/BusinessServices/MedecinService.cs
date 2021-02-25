@@ -11,31 +11,49 @@ namespace BLL.BusinessServices
 {
     public class MedecinService
     {
-        private MedecinRepository Repository { get; set; }
+        private MedecinRepository MedRepository { get; set; }
+        private SpecialiteRepository SpecRepository { get; set; }
+        private MedecinSpecialiteRepository MedSpecRepository { get; set; }
         private IMapper Mapper { get; set; }
         public MedecinService()
         {
-            Repository = new MedecinRepository();
+            MedRepository = new MedecinRepository();
+            SpecRepository = new SpecialiteRepository();
+            MedSpecRepository = new MedecinSpecialiteRepository();
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
         public List<Models.Medecin> GetAllMedecins()
         {
-            List<DAL.Medecin> DALmedecins = Repository.GetAllMedecins();
+            List<DAL.Medecin> DALmedecins = MedRepository.GetAllMedecins();
             List<Models.Medecin> medecins = Mapper.Map<List<Models.Medecin>>(DALmedecins);
             return medecins;
         }
 
         public Models.Medecin GetMedecinById(int id)
         {
-            DAL.Medecin DALmedecin = Repository.GetMedecinbyId(id);
+            DAL.Medecin DALmedecin = MedRepository.GetMedecinbyId(id);
             Models.Medecin medecin = Mapper.Map<Models.Medecin>(DALmedecin);
             return medecin;
         }
-
         public int AddMedecin(Models.Medecin medecin)
         {
-            return Repository.AddMedecin(Mapper.Map<DAL.Medecin>(medecin));
+            return MedRepository.AddMedecin(Mapper.Map<DAL.Medecin>(medecin));
         }
+        public List<Models.Specialite> GetAllSpecialiteForMedecin(int medecin_ID)
+        {
+            List<DAL.Specialite> DALspecs = SpecRepository.GetAllSpecialiteForMedecin(medecin_ID);
+            List<Models.Specialite> specs = Mapper.Map<List<Models.Specialite>>(DALspecs);
+            return specs;
+        }
+
+        public int AddSpecialiteForMedecin(Models.MedecinSpecialite medspec)
+        {
+            DAL.MedecinSpecialite MedSpec = new DAL.MedecinSpecialite();
+            MedSpec.Medecin_ID = medspec.Medecin_ID;
+            MedSpec.Specialite_ID = medspec.Specialite_ID;
+            return MedSpecRepository.AddMedecinSpecialite(MedSpec); ;
+        }
+
     }
 }

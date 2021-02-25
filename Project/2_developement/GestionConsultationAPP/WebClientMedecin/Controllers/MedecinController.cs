@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebClientMedecin.ModelView;
 
 namespace WebClientMedecin.Controllers
 {
@@ -111,10 +112,99 @@ namespace WebClientMedecin.Controllers
             }
         }
 
-        // GET: Medecin/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Medecin
+        public async Task<ActionResult> GetPlanning()
         {
-            return View();
+            List<Models.Medecin> medecins = new List<Models.Medecin>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/Medecin");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var MedResponse = Res.Content.ReadAsStringAsync().Result;
+                    medecins = JsonConvert.DeserializeObject<List<Models.Medecin>>(MedResponse);
+                }
+                return View(medecins);
+            }
+        }
+
+        // GET: Medecin
+        public async Task<ActionResult> GetSpecialiteForMedecin(int id)
+        {
+            List<Models.Specialite> specs = new List<Models.Specialite>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/Medecin/GetAllSpecialiteForMedecin/" + id);
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var specsResponse = Res.Content.ReadAsStringAsync().Result;
+                    specs = JsonConvert.DeserializeObject<List<Models.Specialite>>(specsResponse);
+                }
+                return View(specs);
+            }
+        }
+
+        // GET: Medecin/Create
+        public async Task<ActionResult> AddSpecialiteForMedecin()
+        {
+            List<Models.Specialite> specs = new List<Models.Specialite>();
+            MedecinSpecialiteCreate MedSpecView = new MedecinSpecialiteCreate();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/Specialite");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var specsResponse = Res.Content.ReadAsStringAsync().Result;
+                    specs = JsonConvert.DeserializeObject<List<Models.Specialite>>(specsResponse);
+                    MedSpecView.listSpecialite = specs;
+                }
+                return View(MedSpecView);
+            }
+        }
+
+        // POST: Medecin/Create
+        [HttpPost]
+        public ActionResult AddSpecialiteForMedecin(ModelView.MedecinSpecialiteCreate medSpecCreate)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    Models.MedecinSpecialite medspec = new Models.MedecinSpecialite();
+                    medspec.Specialite_ID = medSpecCreate.Specialite_ID;
+                    medspec.Medecin_ID = medSpecCreate.Medecin_ID;
+
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    var Res = client.PostAsJsonAsync<Models.MedecinSpecialite>("api/AddSpecialiteForMedecin", medspec);
+
+                    if (Res.Result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("GetSpecialiteForMedecin/" + medSpecCreate.Medecin_ID);
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: Medecin/Edit/5

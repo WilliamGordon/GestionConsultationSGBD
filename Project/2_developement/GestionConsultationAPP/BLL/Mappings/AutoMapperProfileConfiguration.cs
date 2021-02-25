@@ -19,6 +19,9 @@ namespace BLL.Mappings
 
             CreateMap<DAL.MedecinSpecialite, Models.MedecinSpecialite>();
             CreateMap<Models.MedecinSpecialite, DAL.MedecinSpecialite>();
+
+            CreateMap<DAL.Specialite, Models.Specialite>();
+            CreateMap<Models.Specialite, DAL.Specialite>();
         }
     }
 }

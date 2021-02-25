@@ -129,6 +129,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelView\MedecinCreate.cs" />
+    <Compile Include="ModelView\MedecinSpecialiteCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,10 +171,11 @@
     <Content Include="Views\Medecin\SelectMedecins.cshtml" />
     <Content Include="Views\Medecin\GetDashboardMedecin.cshtml" />
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
+    <Content Include="Views\Medecin\GetSpecialiteForMedecin.cshtml" />
+    <Content Include="Views\Medecin\AddSpecialiteForMedecin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

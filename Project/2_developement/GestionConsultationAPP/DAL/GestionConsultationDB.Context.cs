@@ -138,13 +138,22 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllSpecialite_Result>("GetAllSpecialite");
         }
     
-        public virtual ObjectResult<GetAllSpecialiteForMedecin_Result> GetAllSpecialiteForMedecin(Nullable<int> medecin_ID)
+        public virtual ObjectResult<Specialite> GetAllSpecialiteForMedecin(Nullable<int> medecin_ID)
         {
             var medecin_IDParameter = medecin_ID.HasValue ?
                 new ObjectParameter("Medecin_ID", medecin_ID) :
                 new ObjectParameter("Medecin_ID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllSpecialiteForMedecin_Result>("GetAllSpecialiteForMedecin", medecin_IDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Specialite>("GetAllSpecialiteForMedecin", medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<Specialite> GetAllSpecialiteForMedecin(Nullable<int> medecin_ID, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Specialite>("GetAllSpecialiteForMedecin", mergeOption, medecin_IDParameter);
         }
     
         public virtual int UpdateMinimalDurationOfConsultation(Nullable<int> medecinSpecialiteMaisonMedicale_ID, Nullable<int> minimalDuration)
