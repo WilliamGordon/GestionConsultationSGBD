@@ -194,3 +194,6 @@ C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\Ge
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\API\obj\Debug\API.csproj.CopyComplete
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\API\obj\Debug\API.dll
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\API\obj\Debug\API.pdb
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\API\bin\System.Web.Cors.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\API\bin\System.Web.Http.Cors.dll
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\API\bin\System.Web.Http.Cors.xml

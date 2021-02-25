@@ -38,21 +38,38 @@ namespace BLL.BusinessServices
         }
         public int AddMedecin(Models.Medecin medecin)
         {
-            return MedRepository.AddMedecin(Mapper.Map<DAL.Medecin>(medecin));
+            try
+            {
+                return MedRepository.AddMedecin(Mapper.Map<DAL.Medecin>(medecin));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
         public List<Models.Specialite> GetAllSpecialiteForMedecin(int medecin_ID)
         {
-            List<DAL.Specialite> DALspecs = SpecRepository.GetAllSpecialiteForMedecin(medecin_ID);
-            List<Models.Specialite> specs = Mapper.Map<List<Models.Specialite>>(DALspecs);
-            return specs;
+            try
+            {
+                List<DAL.Specialite> DALspecs = SpecRepository.GetAllSpecialiteForMedecin(medecin_ID);
+                List<Models.Specialite> specs = Mapper.Map<List<Models.Specialite>>(DALspecs);
+                return specs;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public int AddSpecialiteForMedecin(Models.MedecinSpecialite medspec)
         {
-            DAL.MedecinSpecialite MedSpec = new DAL.MedecinSpecialite();
-            MedSpec.Medecin_ID = medspec.Medecin_ID;
-            MedSpec.Specialite_ID = medspec.Specialite_ID;
-            return MedSpecRepository.AddMedecinSpecialite(MedSpec); ;
+           
+                DAL.MedecinSpecialite MedSpec = new DAL.MedecinSpecialite();
+                MedSpec.Medecin_ID = medspec.Medecin_ID;
+                MedSpec.Specialite_ID = medspec.Specialite_ID;
+                return MedSpecRepository.AddMedecinSpecialite(MedSpec); ;
+            
         }
 
     }

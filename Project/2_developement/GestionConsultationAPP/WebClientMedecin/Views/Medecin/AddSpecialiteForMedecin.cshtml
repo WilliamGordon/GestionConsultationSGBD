@@ -5,41 +5,43 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>AddSpecialiteForMedecin</h2>
-
-
+<br />
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>MedecinSpecialiteView</h4>
+    <h4>Sélectionner une spécialité</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     @Html.HiddenFor(model => model.Medecin_ID)
-<div class="form-group">
-    <label class="control-label col-md-2" for="Specialite_ID">Spécialité</label>
-    <div class="col-md-10">
-        @Html.DropDownListFor(m => m.Specialite_ID,
-            new SelectList(Model.listSpecialite, "Specialite_ID", "Name"));
-        @Html.ValidationMessageFor(model => model.Specialite_ID, "", new { @class = "text-danger" })
+
+    @if (ViewBag.ErrorMessage != "")
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Specialite_ID">Nom</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Specialite_ID,
+                new SelectList(Model.listSpecialite, "Specialite_ID", "Name"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Specialite_ID, "", new { @class = "text-danger" })
+        </div>
     </div>
-</div>
-
-
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Ajouter" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
-
-<div>
-    @Html.Title = "AddSpecialiteForMedecin"
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

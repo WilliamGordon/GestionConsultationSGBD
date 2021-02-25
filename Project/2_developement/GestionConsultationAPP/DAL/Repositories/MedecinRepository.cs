@@ -26,9 +26,17 @@ namespace DAL.Repositories
 
         public int AddMedecin(DAL.Medecin medecin)
         {
-            int Medecin_ID = context.Medecins.Add(medecin).Medecin_ID;
-            context.SaveChanges();
-            return Medecin_ID;
+            try
+            {
+                context.Medecins.Add(medecin);
+                context.SaveChanges();
+                return medecin.Medecin_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public void UpdateMedecin(DAL.Medecin medecin)

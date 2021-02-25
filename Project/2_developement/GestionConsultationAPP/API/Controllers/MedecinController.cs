@@ -35,25 +35,24 @@ namespace API.Controllers
         // POST: api/Medecin
         public IHttpActionResult Post([FromBody] Models.Medecin medecin)
         {
-            return Ok(MedecinService.AddMedecin(medecin));
+            try
+            {
+                return Ok(MedecinService.AddMedecin(medecin));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+            
         }
 
         // GET: api/Medecin/GetAllSpecialiteForMedecin/5
         [HttpGet]
-        [Route("Medecin/GetAllSpecialiteForMedecin/{medecin_ID}")]
+        [Route("api/Medecin/GetAllSpecialiteForMedecin/{medecin_ID}")]
         public IHttpActionResult GetAllSpecialiteForMedecin(int medecin_ID)
         {
             var medecins = MedecinService.GetAllSpecialiteForMedecin(medecin_ID);
             return Ok(medecins);
         }
-
-        // POST: api/Medecin/AddSpecialiteForMedecin/Specialite_ID/Medecin_ID
-        [HttpPost]
-        [Route("Medecin/AddSpecialiteForMedecin/{specialite_ID}/{medecin_ID}")]
-        public IHttpActionResult AddSpecialiteForMedecin([FromBody] Models.MedecinSpecialite medspec)
-        {
-            return Ok(MedecinService.AddSpecialiteForMedecin(medspec));
-        }
-
     }
 }

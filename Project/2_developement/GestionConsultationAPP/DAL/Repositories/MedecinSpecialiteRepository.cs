@@ -26,9 +26,17 @@ namespace DAL.Repositories
 
         public int AddMedecinSpecialite(DAL.MedecinSpecialite medecinSpecialite)
         {
-            context.MedecinSpecialites.Add(medecinSpecialite);
-            context.SaveChanges();
-            return medecinSpecialite.MedecinSpecialite_ID;
+            try
+            {
+                context.MedecinSpecialites.Add(medecinSpecialite);
+                context.SaveChanges();
+                return medecinSpecialite.MedecinSpecialite_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public void UpdateMedecinSpecialite(DAL.MedecinSpecialite medecinSpecialite)

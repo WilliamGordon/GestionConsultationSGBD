@@ -167,7 +167,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Medecin\GetAllMedecins.cshtml" />
-    <Content Include="Views\Medecin\Create.cshtml" />
+    <Content Include="Views\Medecin\AddMedecin.cshtml" />
     <Content Include="Views\Medecin\SelectMedecins.cshtml" />
     <Content Include="Views\Medecin\GetDashboardMedecin.cshtml" />
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
