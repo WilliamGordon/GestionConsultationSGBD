@@ -128,6 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelView\MaisonMedicaleForMedecinView.cs" />
     <Compile Include="ModelView\MedecinCreate.cs" />
     <Compile Include="ModelView\MedecinSpecialiteCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,6 +174,7 @@
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Views\Medecin\GetSpecialiteForMedecin.cshtml" />
     <Content Include="Views\Medecin\AddSpecialiteForMedecin.cshtml" />
+    <Content Include="Views\Medecin\GetMaisonMedicaleForMedecin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -236,41 +236,24 @@ namespace WebClientMedecin.Controllers
             }
         }
 
-        // POST: Medecin/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> GetMaisonMedicaleForMedecin(int id)
         {
-            try
+            ViewBag.Medecin_ID = id;
+            List<Models.MaisonMedicale> maisonMed = new List<Models.MaisonMedicale>();
+            using (var client = new HttpClient())
             {
-                // TODO: Add update logic here
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/Medecin/GetAllMaisonMedicalForMedecin/" + id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Medecin/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Medecin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                if (Res.IsSuccessStatusCode)
+                {
+                    var specsResponse = Res.Content.ReadAsStringAsync().Result;
+                    maisonMed = JsonConvert.DeserializeObject<List<Models.MaisonMedicale>>(specsResponse);
+                    return View(maisonMed);
+                }
+                return View(maisonMed);
             }
         }
     }
