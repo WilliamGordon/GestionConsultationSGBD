@@ -174,11 +174,7 @@
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Views\Medecin\GetSpecialiteForMedecin.cshtml" />
     <Content Include="Views\Medecin\AddSpecialiteForMedecin.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Medecin\GetAllMaisonMedicaleWithSpecialiteForMedecin.cshtml" />
-=======
-    <Content Include="Views\Medecin\GetMaisonMedicaleForMedecin.cshtml" />
->>>>>>> 50a6665e1015fa9d0689f40502ce1c095eeca148
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
