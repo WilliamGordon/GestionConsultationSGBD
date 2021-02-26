@@ -350,5 +350,7 @@
     <FunctionImportMapping FunctionImportName="UpdateLocal" FunctionName="GestionConsultationModel.Store.UpdateLocal" />
     <FunctionImportMapping FunctionImportName="UpdateMedecinSpecialiteMaisonMedicale" FunctionName="GestionConsultationModel.Store.UpdateMedecinSpecialiteMaisonMedicale" />
     <FunctionImportMapping FunctionImportName="UpdatePresence" FunctionName="GestionConsultationModel.Store.UpdatePresence" />
+    <FunctionImportMapping FunctionImportName="GetAllSpecialiteForAMedecinAndMaisonMedicale" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForAMedecinAndMaisonMedicale" />
+    <FunctionImportMapping FunctionImportName="GetAllMaisonMedicaleForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMaisonMedicaleForMedecin" />
   </EntityContainerMapping>
 </Mapping>

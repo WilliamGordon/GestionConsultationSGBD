@@ -236,6 +236,29 @@ namespace WebClientMedecin.Controllers
             }
         }
 
+        // GetAllMaisonMedicaleWithSpecialiteForMedecin
+        public async Task<ActionResult> GetAllMaisonMedicaleWithSpecialiteForMedecin(int id)
+        {
+            ViewBag.Medecin_ID = id;
+            List<Models.PairMaisonMedicalSpecialite> MMSForMedecin = new List<Models.PairMaisonMedicalSpecialite>();
+            
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/Medecin/GetAllMaisonMedicaleWithSpecialiteForMedecin/" + id);
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var specsResponse = Res.Content.ReadAsStringAsync().Result;
+                    MMSForMedecin = JsonConvert.DeserializeObject<List<Models.PairMaisonMedicalSpecialite>>(specsResponse);
+                    return View(MMSForMedecin);
+                }
+                return View(MMSForMedecin);
+            }
+        }
+
         // POST: Medecin/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)

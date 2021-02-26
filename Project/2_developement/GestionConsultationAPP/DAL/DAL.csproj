@@ -83,7 +83,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GestionConsultationDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GetAllMaisonMedicaleForMedecinWithSpecialite_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllMaisonMedicaleForMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllSpecialiteForAMedecinAndMaisonMedicale_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllSpecialiteForMedecin_Result.cs">

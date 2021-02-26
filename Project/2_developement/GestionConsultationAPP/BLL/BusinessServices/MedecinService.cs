@@ -14,12 +14,14 @@ namespace BLL.BusinessServices
         private MedecinRepository MedRepository { get; set; }
         private SpecialiteRepository SpecRepository { get; set; }
         private MedecinSpecialiteRepository MedSpecRepository { get; set; }
+        private MedecinSpecialiteMaisonMedicaleRepository MedSpecMMRepository { get; set; }
         private IMapper Mapper { get; set; }
         public MedecinService()
         {
             MedRepository = new MedecinRepository();
             SpecRepository = new SpecialiteRepository();
             MedSpecRepository = new MedecinSpecialiteRepository();
+            MedSpecMMRepository = new MedecinSpecialiteMaisonMedicaleRepository();
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
@@ -36,6 +38,24 @@ namespace BLL.BusinessServices
             Models.Medecin medecin = Mapper.Map<Models.Medecin>(DALmedecin);
             return medecin;
         }
+
+        public List<Models.PairMaisonMedicalSpecialite> GetAllMaisonMedicaleWithSpecialiteForMedecin(int id)
+        {
+            List<Models.PairMaisonMedicalSpecialite> MMSForMedecin = new List<Models.PairMaisonMedicalSpecialite>();
+            var maisonMedicales = MedSpecMMRepository.GetAllMaisonMedicaleForMedecin(id);
+            foreach (var MM in maisonMedicales)
+            {
+                var Specs = MedSpecMMRepository.GetAllSpecialiteForAMedecinAndMaisonMedicale(id, MM.MaisonMedicale_ID);
+                // check if MM is not already in the dictionnary
+                var PairMMS = new Models.PairMaisonMedicalSpecialite();
+                PairMMS.MaisonMedicale = Mapper.Map<Models.MaisonMedicale>(MM);
+                PairMMS.Specialites = Mapper.Map<List<Models.Specialite>>(Specs);
+
+                MMSForMedecin.Add(PairMMS);
+            }
+            return MMSForMedecin;
+        }
+
         public int AddMedecin(Models.Medecin medecin)
         {
             try

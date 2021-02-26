@@ -436,6 +436,16 @@
       <Parameter Name="Starting" Mode="In" Type="DateTime" />
       <Parameter Name="Ending" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="GetAllMaisonMedicaleForMedecinWithSpecialite" EntitySet="MaisonMedicales" ReturnType="Collection(GestionConsultationModel.MaisonMedicale)">
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllSpecialiteForAMedecinAndMaisonMedicale" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllMaisonMedicaleForMedecin" EntitySet="MaisonMedicales" ReturnType="Collection(GestionConsultationModel.MaisonMedicale)">
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AddMedecin_Result">
     <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -533,5 +543,19 @@
     <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
     <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
     <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetAllMaisonMedicaleForMedecinWithSpecialite_Result">
+    <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+    <Property Type="String" Name="MaisonMedicale_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Specialite_Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllSpecialiteForAMedecinAndMaisonMedicale_Result">
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllMaisonMedicaleForMedecin_Result">
+    <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

@@ -54,5 +54,14 @@ namespace API.Controllers
             var medecins = MedecinService.GetAllSpecialiteForMedecin(medecin_ID);
             return Ok(medecins);
         }
+
+        // GET: api/Medecin/GetAllSpecialiteForMedecin/5
+        [HttpGet]
+        [Route("api/Medecin/GetAllMaisonMedicaleWithSpecialiteForMedecin/{medecin_ID}")]
+        public IHttpActionResult GetAllMaisonMedicaleWithSpecialiteForMedecin(int medecin_ID)
+        {
+            var MMSForMedecin = MedecinService.GetAllMaisonMedicaleWithSpecialiteForMedecin(medecin_ID);
+            return Ok(MMSForMedecin);
+        }
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="Medecin.cs" />
     <Compile Include="MedecinSpecialite.cs" />
     <Compile Include="MedecinSpecialiteMaisonMedicale.cs" />
+    <Compile Include="PairMaisonMedicalSpecialite.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Presence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

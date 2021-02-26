@@ -33,3 +33,4 @@ C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\Ge
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.dll
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.pdb
+C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
