@@ -288,6 +288,12 @@
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetAllMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllMedecinSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllMMSForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetAllSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllSpecialiteForAMedecinAndMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
@@ -879,6 +885,12 @@
           <FunctionImport Name="GetAllMaisonMedicaleForMedecin" EntitySet="MaisonMedicales" ReturnType="Collection(GestionConsultationModel.MaisonMedicale)">
           <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAllMMSForMedecin" EntitySet="MedecinSpecialiteMaisonMedicales" ReturnType="Collection(GestionConsultationModel.MedecinSpecialiteMaisonMedicale)">
+          <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllMedecinSpecialiteForMedecin" EntitySet="MedecinSpecialites" ReturnType="Collection(GestionConsultationModel.MedecinSpecialite)">
+            <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AddMedecin_Result">
           <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -990,6 +1002,18 @@
         <ComplexType Name="GetAllMaisonMedicaleForMedecin_Result">
           <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllMMSForMedecin_Result">
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MinimalDuration" Nullable="false" />
+          <Property Type="Boolean" Name="IsActif" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllMedecinSpecialiteForMedecin_Result">
+          <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+          <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+          <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1360,6 +1384,10 @@
           <FunctionImportMapping FunctionImportName="GetAllSpecialiteForAMedecinAndMaisonMedicale" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForAMedecinAndMaisonMedicale">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllMaisonMedicaleForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMaisonMedicaleForMedecin">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllMMSForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMMSForMedecin">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllMedecinSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMedecinSpecialiteForMedecin">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

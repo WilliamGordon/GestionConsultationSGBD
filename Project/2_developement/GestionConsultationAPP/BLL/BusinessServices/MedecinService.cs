@@ -39,21 +39,11 @@ namespace BLL.BusinessServices
             return medecin;
         }
 
-        public List<Models.PairMaisonMedicalSpecialite> GetAllMaisonMedicaleWithSpecialiteForMedecin(int id)
+        public List<Models.MedecinSpecialiteMaisonMedicale> GetAllMMSForMedecin(int id)
         {
-            List<Models.PairMaisonMedicalSpecialite> MMSForMedecin = new List<Models.PairMaisonMedicalSpecialite>();
-            var maisonMedicales = MedSpecMMRepository.GetAllMaisonMedicaleForMedecin(id);
-            foreach (var MM in maisonMedicales)
-            {
-                var Specs = MedSpecMMRepository.GetAllSpecialiteForAMedecinAndMaisonMedicale(id, MM.MaisonMedicale_ID);
-                // check if MM is not already in the dictionnary
-                var PairMMS = new Models.PairMaisonMedicalSpecialite();
-                PairMMS.MaisonMedicale = Mapper.Map<Models.MaisonMedicale>(MM);
-                PairMMS.Specialites = Mapper.Map<List<Models.Specialite>>(Specs);
-
-                MMSForMedecin.Add(PairMMS);
-            }
-            return MMSForMedecin;
+            List<Models.MedecinSpecialiteMaisonMedicale> MSMM = new List<Models.MedecinSpecialiteMaisonMedicale>();
+            var DALMSMM = MedSpecMMRepository.GetAllMMSForMedecin(id);
+            return Mapper.Map<List<Models.MedecinSpecialiteMaisonMedicale>>(DALMSMM);
         }
 
         public int AddMedecin(Models.Medecin medecin)

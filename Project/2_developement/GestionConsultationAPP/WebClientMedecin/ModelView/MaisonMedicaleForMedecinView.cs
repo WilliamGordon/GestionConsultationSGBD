@@ -8,6 +8,9 @@ namespace WebClientMedecin.ModelView
     public class MaisonMedicaleForMedecinView
     {
         public Models.Medecin Medecin { get; set; }
-        IDictionary<Models.MaisonMedicale, List<Models.Specialite>> MaisonMedicaleWithSpecialite { get; set; }
+        public Models.MaisonMedicale MaisonMedicale { get; set; }
+        public Models.Specialite Specialite { get; set; }
+        public Models.MedecinSpecialiteMaisonMedicale MSMM { get; set; }
+        public Models.MedecinSpecialite MS { get; set; }
     }
 }

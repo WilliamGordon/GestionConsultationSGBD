@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebClientMedecin.ModelView.MaisonMedicaleForMedecinView>
+
+@{
+    ViewBag.Title = "GetAllMaisonMedicalForMedecin";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Mes maisons médicales</h2>
+
+<p>
+    <a href="/Medecin/AddMaisonMedicaleForMedecin/@ViewBag.Medecin_ID">S'inscrire dans une autre maison médicale</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Maison Médicale</th>
+        <th>Spécialite</th>
+        <th>Temps minimum de consultation</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @item.MaisonMedicale.Name
+        </td>
+        <td>
+            @item.Specialite.Name
+        </td>
+        <td>
+            @item.MSMM.MinimalDuration
+        </td>
+        <td>
+            <a href="/Medecin/EditMiniumDurationOfConsultation/@ViewBag.Medecin_ID">Modifier temps de consultation</a>
+        </td>
+    </tr>
+    }
+
+</table>

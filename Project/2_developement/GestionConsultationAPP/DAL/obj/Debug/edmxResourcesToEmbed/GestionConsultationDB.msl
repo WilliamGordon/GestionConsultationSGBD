@@ -352,5 +352,7 @@
     <FunctionImportMapping FunctionImportName="UpdatePresence" FunctionName="GestionConsultationModel.Store.UpdatePresence" />
     <FunctionImportMapping FunctionImportName="GetAllSpecialiteForAMedecinAndMaisonMedicale" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForAMedecinAndMaisonMedicale" />
     <FunctionImportMapping FunctionImportName="GetAllMaisonMedicaleForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMaisonMedicaleForMedecin" />
+    <FunctionImportMapping FunctionImportName="GetAllMMSForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMMSForMedecin" />
+    <FunctionImportMapping FunctionImportName="GetAllMedecinSpecialiteForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMedecinSpecialiteForMedecin" />
   </EntityContainerMapping>
 </Mapping>

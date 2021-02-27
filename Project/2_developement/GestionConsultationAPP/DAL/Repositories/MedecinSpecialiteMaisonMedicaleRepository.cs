@@ -34,11 +34,23 @@ namespace DAL.Repositories
             return context.GetAllSpecialiteForAMedecinAndMaisonMedicale(Medecin_ID, MaisonMedicale_ID).ToList();
         }
 
+        public List<DAL.MedecinSpecialiteMaisonMedicale> GetAllMMSForMedecin(int MaisonMedicale_ID)
+        {
+            return context.GetAllMMSForMedecin(MaisonMedicale_ID).ToList();
+        }
+
         public int AddMedecinSpecialiteMaisonMedicale(DAL.MedecinSpecialiteMaisonMedicale MSMM)
         {
-            context.MedecinSpecialiteMaisonMedicales.Add(MSMM);
-            context.SaveChanges();
-            return MSMM.MedecinSpecialiteMaisonMedicale_ID;
+            try
+            {
+                context.MedecinSpecialiteMaisonMedicales.Add(MSMM);
+                context.SaveChanges();
+                return MSMM.MedecinSpecialiteMaisonMedicale_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void UpdateMedecinSpecialiteMaisonMedicale(DAL.MedecinSpecialiteMaisonMedicale MSMM)

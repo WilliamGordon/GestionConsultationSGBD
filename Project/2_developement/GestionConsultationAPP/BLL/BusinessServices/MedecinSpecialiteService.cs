@@ -26,5 +26,17 @@ namespace BLL.BusinessServices
             MS.Specialite_ID = specialite.Specialite_ID;
             return Repository.AddMedecinSpecialite(MS); ;
         }
+
+        public Models.MedecinSpecialite GetMedecinSpecialitebyId(int id)
+        {
+            return Mapper.Map<Models.MedecinSpecialite>(Repository.GetMedecinSpecialitebyId(id));
+        }
+
+        public List<Models.MedecinSpecialite> GetAllMedecinSpecialiteForMedecin(int id)
+        {
+            return Mapper.Map< List<Models.MedecinSpecialite>>(Repository.GetAllMedecinSpecialiteForMedecin(id));
+        }
+
+        
     }
 }

@@ -22,5 +22,12 @@ namespace API.Controllers
             var Specialites = SpecialiteService.GetAllSpecialites();
             return Ok(Specialites);
         }
+
+        // GET: api/Specialite/5
+        public IHttpActionResult Get(int id)
+        {
+            var Specialite = SpecialiteService.GetSpecialiteById(id);
+            return Ok(Specialite);
+        }
     }
 }

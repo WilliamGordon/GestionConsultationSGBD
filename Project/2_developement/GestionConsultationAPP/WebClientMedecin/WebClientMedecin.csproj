@@ -131,6 +131,7 @@
     <Compile Include="ModelView\MaisonMedicaleForMedecinView.cs" />
     <Compile Include="ModelView\MedecinCreate.cs" />
     <Compile Include="ModelView\MedecinSpecialiteCreate.cs" />
+    <Compile Include="ModelView\MedecinSpecialiteMaisonMedicaleCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,8 @@
     <Content Include="Views\Medecin\GetSpecialiteForMedecin.cshtml" />
     <Content Include="Views\Medecin\AddSpecialiteForMedecin.cshtml" />
     <Content Include="Views\Medecin\GetAllMaisonMedicaleWithSpecialiteForMedecin.cshtml" />
+    <Content Include="Views\Medecin\GetAllMaisonMedicalForMedecin.cshtml" />
+    <Content Include="Views\Medecin\AddMaisonMedicaleForMedecin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

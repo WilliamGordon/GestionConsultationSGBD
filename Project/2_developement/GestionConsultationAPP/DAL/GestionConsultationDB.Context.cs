@@ -752,5 +752,41 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaisonMedicale>("GetAllMaisonMedicaleForMedecin", mergeOption, medecin_IDParameter);
         }
+    
+        public virtual ObjectResult<MedecinSpecialiteMaisonMedicale> GetAllMMSForMedecin(Nullable<int> medecin_ID)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MedecinSpecialiteMaisonMedicale>("GetAllMMSForMedecin", medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<MedecinSpecialiteMaisonMedicale> GetAllMMSForMedecin(Nullable<int> medecin_ID, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MedecinSpecialiteMaisonMedicale>("GetAllMMSForMedecin", mergeOption, medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<MedecinSpecialite> GetAllMedecinSpecialiteForMedecin(Nullable<int> medecin_ID)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MedecinSpecialite>("GetAllMedecinSpecialiteForMedecin", medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<MedecinSpecialite> GetAllMedecinSpecialiteForMedecin(Nullable<int> medecin_ID, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MedecinSpecialite>("GetAllMedecinSpecialiteForMedecin", mergeOption, medecin_IDParameter);
+        }
     }
 }

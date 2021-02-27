@@ -11,9 +11,11 @@ namespace API.Controllers
     public class MedecinSpecialiteController : ApiController
     {
         public MedecinService MedecinService { get; set; }
+        public MedecinSpecialiteService MSService { get; set; }
         public MedecinSpecialiteController()
         {
             MedecinService = new MedecinService();
+            MSService = new MedecinSpecialiteService();
         }
         // GET: api/MedecinSpecialite
         public IEnumerable<string> Get()
@@ -22,9 +24,20 @@ namespace API.Controllers
         }
 
         // GET: api/MedecinSpecialite/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            Models.MedecinSpecialite MS = new Models.MedecinSpecialite();
+            MS = MSService.GetMedecinSpecialitebyId(id);
+            return Ok(MS);
+        }
+
+        // GET: api/Medecin/GetAllSpecialiteForMedecin/5
+        [HttpGet]
+        [Route("api/MedecinSpecialite/GetAllMedecinSpecialiteForMedecin/{medecin_ID}")]
+        public IHttpActionResult GetAllMedecinSpecialiteForMedecin(int medecin_ID)
+        {
+            var medecins = MSService.GetAllMedecinSpecialiteForMedecin(medecin_ID);
+            return Ok(medecins);
         }
 
         // POST: api/MedecinSpecialite

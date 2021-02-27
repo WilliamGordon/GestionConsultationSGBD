@@ -165,8 +165,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaisonMedicaleController.cs" />
     <Compile Include="Controllers\MedecinController.cs" />
     <Compile Include="Controllers\MedecinSpecialiteController.cs" />
+    <Compile Include="Controllers\MedecinSpecialiteMaisonMedicaleController.cs" />
     <Compile Include="Controllers\SpecialiteController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

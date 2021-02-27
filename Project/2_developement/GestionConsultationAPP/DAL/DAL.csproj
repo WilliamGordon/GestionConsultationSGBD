@@ -89,7 +89,13 @@
     <Compile Include="GetAllMaisonMedicaleForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllMedecinSpecialiteForMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllMMSForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllSpecialiteForAMedecinAndMaisonMedicale_Result.cs">
