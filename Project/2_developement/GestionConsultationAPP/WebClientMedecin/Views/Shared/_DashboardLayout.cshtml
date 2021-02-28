@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #1A1E8D;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     @if (true)
                     {
-                        <li><a href="/Medecin/GetPlanningForMedecin/@ViewBag.Medecin_ID">Mes planning</a></li>
+                        <li><a href="/Medecin/GetAllPresenceForMedecin/@ViewBag.Medecin_ID">Mes présences</a></li>
                         <li><a href="/Medecin/GetConsultationsForMedecin/@ViewBag.Medecin_ID">Mes consultations</a></li>
                         <li><a href="/Medecin/GetSpecialiteForMedecin/@ViewBag.Medecin_ID">Mes spécialités</a></li>
                         <li><a href="/Medecin/GetAllMaisonMedicalForMedecin/@ViewBag.Medecin_ID">Mes maisons médicales</a></li>
@@ -42,5 +42,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/moment.js")
 </body>
 </html>

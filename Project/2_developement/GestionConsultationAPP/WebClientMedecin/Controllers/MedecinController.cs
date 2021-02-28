@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -239,6 +240,7 @@ namespace WebClientMedecin.Controllers
         public async Task<ActionResult> GetAllMaisonMedicalForMedecin(int id)
         {
             ViewBag.Medecin_ID = id;
+
             List<ModelView.MaisonMedicaleForMedecinView> MMSForMedecin = new List<ModelView.MaisonMedicaleForMedecinView>();
 
             List<Models.MedecinSpecialiteMaisonMedicale> MSMMs = new List<Models.MedecinSpecialiteMaisonMedicale>();
@@ -426,6 +428,38 @@ namespace WebClientMedecin.Controllers
             }
         }
 
+        // POST: Medecin/EditMedecinSpecialiteMaisonMedicale
+        [HttpPost]
+        public async Task<ActionResult> EditMedecinSpecialiteMaisonMedicale(ModelView.MedecinSpecialiteMaisonMedicaleEdit MSMMEdit)
+        {
+            ViewBag.Medecin_ID = MSMMEdit.Medecin_ID;
+
+            Models.MedecinSpecialiteMaisonMedicale MSMM = new Models.MedecinSpecialiteMaisonMedicale();
+            MSMM.MaisonMedicale_ID = MSMMEdit.MaisonMedicale_ID;
+            MSMM.MedecinSpecialiteMaisonMedicale_ID = MSMMEdit.MedecinSpecialiteMaisonMedicale_ID;
+            MSMM.MedecinSpecialite_ID = MSMMEdit.MedecinSpecialite_ID;
+            MSMM.MinimalDuration = MSMMEdit.MinimalDuration;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                var Res = await client.PutAsJsonAsync<Models.MedecinSpecialiteMaisonMedicale>("api/MedecinSpecialiteMaisonMedicale/", MSMM);
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var specsResponse = Res.Content.ReadAsStringAsync().Result;
+                    var MSMMID = JsonConvert.DeserializeObject<int>(Res.Content.ReadAsStringAsync().Result);
+                    return RedirectToAction("GetAllMaisonMedicalForMedecin/" + MSMMEdit.Medecin_ID);
+                }
+                else
+                {
+                    return RedirectToAction("GetAllMaisonMedicalForMedecin/" + MSMMEdit.Medecin_ID);
+                }
+            }
+        }
+
         public async Task<ActionResult> GetMaisonMedicaleForMedecin(int id)
 
         {
@@ -447,5 +481,136 @@ namespace WebClientMedecin.Controllers
                 return View(maisonMed);
             }
         }
+
+        public async Task<ActionResult> GetAllPresenceForMedecin(int id)
+        {
+            ViewBag.Medecin_ID = id;
+
+            List<ModelView.PresenceForMedecinView> PresencesForMedecin = new List<ModelView.PresenceForMedecinView>();
+
+            List<Models.Presence> Presences = new List<Models.Presence>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage ResPresence = await client.GetAsync("api/Presence/GetAllPresenceForMedecin/" + id);
+
+                if (ResPresence.IsSuccessStatusCode)
+                {
+                    var PresenceResponse = ResPresence.Content.ReadAsStringAsync().Result;
+                    Presences = JsonConvert.DeserializeObject<List<Models.Presence>>(PresenceResponse);
+
+                    foreach (var item in Presences)
+                    {
+                        //public Models.Medecin Medecin { get; set; }
+                        //public Models.MaisonMedicale MaisonMedicale { get; set; }
+                        //public DateTime Starting { get; set; }
+                        //public DateTime Ending { get; set; }
+
+                        // Get the Medecin
+                        HttpResponseMessage ResMed = await client.GetAsync("api/Medecin/" + id);
+                        Models.Medecin Med = new Models.Medecin();
+
+                        // Get the MaisonMedicale
+                        HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale/" + item.MaisonMedicale_ID);
+                        Models.MaisonMedicale MM = new Models.MaisonMedicale();
+
+                        if (ResMed.IsSuccessStatusCode && ResMM.IsSuccessStatusCode)
+                        {
+                            Med = JsonConvert.DeserializeObject<Models.Medecin>(ResMed.Content.ReadAsStringAsync().Result);
+                            MM = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
+
+                            var pres = new ModelView.PresenceForMedecinView();
+                            pres.Medecin = Med;
+                            pres.MaisonMedicale = MM;
+                            pres.Starting = item.Starting;
+                            pres.Ending = item.Ending;
+
+                            PresencesForMedecin.Add(pres);
+                        }
+                    }
+                }
+                return View(PresencesForMedecin);
+            }
+        }
+
+        // GET: Medecin/AddPresenceForMedecin/id
+        public async Task<ActionResult> AddPresenceForMedecin(int id)
+        {
+            ViewBag.ErrorMessage = "";
+            ViewBag.Medecin_ID = id;
+
+            // Get List of maison medicale for which the medecin is working for
+            List<Models.MaisonMedicale> MMs = new List<Models.MaisonMedicale>();
+           
+            PresenceCreate PresenceCreate = new PresenceCreate();
+            PresenceCreate.Medecin_ID = id;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                
+                HttpResponseMessage MMRes = await client.GetAsync("api/MaisonMedicale/GetAllMaisonMedicaleForMedecin/" + id);
+
+                if (MMRes.IsSuccessStatusCode)
+                {
+                    MMs = JsonConvert.DeserializeObject<List<Models.MaisonMedicale>>(MMRes.Content.ReadAsStringAsync().Result);
+
+                    PresenceCreate.ListMMForMedecin = MMs;
+                    PresenceCreate.Medecin_ID = id;
+                }
+                return View(PresenceCreate);
+            }
+        }
+
+        // POST: Medecin/EditMedecinSpecialiteMaisonMedicale
+        [HttpPost]
+        public async Task<ActionResult> AddPresenceForMedecin(ModelView.PresenceCreate presenceCreate)
+        {
+            ViewBag.Medecin_ID = presenceCreate.Medecin_ID;
+
+            Models.MedecinSpecialiteMaisonMedicale MSMM = new Models.MedecinSpecialiteMaisonMedicale();
+
+            List<Models.Presence> presence = new List<Models.Presence>();
+
+            foreach (var day in presenceCreate.days)
+            {
+                Models.Presence pres = new Models.Presence();
+                pres.Medecin_ID = presenceCreate.Medecin_ID;
+                pres.MaisonMedicale_ID = presenceCreate.MaisonMedicale_ID;
+
+                var start = day + " " + presenceCreate.Starting.Hour.ToString().PadLeft(2, '0') + ":" + presenceCreate.Starting.Minute.ToString().PadLeft(2, '0') + ":00";
+                var end = day + " " + presenceCreate.Ending.Hour.ToString().PadLeft(2, '0') + ":" + presenceCreate.Ending.Minute.ToString().PadLeft(2, '0') + ":00";
+
+                pres.Starting = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                pres.Ending = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+
+                presence.Add(pres);
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                var Res = await client.PostAsJsonAsync<List<Models.Presence>>("api/Presence/", presence);
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("GetAllPresenceForMedecin/" + presenceCreate.Medecin_ID);
+                }
+                else
+                {
+                    return RedirectToAction("GetAllPresenceForMedecin/" + presenceCreate.Medecin_ID);
+                }
+            }
+        }
+
     }
 }

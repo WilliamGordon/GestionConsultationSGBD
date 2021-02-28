@@ -45,8 +45,16 @@ namespace API.Controllers
         }
 
         // PUT: api/MedecinSpecialiteMaisonMedicale/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromBody] Models.MedecinSpecialiteMaisonMedicale MSMM)
         {
+            try
+            {
+                return Ok(MSMMService.EditMSMM(MSMM));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
         // DELETE: api/MedecinSpecialiteMaisonMedicale/5

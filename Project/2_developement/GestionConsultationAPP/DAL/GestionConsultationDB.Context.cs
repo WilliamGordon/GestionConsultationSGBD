@@ -788,5 +788,32 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MedecinSpecialite>("GetAllMedecinSpecialiteForMedecin", mergeOption, medecin_IDParameter);
         }
+    
+        public virtual ObjectResult<Presence> GetAllPresenceForMedecin(Nullable<int> medecin_ID)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Presence>("GetAllPresenceForMedecin", medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<Presence> GetAllPresenceForMedecin(Nullable<int> medecin_ID, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Presence>("GetAllPresenceForMedecin", mergeOption, medecin_IDParameter);
+        }
+    
+        public virtual ObjectResult<GetAllMaisonMedicalesForMedecin_Result> GetAllMaisonMedicalesForMedecin(Nullable<int> medecin_ID)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllMaisonMedicalesForMedecin_Result>("GetAllMaisonMedicalesForMedecin", medecin_IDParameter);
+        }
     }
 }

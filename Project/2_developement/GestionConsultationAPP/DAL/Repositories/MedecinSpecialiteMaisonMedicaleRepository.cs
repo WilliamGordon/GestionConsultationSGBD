@@ -53,14 +53,22 @@ namespace DAL.Repositories
             }
         }
 
-        public void UpdateMedecinSpecialiteMaisonMedicale(DAL.MedecinSpecialiteMaisonMedicale MSMM)
+        public int UpdateMedecinSpecialiteMaisonMedicale(DAL.MedecinSpecialiteMaisonMedicale MSMM)
         {
-            DAL.MedecinSpecialiteMaisonMedicale msmm = this.GetMedecinSpecialiteMaisonMedicalebyId(MSMM.MedecinSpecialiteMaisonMedicale_ID);
-            msmm.MedecinSpecialite_ID = MSMM.MedecinSpecialite_ID;
-            msmm.MaisonMedicale_ID = MSMM.MaisonMedicale_ID;
-            msmm.MinimalDuration = MSMM.MinimalDuration;
-            msmm.IsActif = MSMM.IsActif;
-            context.SaveChanges();
+            try
+            {
+                DAL.MedecinSpecialiteMaisonMedicale msmm = this.GetMedecinSpecialiteMaisonMedicalebyId(MSMM.MedecinSpecialiteMaisonMedicale_ID);
+                msmm.MedecinSpecialite_ID = MSMM.MedecinSpecialite_ID;
+                msmm.MaisonMedicale_ID = MSMM.MaisonMedicale_ID;
+                msmm.MinimalDuration = MSMM.MinimalDuration;
+                msmm.IsActif = MSMM.IsActif;
+                context.SaveChanges();
+                return MSMM.MedecinSpecialiteMaisonMedicale_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void DeleteMedecinSpecialiteMaisonMedicale(DAL.MedecinSpecialiteMaisonMedicale MSMM)

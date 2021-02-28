@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebClientMedecin.ModelView.PresenceForMedecinView>
+
+@{
+    ViewBag.Title = "GetAllPresenceForMedecin";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Mes Présences</h2>
+
+<p>
+    <a href="/Medecin/AddPresenceForMedecin/@ViewBag.Medecin_ID">Ajouter une présence</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Starting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ending)
+        </th>
+        <th>
+            Maison médicale
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Starting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ending)
+        </td>
+        <td>
+            @item.MaisonMedicale.Name
+        </td>
+    </tr>
+}
+
+</table>

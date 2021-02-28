@@ -28,6 +28,9 @@ namespace BLL.Mappings
 
             CreateMap<DAL.MedecinSpecialiteMaisonMedicale, Models.MedecinSpecialiteMaisonMedicale>();
             CreateMap<Models.MedecinSpecialiteMaisonMedicale, DAL.MedecinSpecialiteMaisonMedicale>();
+
+            CreateMap<DAL.Presence, Models.Presence>();
+            CreateMap<Models.Presence, DAL.Presence>();
         }
     }
 }

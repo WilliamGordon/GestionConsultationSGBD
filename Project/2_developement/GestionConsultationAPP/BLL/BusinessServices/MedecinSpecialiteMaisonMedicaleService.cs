@@ -41,5 +41,17 @@ namespace BLL.BusinessServices
                 throw ex;
             }
         }
+
+        public int EditMSMM(Models.MedecinSpecialiteMaisonMedicale MSMM)
+        {
+            try
+            {
+                return MSMMRepository.UpdateMedecinSpecialiteMaisonMedicale(Mapper.Map<DAL.MedecinSpecialiteMaisonMedicale>(MSMM));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

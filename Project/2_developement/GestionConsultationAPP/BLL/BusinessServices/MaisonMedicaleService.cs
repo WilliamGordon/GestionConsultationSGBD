@@ -24,6 +24,11 @@ namespace BLL.BusinessServices
             return Mapper.Map<List<Models.MaisonMedicale>>(MMRepository.GetAllMaisonMedicales());
         }
 
+        public List<Models.MaisonMedicale> GetAllMaisonMedicaleForMedecin(int medecin_ID)
+        {
+            return Mapper.Map<List<Models.MaisonMedicale>>(MMRepository.GetAllMaisonMedicaleForMedecin(medecin_ID));
+        }
+
         public Models.MaisonMedicale GetMaisonMedicaleById(int id )
         {
             return Mapper.Map<Models.MaisonMedicale>(MMRepository.GetMaisonMedicalebyId(id)); 

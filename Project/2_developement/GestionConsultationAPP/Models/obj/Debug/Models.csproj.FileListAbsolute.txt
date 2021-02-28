@@ -9,4 +9,3 @@ C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\Ge
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Models\obj\Debug\Models.dll
 C:\Users\WWauters\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Models\obj\Debug\Models.pdb
-C:\Users\willi\Desktop\SGBD\GestionConsultationSGBD\Project\2_developement\GestionConsultationAPP\Models\obj\Debug\Models.csprojAssemblyReference.cache

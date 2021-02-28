@@ -132,6 +132,9 @@
     <Compile Include="ModelView\MedecinCreate.cs" />
     <Compile Include="ModelView\MedecinSpecialiteCreate.cs" />
     <Compile Include="ModelView\MedecinSpecialiteMaisonMedicaleCreate.cs" />
+    <Compile Include="ModelView\MedecinSpecialiteMaisonMedicaleEdit.cs" />
+    <Compile Include="ModelView\PresenceCreate.cs" />
+    <Compile Include="ModelView\PresenceForMedecinView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +159,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -175,9 +182,12 @@
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Views\Medecin\GetSpecialiteForMedecin.cshtml" />
     <Content Include="Views\Medecin\AddSpecialiteForMedecin.cshtml" />
-    <Content Include="Views\Medecin\GetAllMaisonMedicaleWithSpecialiteForMedecin.cshtml" />
     <Content Include="Views\Medecin\GetAllMaisonMedicalForMedecin.cshtml" />
     <Content Include="Views\Medecin\AddMaisonMedicaleForMedecin.cshtml" />
+    <Content Include="Views\Medecin\GetAllPresenceForMedecin.cshtml" />
+    <Content Include="Views\Medecin\AddPresenceForMedecin.cshtml" />
+    <Content Include="Scripts\moment.min.js.map" />
+    <Content Include="Scripts\moment-with-locales.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

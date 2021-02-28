@@ -1,0 +1,193 @@
+﻿@model WebClientMedecin.ModelView.PresenceCreate
+
+@{
+    ViewBag.Title = "AddPresenceForMedecin";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<script>
+    function setMinWeek(el) {
+        console.log(el);
+        var Year = new Date().getFullYear();
+        var Separator = "-W"
+        var weekNumber = moment().format('W');
+
+        if (weekNumber.length == 1) {
+            weekNumber = "0" + weekNumber;
+        }
+        console.log(weekNumber);
+        el.min = Year + Separator + weekNumber
+    }
+
+    function loadDateForDays(week) {
+        week = week.slice(-2);
+        console.log(week.replace("0", ""))
+        week = week.replace("0", "");
+        var day = getDateOfISOWeek(week, new Date().getFullYear());
+        console.log(day);
+
+        document.getElementById("monday").value = GetFormattedDate(day.addDays(0))
+        document.getElementById("monday_label").innerHTML = "Lundi " + GetFormattedDate(day.addDays(0))
+        document.getElementById("tuesday").value = GetFormattedDate(day.addDays(1))
+        document.getElementById("tuesday_label").innerHTML = "Mardi " + GetFormattedDate(day.addDays(1))
+        document.getElementById("wednesday").value = GetFormattedDate(day.addDays(2))
+        document.getElementById("wednesday_label").innerHTML = "Mercredi " + GetFormattedDate(day.addDays(2))
+        document.getElementById("thursday").value = GetFormattedDate(day.addDays(3))
+        document.getElementById("thursday_label").innerHTML = "Jeudi " + GetFormattedDate(day.addDays(3))
+        document.getElementById("friday").value = GetFormattedDate(day.addDays(4))
+        document.getElementById("friday_label").innerHTML = "Vendredi " + GetFormattedDate(day.addDays(4))
+        document.getElementById("saturday").value = GetFormattedDate(day.addDays(5))
+        document.getElementById("saturday_label").innerHTML = "Samedi " + GetFormattedDate(day.addDays(5))
+        document.getElementById("sunday").value = GetFormattedDate(day.addDays(6))
+        document.getElementById("sunday_label").innerHTML = "Dimanche " + GetFormattedDate(day.addDays(6))
+
+        for (var i = 0; i < 7; i++) {
+            console.log(day.addDays(i));
+        }
+
+    }
+
+    function GetFormattedDate(date) {
+
+        console.log(date);
+
+        var formattedDate = "";
+
+        var day = date.getDate();       // yields date
+        var month = date.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
+        var year = date.getFullYear();  // yields year
+
+        // After this construct a string with the above results as below
+        formattedDate = padLeft(day, 2) + "/" + padLeft(month,2)+ "/" + year
+
+        console.log(formattedDate);
+
+        return formattedDate
+    }
+
+    function padLeft(nr, n, str) {
+        return Array(n - String(nr).length + 1).join(str || '0') + nr;
+    }
+
+    function getDateOfISOWeek(w, y) {
+        var simple = new Date(y, 0, 1 + (w - 1) * 7);
+        var dow = simple.getDay();
+        var ISOweekStart = simple;
+        if (dow <= 4)
+            ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+        else
+            ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+        return ISOweekStart;
+    }
+
+    Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+</script>
+
+<br />
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.Medecin_ID)
+
+<div class="form-horizontal">
+    <h4>Ajouter une présence</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="form-group">
+    <label class="control-label col-md-2" for="Starting">Choisissez une semaine</label>
+    <div class="col-md-10">
+        <input type="week" name="week" id="week" required class="form-control" onclick="setMinWeek(this);" onchange="loadDateForDays(this.value)">
+    </div>
+</div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Starting">Choisissez les jours de la semaine pour lesquelle vous serez présent</label>
+        <div class="col-md-10">
+            <div class="input-group" style="padding-bottom:5px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" value="monday" name="days" id="monday" aria-label="..." />
+                </span>
+                <label class="form-control" aria-label="..." id="monday_label">Lundi</label>
+            </div>
+            <div class="input-group" style="padding-bottom:5px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" value="tuesday" name="days" id="tuesday" aria-label="..." />
+                </span>
+                <label class="form-control" aria-label="..." id="tuesday_label">Mardi</label>
+            </div>
+            <div class="input-group" style="padding-bottom:5px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" value="wednesday" name="days" id="wednesday" aria-label="..." />
+                </span>
+                <label class="form-control" aria-label="..." id="wednesday_label">Mercredi</label>
+            </div>
+            <div class="input-group" style="padding-bottom:5px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" value="thursday" name="days" id="thursday" aria-label="..." />
+                </span>
+                <label class="form-control" aria-label="..." id="thursday_label">Jeudi</label>
+            </div>
+            <div class="input-group" style="padding-bottom:5px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" value="friday" name="days" id="friday" aria-label="..." />
+                </span>
+                <label class="form-control" aria-label="..." id="friday_label">Vendredi</label>
+            </div>
+            <div class="input-group" style="padding-bottom:5px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" value="saturday" name="days" id="saturday" aria-label="..." />
+                </span>
+                <label class="form-control" aria-label="..." id="saturday_label">Samedi</label>
+            </div>
+            <div class="input-group" style="padding-bottom:5px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" value="sunday" name="days" id="sunday" aria-label="..." />
+                </span>
+                <label class="form-control" aria-label="..." id="sunday_label">Dimanche</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="MaisonMedicale_ID">Choisissez une maison médicale</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.MaisonMedicale_ID,
+            new SelectList(Model.ListMMForMedecin, "MaisonMedicale_ID", "Name"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Starting, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-date="The field Starting must be a date." data-val-required="The Starting field is required." id="Starting" name="Starting" type="time" value="@Model.Starting">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ending, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-date="The field Ending must be a date." data-val-required="The Ending field is required." id="Ending" name="Ending" type="time" value="@Model.Ending">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Ajouter présences" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

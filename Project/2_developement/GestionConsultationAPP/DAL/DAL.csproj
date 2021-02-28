@@ -89,6 +89,9 @@
     <Compile Include="GetAllMaisonMedicaleForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllMaisonMedicalesForMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllMedecinSpecialiteForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
@@ -96,6 +99,9 @@
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllMMSForMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllPresenceForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllSpecialiteForAMedecinAndMaisonMedicale_Result.cs">
