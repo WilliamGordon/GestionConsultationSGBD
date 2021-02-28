@@ -169,6 +169,7 @@
     <Compile Include="Controllers\MedecinController.cs" />
     <Compile Include="Controllers\MedecinSpecialiteController.cs" />
     <Compile Include="Controllers\MedecinSpecialiteMaisonMedicaleController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PresenceController.cs" />
     <Compile Include="Controllers\SpecialiteController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

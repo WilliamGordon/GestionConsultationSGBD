@@ -102,7 +102,7 @@ namespace WebClientMedecin.Controllers
                     if (Res.Result.IsSuccessStatusCode)
                     {
                         ViewBag.ErrorMessage = "";
-                        return RedirectToAction("GetDashboardMedecin/" + Res.Result.Content.ReadAsAsync<int>().Result);
+                        return RedirectToAction("GetAllPresenceForMedecin/" + Res.Result.Content.ReadAsAsync<int>().Result);
                     }
                     else
                     {

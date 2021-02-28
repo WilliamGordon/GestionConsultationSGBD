@@ -178,7 +178,6 @@
     <Content Include="Views\Medecin\GetAllMedecins.cshtml" />
     <Content Include="Views\Medecin\AddMedecin.cshtml" />
     <Content Include="Views\Medecin\SelectMedecins.cshtml" />
-    <Content Include="Views\Medecin\GetDashboardMedecin.cshtml" />
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Views\Medecin\GetSpecialiteForMedecin.cshtml" />
     <Content Include="Views\Medecin\AddSpecialiteForMedecin.cshtml" />
