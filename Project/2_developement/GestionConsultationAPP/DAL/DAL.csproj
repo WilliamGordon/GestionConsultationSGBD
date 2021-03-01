@@ -110,6 +110,9 @@
     <Compile Include="GetAllSpecialiteForAMedecinAndMaisonMedicale_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllSpecialiteForMaisonMedicale_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllSpecialiteForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>

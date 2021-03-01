@@ -300,6 +300,9 @@
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
     <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetAllSpecialiteForMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetAllSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
   </Function>

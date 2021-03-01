@@ -833,5 +833,23 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("GetAllConsultationForPatient", mergeOption, patient_IDParameter);
         }
+    
+        public virtual ObjectResult<Specialite> GetAllSpecialiteForMaisonMedicale(Nullable<int> maisonMedicale_ID)
+        {
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Specialite>("GetAllSpecialiteForMaisonMedicale", maisonMedicale_IDParameter);
+        }
+    
+        public virtual ObjectResult<Specialite> GetAllSpecialiteForMaisonMedicale(Nullable<int> maisonMedicale_ID, MergeOption mergeOption)
+        {
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Specialite>("GetAllSpecialiteForMaisonMedicale", mergeOption, maisonMedicale_IDParameter);
+        }
     }
 }

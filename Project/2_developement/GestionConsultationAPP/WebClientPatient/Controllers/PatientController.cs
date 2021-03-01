@@ -95,6 +95,7 @@ namespace WebClientPatient.Controllers
 
         public async Task<ActionResult> GetConsultationForPatient(int id)
         {
+            ViewBag.Patient_ID = id;
             List<Models.Consultation> consultations = new List<Models.Consultation>();
             using (var client = new HttpClient())
             {
@@ -109,6 +110,74 @@ namespace WebClientPatient.Controllers
                     consultations = JsonConvert.DeserializeObject<List<Models.Consultation>>(MedResponse);
                 }
                 return View(consultations);
+            }
+        }
+
+        // GET: Medecin/AddMedecin
+        public async Task<ActionResult> AddConsultationForPatient(int id)
+        {
+            ViewBag.ErrorMessage = "";
+            ViewBag.Patient_ID = id;
+
+            ModelView.ConsultationCreate consultationCreate = new ModelView.ConsultationCreate();
+            List<Models.MaisonMedicale> MMs = new List<Models.MaisonMedicale>();
+
+            consultationCreate.Patient_ID = id;
+
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/MaisonMedicale");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    ViewBag.ErrorMessage = "";
+                    MMs = JsonConvert.DeserializeObject<List<Models.MaisonMedicale>>(Res.Content.ReadAsStringAsync().Result);
+                    consultationCreate.listMaisonMedicales = MMs;
+                    return View(consultationCreate);
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = Res.Content.ReadAsAsync<string>().Result;
+                    return View(consultationCreate);
+                }
+            }
+        }
+
+        // POST: Medecin/AddMedecin
+        [HttpPost]
+        public async Task<ActionResult> AddConsultationForPatient(ModelView.ConsultationCreate consultationCreate)
+        {
+            ViewBag.Patient_ID = consultationCreate.Patient_ID;
+            try
+            {
+                using (var client = new HttpClient())
+                {
+
+                    //client.BaseAddress = new Uri(Baseurl);
+                    //client.DefaultRequestHeaders.Clear();
+                    //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    //var Res = await client.PostAsJsonAsync<Models.Patient>("api/Patient/", patient);
+
+                    //if (Res.IsSuccessStatusCode)
+                    //{
+                    //    ViewBag.ErrorMessage = "";
+                    //    return RedirectToAction("GetConsultationForPatient/" + Res.Content.ReadAsAsync<int>().Result);
+                    //}
+                    //else
+                    //{
+                    //    ViewBag.ErrorMessage = Res.Content.ReadAsAsync<string>().Result;
+                    //    return View();
+                    //}
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
             }
         }
     }

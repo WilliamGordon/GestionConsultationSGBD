@@ -8,8 +8,9 @@
 <h2>Mes consultations</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="/Patient/AddConsultationForPatient/@ViewBag.Patient_ID">Ajouter une nouvelle consultation</a>
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -36,35 +37,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Consultation_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Patient_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MedecinSpecialiteMaisonMedicale_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Local_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Starting)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ending)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsConfirmed)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultation_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedecinSpecialiteMaisonMedicale_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Local_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Starting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsConfirmed)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -25,6 +25,14 @@ namespace BLL.BusinessServices
             return specs;
         }
 
+        public List<Models.Specialite> GetAllSpecialiteForMaisonMedicale(int id)
+        {
+            List<DAL.Specialite> DALspecs = SpecRepository.GetAllSpecialiteForMaisonMedicale(id);
+            List<Models.Specialite> specs = Mapper.Map<List<Models.Specialite>>(DALspecs);
+            return specs;
+        }
+
+
         public Models.Specialite GetSpecialiteById(int id)
         {
             return Mapper.Map<Models.Specialite>(SpecRepository.GetSpecialiteById(id));

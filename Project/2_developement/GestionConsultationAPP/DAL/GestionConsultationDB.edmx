@@ -305,6 +305,9 @@
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
           <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetAllSpecialiteForMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetAllSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
         </Function>
@@ -904,7 +907,10 @@
           <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAllConsultationForPatient" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
-            <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+          <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSpecialiteForMaisonMedicale" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AddMedecin_Result">
@@ -1049,6 +1055,10 @@
           <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
           <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllSpecialiteForMaisonMedicale_Result">
+          <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1427,6 +1437,8 @@
           <FunctionImportMapping FunctionImportName="GetAllPresenceForMedecin" FunctionName="GestionConsultationModel.Store.GetAllPresenceForMedecin">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllConsultationForPatient" FunctionName="GestionConsultationModel.Store.GetAllConsultationForPatient">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSpecialiteForMaisonMedicale" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForMaisonMedicale">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

@@ -1,0 +1,129 @@
+﻿@model WebClientPatient.ModelView.ConsultationCreate
+
+@{
+    ViewBag.Title = "AddConsultationForPatient";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<br />
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Création demande de consultation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Patient_ID)
+        @Html.HiddenFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
+        @Html.HiddenFor(model => model.Local_ID)
+        @Html.HiddenFor(model => model.Starting)
+        @Html.HiddenFor(model => model.Ending)
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
+            <div class="col-md-10">
+                <input type="date" class="form-control" data-val="true" data-val-number="The field day must be a number." data-val-required="The day field is required." id="day" name="day" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une maison médicale</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.MaisonMedicale_ID,
+                new SelectList(Model.listMaisonMedicales, "MaisonMedicale_ID", "Name"), string.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="div_specialite">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
+            <div class="col-md-10">
+
+                <select class="form-control" data-val="true" data-val-number="The field MaisonMedicale_ID must be a number." data-val-required="The MaisonMedicale_ID field is required." id="Specialite_ID" name="Specialite_ID">
+                    <option value=""></option>
+                </select>
+
+            </div>
+        </div>
+
+         <div class="form-group" id="div_specialite">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
+            <div class="col-md-10">
+
+                <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="schedule" name="schedule">
+                    <option value=""></option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@Scripts.Render("~/bundles/jquery")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+    $("#div_specialite").hide();
+
+    $("#MaisonMedicale_ID").on("change", function (event) {
+
+        if (this.value !== "") {
+            $("#div_specialite").show();
+            loadSpecialiteForSelectedMaisonMedicale(this);
+        }
+        else {
+            $("#div_specialite").hide();
+        }
+
+    });
+
+    $("#Specialite_ID").on("change", function (event) {
+
+        if (this.value !== "") {
+            $("#div_specialite").show();
+            loadSpecialiteForSelectedMaisonMedicale(this);
+        }
+        else {
+            $("#div_specialite").hide();
+        }
+
+    });
+
+    function loadSpecialiteForSelectedMaisonMedicale(el) {
+       
+        $.getJSON("https://localhost:44307/api/Specialite/GetAllSpecialiteForMaisonMedicale/" + el.value, function (data) {
+
+            $('#Specialite_ID').empty()
+            $('#Specialite_ID').append($('<option>', {
+                value: "",
+                text: ""
+            }));
+
+            $.each(data, function (i, item) {
+                $('#Specialite_ID').append($('<option>', {
+                    value: item.Specialite_ID,
+                    text: item.Name
+                }));
+            });
+        });
+    }
+
+</script>
