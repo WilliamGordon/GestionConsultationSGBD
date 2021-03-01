@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessServices\ConsultationService.cs" />
     <Compile Include="BusinessServices\MaisonMedicaleService.cs" />
     <Compile Include="BusinessServices\MedecinService.cs" />
     <Compile Include="BusinessServices\MedecinSpecialiteMaisonMedicaleService.cs" />

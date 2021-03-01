@@ -279,6 +279,9 @@
   <Function Name="DeleteSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetAllConsultationForPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Patient_ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetAllMaisonMedicaleForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
   </Function>

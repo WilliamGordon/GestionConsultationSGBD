@@ -815,5 +815,23 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllMaisonMedicalesForMedecin_Result>("GetAllMaisonMedicalesForMedecin", medecin_IDParameter);
         }
+    
+        public virtual ObjectResult<Consultation> GetAllConsultationForPatient(Nullable<int> patient_ID)
+        {
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("GetAllConsultationForPatient", patient_IDParameter);
+        }
+    
+        public virtual ObjectResult<Consultation> GetAllConsultationForPatient(Nullable<int> patient_ID, MergeOption mergeOption)
+        {
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("GetAllConsultationForPatient", mergeOption, patient_IDParameter);
+        }
     }
 }

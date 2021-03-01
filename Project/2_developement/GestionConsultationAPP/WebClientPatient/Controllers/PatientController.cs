@@ -93,7 +93,7 @@ namespace WebClientPatient.Controllers
             }
         }
 
-        public async Task<ActionResult> GetConsultationForPatient()
+        public async Task<ActionResult> GetConsultationForPatient(int id)
         {
             List<Models.Consultation> consultations = new List<Models.Consultation>();
             using (var client = new HttpClient())
@@ -101,7 +101,7 @@ namespace WebClientPatient.Controllers
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("api/Patient");
+                HttpResponseMessage Res = await client.GetAsync("api/Consultation/GetAllConsultationForPatient/" + id);
 
                 if (Res.IsSuccessStatusCode)
                 {

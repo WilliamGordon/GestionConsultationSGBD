@@ -31,6 +31,9 @@ namespace BLL.Mappings
 
             CreateMap<DAL.Presence, Models.Presence>();
             CreateMap<Models.Presence, DAL.Presence>();
+
+            CreateMap<DAL.Consultation, Models.Consultation>();
+            CreateMap<Models.Consultation, DAL.Consultation>();
         }
     }
 }
