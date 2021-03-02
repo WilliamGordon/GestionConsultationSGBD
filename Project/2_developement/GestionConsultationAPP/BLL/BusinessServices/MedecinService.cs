@@ -32,6 +32,15 @@ namespace BLL.BusinessServices
             return medecins;
         }
 
+        public List<Models.Medecin> GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(DateTime day, int maisonMedicale_ID, int specialite_ID)
+        {
+            List<DAL.Medecin> DALmedecins = MedRepository.GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(day, maisonMedicale_ID, specialite_ID);
+            List<Models.Medecin> medecins = Mapper.Map<List<Models.Medecin>>(DALmedecins);
+            return medecins;
+        }
+
+        
+
         public Models.Medecin GetMedecinById(int id)
         {
             DAL.Medecin DALmedecin = MedRepository.GetMedecinbyId(id);

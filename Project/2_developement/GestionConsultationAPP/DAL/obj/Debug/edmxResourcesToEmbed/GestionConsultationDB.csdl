@@ -464,6 +464,11 @@
     <FunctionImport Name="GetAllSpecialiteForMaisonMedicale" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
       <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
+      <Parameter Name="day" Mode="In" Type="DateTime" />
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AddMedecin_Result">
     <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -611,5 +616,10 @@
   <ComplexType Name="GetAllSpecialiteForMaisonMedicale_Result">
     <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay_Result">
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

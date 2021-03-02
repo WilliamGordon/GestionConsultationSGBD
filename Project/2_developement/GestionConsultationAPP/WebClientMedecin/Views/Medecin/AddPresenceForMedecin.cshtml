@@ -58,7 +58,7 @@
         var year = date.getFullYear();  // yields year
 
         // After this construct a string with the above results as below
-        formattedDate = padLeft(day, 2) + "/" + padLeft(month,2)+ "/" + year
+        formattedDate = padLeft(day, 2) + "/" + padLeft(month, 2) + "/" + year
 
         console.log(formattedDate);
 
@@ -97,96 +97,131 @@
 
     @Html.HiddenFor(model => model.Medecin_ID)
 
-<div class="form-horizontal">
-    <h4>Ajouter une présence</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Ajouter une présence</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<div class="form-group">
-    <label class="control-label col-md-2" for="Starting">Choisissez une semaine</label>
-    <div class="col-md-10">
-        <input type="week" name="week" id="week" required class="form-control" onclick="setMinWeek(this);" onchange="loadDateForDays(this.value)">
-    </div>
-</div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Starting">Choisissez une semaine</label>
+            <div class="col-md-10">
+                <input type="week" name="week" id="week" required class="form-control" onclick="setMinWeek(this);" onchange="loadDateForDays(this.value)">
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="Starting">Choisissez les jours de la semaine pour lesquelle vous serez présent</label>
-        <div class="col-md-10">
-            <div class="input-group" style="padding-bottom:5px;">
-                <span class="input-group-addon">
-                    <input type="checkbox" value="monday" name="days" id="monday" aria-label="..." />
-                </span>
-                <label class="form-control" aria-label="..." id="monday_label">Lundi</label>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Starting">Choisissez les jours de la semaine pour lesquelle vous serez présent</label>
+            <div class="col-md-10">
+                <div class="input-group" style="padding-bottom:5px;">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="monday" name="days" id="monday" aria-label="..." />
+                    </span>
+                    <label class="form-control" aria-label="..." id="monday_label">Lundi</label>
+                </div>
+                <div class="input-group" style="padding-bottom:5px;">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="tuesday" name="days" id="tuesday" aria-label="..." />
+                    </span>
+                    <label class="form-control" aria-label="..." id="tuesday_label">Mardi</label>
+                </div>
+                <div class="input-group" style="padding-bottom:5px;">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="wednesday" name="days" id="wednesday" aria-label="..." />
+                    </span>
+                    <label class="form-control" aria-label="..." id="wednesday_label">Mercredi</label>
+                </div>
+                <div class="input-group" style="padding-bottom:5px;">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="thursday" name="days" id="thursday" aria-label="..." />
+                    </span>
+                    <label class="form-control" aria-label="..." id="thursday_label">Jeudi</label>
+                </div>
+                <div class="input-group" style="padding-bottom:5px;">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="friday" name="days" id="friday" aria-label="..." />
+                    </span>
+                    <label class="form-control" aria-label="..." id="friday_label">Vendredi</label>
+                </div>
+                <div class="input-group" style="padding-bottom:5px;">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="saturday" name="days" id="saturday" aria-label="..." />
+                    </span>
+                    <label class="form-control" aria-label="..." id="saturday_label">Samedi</label>
+                </div>
+                <div class="input-group" style="padding-bottom:5px;">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="sunday" name="days" id="sunday" aria-label="..." />
+                    </span>
+                    <label class="form-control" aria-label="..." id="sunday_label">Dimanche</label>
+                </div>
             </div>
-            <div class="input-group" style="padding-bottom:5px;">
-                <span class="input-group-addon">
-                    <input type="checkbox" value="tuesday" name="days" id="tuesday" aria-label="..." />
-                </span>
-                <label class="form-control" aria-label="..." id="tuesday_label">Mardi</label>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Choisissez une maison médicale</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.MaisonMedicale_ID,
+                new SelectList(Model.ListMMForMedecin, "MaisonMedicale_ID", "Name"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
             </div>
-            <div class="input-group" style="padding-bottom:5px;">
-                <span class="input-group-addon">
-                    <input type="checkbox" value="wednesday" name="days" id="wednesday" aria-label="..." />
-                </span>
-                <label class="form-control" aria-label="..." id="wednesday_label">Mercredi</label>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Starting, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-date="The field Starting must be a date." data-val-required="The Starting field is required." id="Starting" name="Starting" value="@Model.Starting">
             </div>
-            <div class="input-group" style="padding-bottom:5px;">
-                <span class="input-group-addon">
-                    <input type="checkbox" value="thursday" name="days" id="thursday" aria-label="..." />
-                </span>
-                <label class="form-control" aria-label="..." id="thursday_label">Jeudi</label>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ending, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-date="The field Ending must be a date." data-val-required="The Ending field is required." id="Ending" name="Ending" value="@Model.Ending">
             </div>
-            <div class="input-group" style="padding-bottom:5px;">
-                <span class="input-group-addon">
-                    <input type="checkbox" value="friday" name="days" id="friday" aria-label="..." />
-                </span>
-                <label class="form-control" aria-label="..." id="friday_label">Vendredi</label>
-            </div>
-            <div class="input-group" style="padding-bottom:5px;">
-                <span class="input-group-addon">
-                    <input type="checkbox" value="saturday" name="days" id="saturday" aria-label="..." />
-                </span>
-                <label class="form-control" aria-label="..." id="saturday_label">Samedi</label>
-            </div>
-            <div class="input-group" style="padding-bottom:5px;">
-                <span class="input-group-addon">
-                    <input type="checkbox" value="sunday" name="days" id="sunday" aria-label="..." />
-                </span>
-                <label class="form-control" aria-label="..." id="sunday_label">Dimanche</label>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ajouter présences" class="btn btn-default" />
             </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2" for="MaisonMedicale_ID">Choisissez une maison médicale</label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.MaisonMedicale_ID,
-            new SelectList(Model.ListMMForMedecin, "MaisonMedicale_ID", "Name"), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Starting, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input class="form-control text-box single-line" data-val="true" data-val-date="The field Starting must be a date." data-val-required="The Starting field is required." id="Starting" name="Starting" type="time" value="@Model.Starting">
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Ending, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input class="form-control text-box single-line" data-val="true" data-val-date="The field Ending must be a date." data-val-required="The Ending field is required." id="Ending" name="Ending" type="time" value="@Model.Ending">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Ajouter présences" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/jquery.timepicker.js")
+@Scripts.Render("~/Scripts/jquery.timepicker.js")
+<script>
+
+    $(document).ready(function () {
+        $('#Starting').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            minTime: '09:00',
+            maxTime: '6:00pm',
+            defaultTime: '09:00',
+            startTime: '09:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $('#Ending').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            minTime: '09:00',
+            maxTime: '6:00pm',
+            defaultTime: '09:00',
+            startTime: '09:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+
+   
+
+</script>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

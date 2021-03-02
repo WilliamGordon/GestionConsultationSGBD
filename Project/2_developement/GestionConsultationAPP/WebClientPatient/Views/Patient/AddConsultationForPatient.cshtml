@@ -12,61 +12,72 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Création demande de consultation</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-horizontal">
+    <h4>Création demande de consultation</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @Html.HiddenFor(model => model.Patient_ID)
-        @Html.HiddenFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
-        @Html.HiddenFor(model => model.Local_ID)
-        @Html.HiddenFor(model => model.Starting)
-        @Html.HiddenFor(model => model.Ending)
+    @Html.HiddenFor(model => model.Patient_ID)
+    @Html.HiddenFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
+    @Html.HiddenFor(model => model.Local_ID)
+    @Html.HiddenFor(model => model.Starting)
+    @Html.HiddenFor(model => model.Ending)
 
-        <div class="form-group">
-            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
-            <div class="col-md-10">
-                <input type="date" class="form-control" data-val="true" data-val-number="The field day must be a number." data-val-required="The day field is required." id="day" name="day" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une maison médicale</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.MaisonMedicale_ID,
-                new SelectList(Model.listMaisonMedicales, "MaisonMedicale_ID", "Name"), string.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group" id="div_specialite">
-            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
-            <div class="col-md-10">
-
-                <select class="form-control" data-val="true" data-val-number="The field MaisonMedicale_ID must be a number." data-val-required="The MaisonMedicale_ID field is required." id="Specialite_ID" name="Specialite_ID">
-                    <option value=""></option>
-                </select>
-
-            </div>
-        </div>
-
-         <div class="form-group" id="div_specialite">
-            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
-            <div class="col-md-10">
-
-                <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="schedule" name="schedule">
-                    <option value=""></option>
-                </select>
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
+        <div class="col-md-10">
+            <input type="date" class="form-control" data-val="true" data-val-number="The field day must be a number." data-val-required="The day field is required." id="Day" name="Day" />
         </div>
     </div>
+
+    <div class="form-group" id="div_maisonMedicale">
+        <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une maison médicale</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.MaisonMedicale_ID,
+            new SelectList(Model.listMaisonMedicales, "MaisonMedicale_ID", "Name"), string.Empty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" id="div_specialite">
+        <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une spécialité</label>
+        <div class="col-md-10">
+
+            <select class="form-control" data-val="true" data-val-number="The field MaisonMedicale_ID must be a number." data-val-required="The MaisonMedicale_ID field is required." id="Specialite_ID" name="Specialite_ID">
+                <option value=""></option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group" id="div_medecin">
+        <label class="control-label col-md-2" for="Medecin_ID">Veuillez Sélectionner un médecin</label>
+        <div class="col-md-10">
+
+            <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="Medecin_ID" name="Medecin_ID">
+                <option value=""></option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group" id="div_schedule">
+        <label class="control-label col-md-2" for="Medecin_ID">Veuillez Sélectionner une consultation</label>
+        <div class="col-md-10">
+
+            <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="schedule" name="schedule">
+                <option value=""></option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 
@@ -81,34 +92,80 @@
 
 <script>
 
+    $("#div_maisonMedicale").hide();
+    $("#MaisonMedicale_ID").val('');
     $("#div_specialite").hide();
+    $("#Specialite_ID").val('');
+    $("#div_medecin").hide();
+    $("#Medecin_ID").val('');
+    $("#div_schedule").hide();
+    $("#schedule").val('');
 
-    $("#MaisonMedicale_ID").on("change", function (event) {
+    function handleFormShowHideAndLoadJSON() {
 
-        if (this.value !== "") {
-            $("#div_specialite").show();
-            loadSpecialiteForSelectedMaisonMedicale(this);
+        if ($("#Day").val() == "") {
+            $("#div_maisonMedicale").hide();
+            $("#MaisonMedicale_ID").val('');
+            $("#div_specialite").hide();
+            $("#Specialite_ID").val('');
+            $("#div_medecin").hide();
+            $("#Medecin_ID").val('');
+            $("#div_schedule").hide();
+            $("#schedule").val('');
         }
         else {
-            $("#div_specialite").hide();
-        }
+            $("#div_maisonMedicale").show();
+            if ($("#MaisonMedicale_ID").val() == "") {
+                $("#div_specialite").hide();
+                $("#Specialite_ID").val('');
+                $("#div_medecin").hide();
+                $("#Medecin_ID").val('');
+                $("#div_schedule").hide();
+                $("#schedule").val('');
+            }
+            else {
+                $("#div_specialite").show();
+                if ($("#Specialite_ID").val() == "") {
+                    $("#div_medecin").hide();
+                    $("#Medecin_ID").val('');
+                    $("#div_schedule").hide();
+                    $("#schedule").val('');
+                }
+                else {
+                    $("#div_medecin").show();
+                    if ($("#Medecin_ID").val() == "") {
+                        $("#div_schedule").hide();
+                        $("#schedule").val('');
+                    }
+                    else {
+                        $("#div_schedule").show();
+                    }
 
+                }
+            }
+        }
+    }
+
+    $("#Day").on("change", function (event) {
+        handleFormShowHideAndLoadJSON();
+    });
+
+    $("#MaisonMedicale_ID").on("change", function (event) {
+        handleFormShowHideAndLoadJSON();
+        loadSpecialiteForSelectedMaisonMedicale(this);
     });
 
     $("#Specialite_ID").on("change", function (event) {
+        handleFormShowHideAndLoadJSON();
+        loadMedecinsForSelectedSpecialite(this)
+    });
 
-        if (this.value !== "") {
-            $("#div_specialite").show();
-            loadSpecialiteForSelectedMaisonMedicale(this);
-        }
-        else {
-            $("#div_specialite").hide();
-        }
-
+    $("#Medecin_ID").on("change", function (event) {
+        handleFormShowHideAndLoadJSON();
     });
 
     function loadSpecialiteForSelectedMaisonMedicale(el) {
-       
+
         $.getJSON("https://localhost:44307/api/Specialite/GetAllSpecialiteForMaisonMedicale/" + el.value, function (data) {
 
             $('#Specialite_ID').empty()
@@ -121,6 +178,32 @@
                 $('#Specialite_ID').append($('<option>', {
                     value: item.Specialite_ID,
                     text: item.Name
+                }));
+            });
+        });
+    }
+
+    function loadMedecinsForSelectedSpecialite(el) {
+
+        var Day = $('#Day').val();
+        var MaisonMedicale_ID = $('#MaisonMedicale_ID').val();
+        var Specialite_ID = $('#Specialite_ID').val();
+
+
+        $.getJSON("https://localhost:44307/api/Medecin/GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay/" + Day + "/" + MaisonMedicale_ID + "/" + Specialite_ID, function (data) {
+
+            console.log(data)
+
+            $('#Medecin_ID').empty()
+            $('#Medecin_ID').append($('<option>', {
+                value: "",
+                text: ""
+            }));
+
+            $.each(data, function (i, item) {
+                $('#Medecin_ID').append($('<option>', {
+                    value: item.Medecin_ID,
+                    text: item.Firstname + " " + item.Lastname
                 }));
             });
         });
