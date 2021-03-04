@@ -23,7 +23,11 @@ namespace DAL.Repositories
         {
             return context.GetAllMaisonMedicaleForMedecin(medecin_ID).ToList();
         }
-
+        public DAL.MaisonMedicale GetMaisonMedicaleFromMSMM(int id)
+        {
+            return context.GetMaisonMedicaleFromMSMM(id).FirstOrDefault();
+        }
+        
         public DAL.MaisonMedicale GetMaisonMedicalebyId(int id)
         {
             return context.GetMaisonMedicaleById(id).FirstOrDefault();

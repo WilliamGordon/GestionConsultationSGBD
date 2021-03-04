@@ -31,6 +31,17 @@ namespace API.Controllers
 
         }
 
+
+
+        // GET: api/Consultation/GetAllConsultationForMedecin/5
+        [HttpGet]
+        [Route("api/Consultation/GetAllConsultationForMedecin/{medecin_ID}")]
+        public IHttpActionResult GetAllConsultationForMedecin(int medecin_ID)
+        {
+            var cons = ConsultationService.GetAllConsultationForMedecin(medecin_ID);
+            return Ok(cons);
+        }
+
         // GET: api/Consultation/GetAllConsultationForPatient/5
         [HttpGet]
         [Route("api/Consultation/GetAllConsultationForPatient/{patient_ID}")]

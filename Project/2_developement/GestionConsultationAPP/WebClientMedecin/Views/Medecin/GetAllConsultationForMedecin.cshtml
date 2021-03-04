@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebClientMedecin.ModelView.ConsultationView>
+
+@{
+    ViewBag.Title = "GetAllConsultationForMedecin";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>GetAllConsultationForMedecin</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Consultation_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaisonMedicale_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Local_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Starting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ending)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consultation_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaisonMedicale_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedecinSpecialiteMaisonMedicale_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Local_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Starting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ending)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

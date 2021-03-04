@@ -284,6 +284,9 @@
     <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
     <Parameter Name="Day" Type="date" Mode="In" />
   </Function>
+  <Function Name="GetAllConsultationForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetAllConsultationForPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Patient_ID" Type="int" Mode="In" />
   </Function>
@@ -330,6 +333,9 @@
   <Function Name="GetMaisonMedicaleById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetMaisonMedicaleFromMSMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetMedecinById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
   </Function>
@@ -352,6 +358,9 @@
   </Function>
   <Function Name="GetSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetSpecialiteFromMSMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
   </Function>
   <Function Name="UpdateConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Consultation_ID" Type="int" Mode="In" />

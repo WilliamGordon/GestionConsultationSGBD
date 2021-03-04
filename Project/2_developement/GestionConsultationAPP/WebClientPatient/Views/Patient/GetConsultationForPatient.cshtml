@@ -62,9 +62,8 @@
                 @Html.DisplayFor(modelItem => item.IsConfirmed)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a href="/Patient/EditConsultation/@item.Consultation_ID">Modifier</a> |
+                <a href="/Patient/DeleteConsultation/@item.Consultation_ID">Supprimer</a>
             </td>
         </tr>
     }

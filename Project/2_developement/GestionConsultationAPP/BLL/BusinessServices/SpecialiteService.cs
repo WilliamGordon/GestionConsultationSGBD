@@ -32,7 +32,11 @@ namespace BLL.BusinessServices
             return specs;
         }
 
-
+        
+        public Models.Specialite GetSpecialiteFromMSMM(int id)
+        {
+            return Mapper.Map<Models.Specialite>(SpecRepository.GetSpecialiteFromMSMM(id));
+        }
         public Models.Specialite GetSpecialiteById(int id)
         {
             return Mapper.Map<Models.Specialite>(SpecRepository.GetSpecialiteById(id));

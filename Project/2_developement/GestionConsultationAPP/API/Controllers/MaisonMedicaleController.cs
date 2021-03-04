@@ -32,6 +32,16 @@ namespace API.Controllers
             return Ok(MMs);
         }
 
+        // GET: api/MaisonMedicale/GetAllMaisonMedicaleForMedecin/5
+        [HttpGet]
+        [Route("api/MaisonMedicale/GetMaisonMedicaleFromMSMM/{MSMM_ID}")]
+        public IHttpActionResult GetMaisonMedicaleFromMSMM(int MSMM_ID)
+        {
+            var MMs = MMService.GetMaisonMedicaleFromMSMM(MSMM_ID);
+            return Ok(MMs);
+        }
+        
+
         // GET: api/MaisonMedicale/5
         public IHttpActionResult Get(int id)
         {

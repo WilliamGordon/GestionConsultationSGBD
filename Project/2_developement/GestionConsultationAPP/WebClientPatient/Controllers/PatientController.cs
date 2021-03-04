@@ -145,40 +145,6 @@ namespace WebClientPatient.Controllers
                     return View(consultationCreate);
                 }
             }
-        }
-
-        // POST: Medecin/AddMedecin
-        [HttpPost]
-        public async Task<ActionResult> AddConsultationForPatient(ModelView.ConsultationCreate consultationCreate)
-        {
-            ViewBag.Patient_ID = consultationCreate.Patient_ID;
-            try
-            {
-                using (var client = new HttpClient())
-                {
-
-                    //client.BaseAddress = new Uri(Baseurl);
-                    //client.DefaultRequestHeaders.Clear();
-                    //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    //var Res = await client.PostAsJsonAsync<Models.Patient>("api/Patient/", patient);
-
-                    //if (Res.IsSuccessStatusCode)
-                    //{
-                    //    ViewBag.ErrorMessage = "";
-                    //    return RedirectToAction("GetConsultationForPatient/" + Res.Content.ReadAsAsync<int>().Result);
-                    //}
-                    //else
-                    //{
-                    //    ViewBag.ErrorMessage = Res.Content.ReadAsAsync<string>().Result;
-                    //    return View();
-                    //}
-                    return View();
-                }
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        } 
     }
 }

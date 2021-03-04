@@ -83,6 +83,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GestionConsultationDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GetAllConsultationForMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllConsultationForPatient_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
@@ -137,6 +140,9 @@
     <Compile Include="GetMaisonMedicaleById_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetMaisonMedicaleFromMSMM_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetMedecinById_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
@@ -156,6 +162,9 @@
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetSpecialiteById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetSpecialiteFromMSMM_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Local.cs">

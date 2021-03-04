@@ -289,6 +289,9 @@
           <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
           <Parameter Name="Day" Type="date" Mode="In" />
         </Function>
+        <Function Name="GetAllConsultationForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetAllConsultationForPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Patient_ID" Type="int" Mode="In" />
         </Function>
@@ -335,6 +338,9 @@
         <Function Name="GetMaisonMedicaleById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetMaisonMedicaleFromMSMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetMedecinById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
         </Function>
@@ -357,6 +363,9 @@
         </Function>
         <Function Name="GetSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSpecialiteFromMSMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="UpdateConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consultation_ID" Type="int" Mode="In" />
@@ -952,6 +961,15 @@
             <Parameter Name="maisonMedicale_ID" Mode="In" Type="Int32" />
             <Parameter Name="specialite_ID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAllConsultationForMedecin" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
+          <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSpecialiteFromMSMM" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMaisonMedicaleFromMSMM" EntitySet="MaisonMedicales" ReturnType="Collection(GestionConsultationModel.MaisonMedicale)">
+            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AddMedecin_Result">
           <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -1138,6 +1156,39 @@
           <Property Type="Int32" Name="MedecinSpecialite_ID1" Nullable="false" />
           <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
           <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllConsultationForMedecin_Result">
+          <Property Type="Int32" Name="Consultation_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="Local_ID" Nullable="false" />
+          <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID1" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MinimalDuration" Nullable="false" />
+          <Property Type="Boolean" Name="IsActif" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialite_ID1" Nullable="false" />
+          <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+          <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetSpecialiteFromMSMM_Result">
+          <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+          <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+          <Property Type="Int32" Name="Specialite_ID1" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialite_ID1" Nullable="false" />
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="MinimalDuration" Nullable="false" />
+          <Property Type="Boolean" Name="IsActif" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetMaisonMedicaleFromMSMM_Result">
+          <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1526,6 +1577,12 @@
           <FunctionImportMapping FunctionImportName="GetAllPresence" FunctionName="GestionConsultationModel.Store.GetAllPresence">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetMedecinSpecialiteMaisonMedicale" FunctionName="GestionConsultationModel.Store.GetMedecinSpecialiteMaisonMedicale">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllConsultationForMedecin" FunctionName="GestionConsultationModel.Store.GetAllConsultationForMedecin">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSpecialiteFromMSMM" FunctionName="GestionConsultationModel.Store.GetSpecialiteFromMSMM">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMaisonMedicaleFromMSMM" FunctionName="GestionConsultationModel.Store.GetMaisonMedicaleFromMSMM">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

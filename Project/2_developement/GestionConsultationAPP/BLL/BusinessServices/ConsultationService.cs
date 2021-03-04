@@ -41,11 +41,21 @@ namespace BLL.BusinessServices
             return Mapper.Map<List<Models.Consultation>>(Repo.GetAllConsultations(medecin_ID, maisonMedicale_ID, day));
         }
 
+        
+
+        public List<Models.Consultation> GetAllConsultationForMedecin(int id)
+        {
+            Repo.GetAllConsultationForPatient(id);
+            return Mapper.Map<List<Models.Consultation>>(Repo.GetAllConsultationForMedecin(id));
+        }
+
         public List<Models.Consultation> GetAllConsultationForPatient(int id)
         {
             Repo.GetAllConsultationForPatient(id);
             return Mapper.Map<List<Models.Consultation>>(Repo.GetAllConsultationForPatient(id));
         }
+
+        // TODO CHECK IF LOCAL IS AVAILABLE
 
         public List<Models.Consultation> GetAllPossibleConsultation(int medecin_ID, int maisonMedicale_ID, DateTime day, int specialite_ID, int patient_ID)
         {

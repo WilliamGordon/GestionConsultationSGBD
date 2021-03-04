@@ -612,5 +612,41 @@ namespace WebClientMedecin.Controllers
             }
         }
 
+        public async Task<ActionResult> GetAllConsultationForMedecin(int id)
+        {
+            ViewBag.Medecin_ID = id;
+            List<ModelView.ConsultationView> consultations = new List<ModelView.ConsultationView>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage ResCons = await client.GetAsync("api/Consultation/GetAllConsultationForMedecin/" + id);
+                
+
+                if (ResCons.IsSuccessStatusCode)
+                {
+                    var MedResponse = ResCons.Content.ReadAsStringAsync().Result;
+                    consultations = JsonConvert.DeserializeObject<List<ModelView.ConsultationView>>(MedResponse);
+
+                    foreach (var c in consultations)
+                    {
+                        HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale//GetMaisonMedicaleFromMSMM" + c.MedecinSpecialiteMaisonMedicale_ID);
+                        HttpResponseMessage ResPatient = await client.GetAsync("api/Patient/" + c.Patient_ID);
+                        HttpResponseMessage ResSpec = await client.GetAsync("api/Specialite/GetSpecialiteFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
+
+                        if(ResMM.IsSuccessStatusCode && ResPatient.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode)
+                        {
+                            c.Patient = JsonConvert.DeserializeObject<Models.Patient>(ResPatient.Content.ReadAsStringAsync().Result);
+                            c.MaisonMedicale = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
+                            c.Specialite = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
+                        }
+
+                    }
+
+                }
+                return View(consultations);
+            }
+        }
     }
 }

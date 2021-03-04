@@ -29,6 +29,11 @@ namespace DAL.Repositories
             return context.GetAllConsultationForPatient(id).ToList();
         }
 
+        public List<DAL.Consultation> GetAllConsultationForMedecin(int id)
+        {
+            return context.GetAllConsultationForMedecin(id).ToList();
+        }
+        
         public DAL.Consultation GetConsultationbyId(int id)
         {
             return context.GetConsultationById(id).FirstOrDefault();

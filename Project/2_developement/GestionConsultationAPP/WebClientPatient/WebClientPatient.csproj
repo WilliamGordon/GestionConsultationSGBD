@@ -129,6 +129,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelView\ConsultationCreate.cs" />
+    <Compile Include="ModelView\ConsultationEdit.cs" />
+    <Compile Include="ModelView\ConsultationView.cs" />
     <Compile Include="ModelView\PatientCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,6 +173,7 @@
     <Content Include="Views\Patient\AddPatient.cshtml" />
     <Content Include="Views\Patient\GetConsultationForPatient.cshtml" />
     <Content Include="Views\Patient\AddConsultationForPatient.cshtml" />
+    <Content Include="Views\Patient\EditConsultation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
