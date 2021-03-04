@@ -20,6 +20,11 @@ namespace BLL.BusinessServices
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
+        public Models.MedecinSpecialiteMaisonMedicale GetMSMMB(int medecin_ID, int maisonMedicale_ID, int specialite_ID)
+        {
+            return Mapper.Map<Models.MedecinSpecialiteMaisonMedicale>(MSMMRepository.GetMedecinSpecialiteMaisonMedicale(medecin_ID, maisonMedicale_ID, specialite_ID));
+        }
+
         public Models.MedecinSpecialiteMaisonMedicale GetMSMMById(int id)
         {
             return Mapper.Map<Models.MedecinSpecialiteMaisonMedicale>(MSMMRepository.GetMedecinSpecialiteMaisonMedicalebyId(id));

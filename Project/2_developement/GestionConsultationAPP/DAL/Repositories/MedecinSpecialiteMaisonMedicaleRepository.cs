@@ -19,6 +19,11 @@ namespace DAL.Repositories
             return context.MedecinSpecialiteMaisonMedicales.ToList();
         }
 
+        public DAL.MedecinSpecialiteMaisonMedicale GetMedecinSpecialiteMaisonMedicale(int medecin_ID, int maisonMedicale_ID, int specialite_ID)
+        {
+            return context.GetMedecinSpecialiteMaisonMedicale(medecin_ID, maisonMedicale_ID, specialite_ID).FirstOrDefault();
+        }
+
         public DAL.MedecinSpecialiteMaisonMedicale GetMedecinSpecialiteMaisonMedicalebyId(int id)
         {
             return context.GetMedecinSpecialiteMaisonMedicaleById(id).FirstOrDefault();

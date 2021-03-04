@@ -885,5 +885,107 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay", mergeOption, dayParameter, maisonMedicale_IDParameter, specialite_IDParameter);
         }
+    
+        public virtual ObjectResult<Consultation> GetAllConsultation(Nullable<int> medecin_ID, Nullable<int> maisonMedicale_ID, Nullable<System.DateTime> day)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("GetAllConsultation", medecin_IDParameter, maisonMedicale_IDParameter, dayParameter);
+        }
+    
+        public virtual ObjectResult<Consultation> GetAllConsultation(Nullable<int> medecin_ID, Nullable<int> maisonMedicale_ID, Nullable<System.DateTime> day, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("GetAllConsultation", mergeOption, medecin_IDParameter, maisonMedicale_IDParameter, dayParameter);
+        }
+    
+        public virtual ObjectResult<Presence> GetAllPresence(Nullable<int> medecin_ID, Nullable<int> maisonMedicale_ID, Nullable<System.DateTime> day)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Presence>("GetAllPresence", medecin_IDParameter, maisonMedicale_IDParameter, dayParameter);
+        }
+    
+        public virtual ObjectResult<Presence> GetAllPresence(Nullable<int> medecin_ID, Nullable<int> maisonMedicale_ID, Nullable<System.DateTime> day, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("MaisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("MaisonMedicale_ID", typeof(int));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Presence>("GetAllPresence", mergeOption, medecin_IDParameter, maisonMedicale_IDParameter, dayParameter);
+        }
+    
+        public virtual ObjectResult<MedecinSpecialiteMaisonMedicale> GetMedecinSpecialiteMaisonMedicale(Nullable<int> medecin_ID, Nullable<int> maisonMedicale_ID, Nullable<int> specialite_ID)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("medecin_ID", medecin_ID) :
+                new ObjectParameter("medecin_ID", typeof(int));
+    
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("maisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("maisonMedicale_ID", typeof(int));
+    
+            var specialite_IDParameter = specialite_ID.HasValue ?
+                new ObjectParameter("specialite_ID", specialite_ID) :
+                new ObjectParameter("specialite_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MedecinSpecialiteMaisonMedicale>("GetMedecinSpecialiteMaisonMedicale", medecin_IDParameter, maisonMedicale_IDParameter, specialite_IDParameter);
+        }
+    
+        public virtual ObjectResult<MedecinSpecialiteMaisonMedicale> GetMedecinSpecialiteMaisonMedicale(Nullable<int> medecin_ID, Nullable<int> maisonMedicale_ID, Nullable<int> specialite_ID, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("medecin_ID", medecin_ID) :
+                new ObjectParameter("medecin_ID", typeof(int));
+    
+            var maisonMedicale_IDParameter = maisonMedicale_ID.HasValue ?
+                new ObjectParameter("maisonMedicale_ID", maisonMedicale_ID) :
+                new ObjectParameter("maisonMedicale_ID", typeof(int));
+    
+            var specialite_IDParameter = specialite_ID.HasValue ?
+                new ObjectParameter("specialite_ID", specialite_ID) :
+                new ObjectParameter("specialite_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MedecinSpecialiteMaisonMedicale>("GetMedecinSpecialiteMaisonMedicale", mergeOption, medecin_IDParameter, maisonMedicale_IDParameter, specialite_IDParameter);
+        }
     }
 }

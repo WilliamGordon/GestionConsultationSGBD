@@ -19,6 +19,20 @@ namespace BLL.BusinessServices
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
+        public List<Models.Presence> GetAllPresence(int medecin_ID, int maisonMedicale_ID, DateTime day)
+        {
+            try
+            {
+                List<DAL.Presence> DALPres = presenceRepo.GetAllPresences(medecin_ID, maisonMedicale_ID, day);
+                List<Models.Presence> pres = Mapper.Map<List<Models.Presence>>(DALPres);
+                return pres;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public int AddPresence(List<Models.Presence> presence)
         {
             foreach (var pres in presence)

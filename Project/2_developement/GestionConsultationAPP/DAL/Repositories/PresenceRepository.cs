@@ -19,6 +19,11 @@ namespace DAL.Repositories
             return context.Presences.ToList();
         }
 
+        public List<DAL.Presence> GetAllPresences(int medecin_ID, int maisonMedicale_ID, DateTime day)
+        {
+            return context.GetAllPresence(medecin_ID, maisonMedicale_ID, day).ToList();
+        }
+
         public List<DAL.Presence> GetAllPresenceForMedecin(int medecin_ID)
         {
             return context.GetAllPresenceForMedecin(medecin_ID).ToList();

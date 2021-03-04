@@ -14,8 +14,5 @@ namespace WebClientPatient.ModelView
         public System.DateTime Starting { get; set; }
         public System.DateTime Ending { get; set; }
         public List<Models.MaisonMedicale> listMaisonMedicales { get; set; }
-        public List<Models.Local> listlocaux { get; set; }
-        public List<Models.Specialite> listSpecialites { get; set; }
-        public List<Models.Medecin> listMedecin { get; set; }
     }
 }

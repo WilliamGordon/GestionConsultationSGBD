@@ -279,6 +279,11 @@
   <Function Name="DeleteSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetAllConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+    <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+    <Parameter Name="Day" Type="date" Mode="In" />
+  </Function>
   <Function Name="GetAllConsultationForPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Patient_ID" Type="int" Mode="In" />
   </Function>
@@ -296,6 +301,11 @@
   </Function>
   <Function Name="GetAllMMSForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllPresence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+    <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+    <Parameter Name="Day" Type="date" Mode="In" />
   </Function>
   <Function Name="GetAllPresenceForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
@@ -325,6 +335,11 @@
   </Function>
   <Function Name="GetMedecinSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetMedecinSpecialiteMaisonMedicale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="medecin_ID" Type="int" Mode="In" />
+    <Parameter Name="maisonMedicale_ID" Type="int" Mode="In" />
+    <Parameter Name="specialite_ID" Type="int" Mode="In" />
   </Function>
   <Function Name="GetMedecinSpecialiteMaisonMedicaleById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />

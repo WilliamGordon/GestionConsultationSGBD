@@ -12,72 +12,72 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Création demande de consultation</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Création demande de consultation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.HiddenFor(model => model.Patient_ID)
-    @Html.HiddenFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
-    @Html.HiddenFor(model => model.Local_ID)
-    @Html.HiddenFor(model => model.Starting)
-    @Html.HiddenFor(model => model.Ending)
+        @Html.HiddenFor(model => model.Patient_ID)
+        @Html.HiddenFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
+        @Html.HiddenFor(model => model.Local_ID)
+        @Html.HiddenFor(model => model.Starting)
+        @Html.HiddenFor(model => model.Ending)
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
-        <div class="col-md-10">
-            <input type="date" class="form-control" data-val="true" data-val-number="The field day must be a number." data-val-required="The day field is required." id="Day" name="Day" />
+        <div class="form-group">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
+            <div class="col-md-10">
+                <input type="date" class="form-control" data-val="true" data-val-number="The field day must be a number." data-val-required="The day field is required." id="Day" name="Day" />
+            </div>
+        </div>
+
+        <div class="form-group" id="div_maisonMedicale">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une maison médicale</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.MaisonMedicale_ID,
+                new SelectList(Model.listMaisonMedicales, "MaisonMedicale_ID", "Name"), string.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="div_specialite">
+            <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une spécialité</label>
+            <div class="col-md-10">
+
+                <select class="form-control" data-val="true" data-val-number="The field MaisonMedicale_ID must be a number." data-val-required="The MaisonMedicale_ID field is required." id="Specialite_ID" name="Specialite_ID">
+                    <option value=""></option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group" id="div_medecin">
+            <label class="control-label col-md-2" for="Medecin_ID">Veuillez Sélectionner un médecin</label>
+            <div class="col-md-10">
+
+                <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="Medecin_ID" name="Medecin_ID">
+                    <option value=""></option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group" id="div_schedule">
+            <label class="control-label col-md-2" for="Medecin_ID">Veuillez Sélectionner une consultation</label>
+            <div class="col-md-10">
+
+                <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="schedule" name="schedule">
+                    <option value=""></option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="CreateConsultation();" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-
-    <div class="form-group" id="div_maisonMedicale">
-        <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une maison médicale</label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.MaisonMedicale_ID,
-            new SelectList(Model.listMaisonMedicales, "MaisonMedicale_ID", "Name"), string.Empty, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MaisonMedicale_ID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" id="div_specialite">
-        <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une spécialité</label>
-        <div class="col-md-10">
-
-            <select class="form-control" data-val="true" data-val-number="The field MaisonMedicale_ID must be a number." data-val-required="The MaisonMedicale_ID field is required." id="Specialite_ID" name="Specialite_ID">
-                <option value=""></option>
-            </select>
-
-        </div>
-    </div>
-
-    <div class="form-group" id="div_medecin">
-        <label class="control-label col-md-2" for="Medecin_ID">Veuillez Sélectionner un médecin</label>
-        <div class="col-md-10">
-
-            <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="Medecin_ID" name="Medecin_ID">
-                <option value=""></option>
-            </select>
-
-        </div>
-    </div>
-
-    <div class="form-group" id="div_schedule">
-        <label class="control-label col-md-2" for="Medecin_ID">Veuillez Sélectionner une consultation</label>
-        <div class="col-md-10">
-
-            <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="schedule" name="schedule">
-                <option value=""></option>
-            </select>
-
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 
@@ -162,6 +162,11 @@
 
     $("#Medecin_ID").on("change", function (event) {
         handleFormShowHideAndLoadJSON();
+        loadAllPossibleConsultation(this);
+    });
+
+    $("#schedule").on("change", function (event) {
+
     });
 
     function loadSpecialiteForSelectedMaisonMedicale(el) {
@@ -207,6 +212,56 @@
                 }));
             });
         });
+    }
+
+    function loadAllPossibleConsultation(el) {
+
+        var Day = $('#Day').val();
+        var MaisonMedicale_ID = $('#MaisonMedicale_ID').val();
+        var Specialite_ID = $('#Specialite_ID').val();
+        var Medecin_ID = $('#Medecin_ID').val();
+        var Patient_ID = $('#Patient_ID').val();
+
+        $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + Medecin_ID + "/" + MaisonMedicale_ID + "/" + Day + "/" + Specialite_ID + "/" + Patient_ID, function (data) {
+
+            console.log(data)
+
+            $('#schedule').empty()
+            $('#schedule').append($('<option>', {
+                value: "",
+                text: ""
+            }));
+
+            $.each(data, function (i, item) {
+
+                var obj = item;
+
+                console.log(obj)
+
+                var date = new Date(obj.Starting)
+
+                console.log(date)
+
+                $('#schedule').append($('<option>', {
+                    value: JSON.stringify(item),
+                    text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2)
+                }));
+            });
+        });
+    }
+
+    function padLeft(nr, n, str) {
+        return Array(n - String(nr).length + 1).join(str || '0') + nr;
+    }
+
+    function CreateConsultation() {
+
+        var SelectedConsultation = JSON.parse($('#schedule').val());
+
+        $.post("https://localhost:44307/api/Consultation/", SelectedConsultation)
+            .done(function (data) {
+                window.location.replace("https://localhost:44349/Patient/GetConsultationForPatient/" + SelectedConsultation.Patient_ID);
+            });
     }
 
 </script>
