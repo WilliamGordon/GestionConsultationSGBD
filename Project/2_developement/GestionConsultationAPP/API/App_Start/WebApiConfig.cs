@@ -13,8 +13,6 @@ namespace API
         {
             // Web API configuration and services
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-            var cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

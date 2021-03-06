@@ -13,10 +13,19 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Création demande de consultation</h4>
+        @if (Model.Consultation_ID == 0)
+        {
+            <h4>Creation de consultation</h4>
+        }
+        else
+        {
+            <h4>Modification demande de consultation</h4>
+        }
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @Html.HiddenFor(model => model.Consultation_ID)
         @Html.HiddenFor(model => model.Patient_ID)
         @Html.HiddenFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
         @Html.HiddenFor(model => model.Local_ID)
@@ -26,7 +35,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="MaisonMedicale_ID">Veuillez Sélectionner une date</label>
             <div class="col-md-10">
-                <input type="date" class="form-control" data-val="true" data-val-number="The field day must be a number." data-val-required="The day field is required." id="Day" name="Day" />
+                <input type="text" class="form-control" data-val="true" data-val-number="The field day must be a number." autocomplete="off" data-val-required="The day field is required." id="Day" name="Day" />
             </div>
         </div>
 
@@ -85,10 +94,157 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
 @Scripts.Render("~/bundles/jquery")
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
+
+<script>
+
+    $(document).ready(function () {
+        $('#Day').datepicker({
+            minDate: new Date(),
+            dateFormat: 'dd/mm/yy',
+            onSelect: function (dateText, inst) {
+                handleFormShowHideAndLoadJSON();
+            }
+        });
+
+        if ($("#Consultation_ID").val() !== "") {
+
+            var Year = "@Model.Starting.Year"
+            var Month = "@Model.Starting.Month"
+            var Day = "@Model.Starting.Day"
+            var Hours = "@Model.Starting.Hour"
+            var Minutes = "@Model.Starting.Minute"
+            console.log(Year);
+            console.log(Month);
+            console.log(Day);
+            console.log(Hours);
+            console.log(Minutes);
+
+            // Setup date
+            $('#Day').datepicker("setDate", new Date(Year, (Month-1), Day));
+
+            console.log(new Date(Year, (Month - 1), Day))
+
+            // Setup Maison médicale
+            $("#div_maisonMedicale").show();
+            $("#MaisonMedicale_ID").val('@Model.MaisonMedicale_ID');
+
+             // Setup Specialite
+            $("#div_specialite").show();
+            $.getJSON("https://localhost:44307/api/Specialite/GetAllSpecialiteForMaisonMedicale/" + $("#MaisonMedicale_ID").val(), function (data) {
+
+                $('#Specialite_ID').empty()
+                $('#Specialite_ID').append($('<option>', {
+                    value: "",
+                    text: ""
+                }));
+
+                $.each(data, function (i, item) {
+
+                    if (item.Specialite_ID == "@Model.Specialite_ID") {
+                        $('#Specialite_ID').append($('<option>', {
+                            value: item.Specialite_ID,
+                            text: item.Name,
+                            selected: true
+                        }));
+                    } else {
+                        $('#Specialite_ID').append($('<option>', {
+                            value: item.Specialite_ID,
+                            text: item.Name
+                        }));
+                    }
+                });
+            });
+
+            // Setup medecin
+            $("#div_medecin").show();
+            var Day = $('#Day').datepicker('getDate');
+            var FormattedDay = (Day.getMonth() + 1) + "-" + Day.getDate() + "-" + Day.getUTCFullYear();
+
+            var MaisonMedicale_ID = $('#MaisonMedicale_ID').val();
+            var Specialite_ID = $('#Specialite_ID').val();
+
+            $.getJSON("https://localhost:44307/api/Medecin/GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay/" + FormattedDay + "/" + MaisonMedicale_ID + "/" + "@Model.Specialite_ID", function (data) {
+
+                $('#Medecin_ID').empty()
+                $('#Medecin_ID').append($('<option>', {
+                    value: "",
+                    text: ""
+                }));
+
+                $.each(data, function (i, item) {
+
+                    if (item.Medecin_ID == "@Model.Medecin_ID") {
+                        $('#Medecin_ID').append($('<option>', {
+                            value: item.Medecin_ID,
+                            text: item.Firstname + " " + item.Lastname,
+                            selected: true
+                        }));
+                    } else {
+                        $('#Medecin_ID').append($('<option>', {
+                            value: item.Medecin_ID,
+                            text: item.Firstname + " " + item.Lastname
+                        }));
+                    }
+                });
+            });
+
+            // setup schedule
+            $("#div_schedule").show();
+            var Day = $('#Day').datepicker('getDate');
+            var FormattedDay = (Day.getMonth() + 1) + "-" + Day.getDate() + "-" + Day.getUTCFullYear();
+
+            var MaisonMedicale_ID = $('#MaisonMedicale_ID').val();
+            var Specialite_ID = $('#Specialite_ID').val();
+            var Medecin_ID = $('#Medecin_ID').val();
+            var Patient_ID = $('#Patient_ID').val();
+
+            var StartYear = "@Model.Starting.Year"
+            var StartMonth = "@Model.Starting.Month"
+            var StartDay = "@Model.Starting.Day"
+            var StartHours = "@Model.Starting.Hour"
+            var StartMinutes = "@Model.Starting.Minute"
+
+            var EndYear = "@Model.Ending.Year"
+            var EndMonth = "@Model.Ending.Month"
+            var EndDay = "@Model.Ending.Day"
+            var EndHours = "@Model.Ending.Hour"
+            var EndMinutes = "@Model.Ending.Minute"
+
+            var StartDate = new Date(StartYear, (StartMonth - 1), StartDay, StartHours, StartMinutes)
+            var EndDate = new Date(EndYear, (EndMonth - 1), EndDay, EndHours, EndMinutes)
+
+            $('#schedule').append($('<option>', {
+                    value: "@Json.Encode(@Model)",
+                    text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2),
+                    selected: true
+                }));
+
+            $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + "@Model.Medecin_ID" + "/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + "@Model.Specialite_ID" + "/" + Patient_ID, function (data) {
+
+                $.each(data, function (i, item) {
+
+                    var obj = item;
+
+                    console.log(obj)
+
+                    var date = new Date(obj.Starting)
+
+                    console.log(date)
+
+                    $('#schedule').append($('<option>', {
+                        value: JSON.stringify(item),
+                        text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2)
+                    }));
+                });
+
+            });
+        }
+    });
+
+</script>
 
 <script>
 
@@ -146,23 +302,22 @@
         }
     }
 
-    $("#Day").on("change", function (event) {
-        handleFormShowHideAndLoadJSON();
-    });
-
     $("#MaisonMedicale_ID").on("change", function (event) {
-        handleFormShowHideAndLoadJSON();
+        
         loadSpecialiteForSelectedMaisonMedicale(this);
+        handleFormShowHideAndLoadJSON();
     });
 
     $("#Specialite_ID").on("change", function (event) {
-        handleFormShowHideAndLoadJSON();
+        
         loadMedecinsForSelectedSpecialite(this)
+        handleFormShowHideAndLoadJSON();
     });
 
     $("#Medecin_ID").on("change", function (event) {
-        handleFormShowHideAndLoadJSON();
+        
         loadAllPossibleConsultation(this);
+        handleFormShowHideAndLoadJSON();
     });
 
     $("#schedule").on("change", function (event) {
@@ -190,64 +345,90 @@
 
     function loadMedecinsForSelectedSpecialite(el) {
 
-        var Day = $('#Day').val();
+        var Day = $('#Day').datepicker('getDate');
+        var FormattedDay = (Day.getMonth() + 1) + "-" + Day.getDate() + "-" + Day.getUTCFullYear();
+
         var MaisonMedicale_ID = $('#MaisonMedicale_ID').val();
         var Specialite_ID = $('#Specialite_ID').val();
 
 
-        $.getJSON("https://localhost:44307/api/Medecin/GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay/" + Day + "/" + MaisonMedicale_ID + "/" + Specialite_ID, function (data) {
+        $.getJSON("https://localhost:44307/api/Medecin/GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay/" + FormattedDay + "/" + MaisonMedicale_ID + "/" + Specialite_ID)
+            .done(function (data) {
+                console.log(data)
 
-            console.log(data)
-
-            $('#Medecin_ID').empty()
-            $('#Medecin_ID').append($('<option>', {
-                value: "",
-                text: ""
-            }));
-
-            $.each(data, function (i, item) {
+                $('#Medecin_ID').empty()
                 $('#Medecin_ID').append($('<option>', {
-                    value: item.Medecin_ID,
-                    text: item.Firstname + " " + item.Lastname
+                    value: "",
+                    text: ""
                 }));
+
+                $.each(data, function (i, item) {
+                    $('#Medecin_ID').append($('<option>', {
+                        value: item.Medecin_ID,
+                        text: item.Firstname + " " + item.Lastname
+                    }));
+                });
+            })
+            .fail(function (jqxhr, textStatus, error) {
+
+                $('#Medecin_ID').empty()
+                $('#Medecin_ID').append($('<option>', {
+                    value: "",
+                    text: ""
+                }));
+
+                $("#div_schedule").hide();
+                $("#schedule").val('');
+
+                var err = textStatus + ", " + error;
+                alert(jqxhr.responseText);
+                console.log("Request Failed: " + err);
             });
-        });
     }
 
     function loadAllPossibleConsultation(el) {
 
-        var Day = $('#Day').val();
+        var Day = $('#Day').datepicker('getDate');
+        var FormattedDay = (Day.getMonth() + 1) + "-" + Day.getDate() + "-" + Day.getUTCFullYear();
+
         var MaisonMedicale_ID = $('#MaisonMedicale_ID').val();
         var Specialite_ID = $('#Specialite_ID').val();
         var Medecin_ID = $('#Medecin_ID').val();
         var Patient_ID = $('#Patient_ID').val();
 
-        $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + Medecin_ID + "/" + MaisonMedicale_ID + "/" + Day + "/" + Specialite_ID + "/" + Patient_ID, function (data) {
+        if (FormattedDay !== "" && MaisonMedicale_ID !== "" && Specialite_ID !== "" && Medecin_ID !== "" && Patient_ID !== "")
 
-            console.log(data)
+        $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + Medecin_ID + "/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + Specialite_ID + "/" + Patient_ID)
+            .done(function (data) {
+                console.log(data)
 
-            $('#schedule').empty()
-            $('#schedule').append($('<option>', {
-                value: "",
-                text: ""
-            }));
-
-            $.each(data, function (i, item) {
-
-                var obj = item;
-
-                console.log(obj)
-
-                var date = new Date(obj.Starting)
-
-                console.log(date)
-
+                $('#schedule').empty()
                 $('#schedule').append($('<option>', {
-                    value: JSON.stringify(item),
-                    text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2)
+                    value: "",
+                    text: ""
                 }));
+
+                $.each(data, function (i, item) {
+
+                    var obj = item;
+
+                    console.log(obj)
+
+                    var date = new Date(obj.Starting)
+
+                    console.log(date)
+
+                    $('#schedule').append($('<option>', {
+                        value: JSON.stringify(item),
+                        text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2)
+                    }));
+                });
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                alert(jqxhr.responseText);
+                console.log("Request Failed: " + err);
             });
-        });
     }
 
     function padLeft(nr, n, str) {
@@ -258,10 +439,20 @@
 
         var SelectedConsultation = JSON.parse($('#schedule').val());
 
-        $.post("https://localhost:44307/api/Consultation/", SelectedConsultation)
-            .done(function (data) {
-                window.location.replace("https://localhost:44349/Patient/GetConsultationForPatient/" + SelectedConsultation.Patient_ID);
-            });
+        if ($("#Consultation_ID").val() == "") {
+            $.post("https://localhost:44307/api/Consultation/", SelectedConsultation)
+                .done(function (data) {
+                    window.location.replace("https://l★ Monthocalhost:44349/Patient/GetAllConsultationForPatient/" + SelectedConsultation.Patient_ID);
+                });
+        } else {
+
+            SelectedConsultation.IsConfirmed = false;
+
+            $.post("https://localhost:44307/api/Consultation/★ DayEditConsultation", SelectedConsultation)
+                .done(function (data) {
+                    window.location.replace("https://localhost:44349/Patient/GetAllConsultationForPatient/" + SelectedConsultation.Patient_ID);
+                });
+        }
     }
 
 </script>

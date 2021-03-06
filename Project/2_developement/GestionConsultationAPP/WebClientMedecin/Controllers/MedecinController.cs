@@ -635,15 +635,18 @@ namespace WebClientMedecin.Controllers
                         HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale//GetMaisonMedicaleFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
                         HttpResponseMessage ResPatient = await client.GetAsync("api/Patient/" + c.Patient_ID);
                         HttpResponseMessage ResSpec = await client.GetAsync("api/Specialite/GetSpecialiteFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
+                        HttpResponseMessage ResLocal = await client.GetAsync("api/Local/" + c.Local_ID);
 
-                        if(ResMM.IsSuccessStatusCode && ResPatient.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode)
+                        
+
+                        if (ResMM.IsSuccessStatusCode && ResPatient.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode && ResLocal.IsSuccessStatusCode)
                         {
                             var cView = new ConsultationView();
                             cView.Consultation = c;
                             cView.Patient = JsonConvert.DeserializeObject<Models.Patient>(ResPatient.Content.ReadAsStringAsync().Result);
                             cView.MaisonMedicale = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
                             cView.Specialite = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
-
+                            cView.Local = JsonConvert.DeserializeObject<Models.Local>(ResLocal.Content.ReadAsStringAsync().Result);
                             consultations.Add(cView);
                         }
                     }

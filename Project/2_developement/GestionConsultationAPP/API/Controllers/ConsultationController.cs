@@ -17,7 +17,14 @@ namespace API.Controllers
             ConsultationService = new ConsultationService();
         }
 
-        // POST: api/Medecin
+        // GET: api/Consultation/5
+        public IHttpActionResult Get(int id)
+        {
+            var medecin = ConsultationService.GetConsultationById(id);
+            return Ok(medecin);
+        }
+
+        // POST: api/Consultation
         public IHttpActionResult Post([FromBody] Models.Consultation consultation)
         {
             try
@@ -54,8 +61,14 @@ namespace API.Controllers
         [Route("api/Consultation/GetAllPossibleConsultation/{medecin_ID}/{maisonMedicale_ID}/{day}/{specialite_ID}/{patient_ID}")]
         public IHttpActionResult GetAllSpecialiteForMedecin(int medecin_ID, int maisonMedicale_ID, DateTime day, int specialite_ID, int patient_ID)
         {
-            var cons = ConsultationService.GetAllPossibleConsultation(medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID);
-            return Ok(cons);
+            try
+            {
+                return Ok(ConsultationService.GetAllPossibleConsultation(medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
         // POST: api/Consultation/ConfirmConsultation/5
@@ -66,5 +79,22 @@ namespace API.Controllers
             var cons = ConsultationService.ConfirmConsultation(consultation.Consultation_ID);
             return Ok(cons);
         }
+
+        // POST: api/Consultation/ConfirmConsultation/5
+        [HttpPost]
+        [Route("api/Consultation/DeleteConsultation")]
+        public IHttpActionResult DeleteConsultation([FromBody] Models.Consultation consultation)
+        {
+            try
+            {
+                ConsultationService.DeleteConsultation(consultation);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
     }
 }

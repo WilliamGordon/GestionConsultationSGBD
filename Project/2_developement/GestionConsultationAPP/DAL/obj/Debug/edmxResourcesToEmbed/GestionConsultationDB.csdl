@@ -499,6 +499,13 @@
     <FunctionImport Name="ConfirmConsultation" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
       <Parameter Name="consultation_ID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetAllConsultationForMMForADay" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Day" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllLocalsForMSMM" EntitySet="Locals" ReturnType="Collection(GestionConsultationModel.Local)">
+      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AddMedecin_Result">
     <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -740,5 +747,27 @@
     <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
     <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
     <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetAllConsultationForMMForADay_Result">
+    <Property Type="Int32" Name="Consultation_ID" Nullable="false" />
+    <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+    <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+    <Property Type="Int32" Name="Local_ID" Nullable="false" />
+    <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+    <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID1" Nullable="false" />
+    <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+    <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+    <Property Type="Int32" Name="MinimalDuration" Nullable="false" />
+    <Property Type="Boolean" Name="IsActif" Nullable="false" />
+    <Property Type="Int32" Name="MedecinSpecialite_ID1" Nullable="false" />
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetAllLocalsForMSMM_Result">
+    <Property Type="Int32" Name="Local_ID" Nullable="false" />
+    <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

@@ -34,6 +34,9 @@ namespace BLL.Mappings
 
             CreateMap<DAL.Consultation, Models.Consultation>();
             CreateMap<Models.Consultation, DAL.Consultation>();
+
+            CreateMap<DAL.Local, Models.Local>();
+            CreateMap<Models.Local, DAL.Local>();
         }
     }
 }

@@ -19,6 +19,11 @@ namespace DAL.Repositories
             return context.Locals.ToList();
         }
 
+        public List<DAL.Local> GetAllLocals(int msmm_ID)
+        {
+            return context.GetAllLocalsForMSMM(msmm_ID).ToList();
+        }
+
         public DAL.Local GetLocalbyId(int id)
         {
             return context.GetLocalById(id).FirstOrDefault();

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessServices\ConsultationService.cs" />
+    <Compile Include="BusinessServices\LocaLService.cs" />
     <Compile Include="BusinessServices\MaisonMedicaleService.cs" />
     <Compile Include="BusinessServices\MedecinService.cs" />
     <Compile Include="BusinessServices\MedecinSpecialiteMaisonMedicaleService.cs" />
@@ -55,6 +56,9 @@
     <Compile Include="BusinessServices\PatientService.cs" />
     <Compile Include="BusinessServices\PresenceService.cs" />
     <Compile Include="BusinessServices\SpecialiteService.cs" />
+    <Compile Include="CustomErrors\NoAvailabilityForMedecin.cs" />
+    <Compile Include="CustomErrors\PatientAlreadyHasAConsultationForSameSpecialiteInSameMaisonMedicale.cs" />
+    <Compile Include="CustomErrors\PatientAlreadyHasAConsultationInAnotherMaisonMedicaleException.cs" />
     <Compile Include="Mappings\AutoMapperProfileConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -29,6 +29,11 @@ namespace DAL.Repositories
             return context.GetAllConsultation(medecin_ID, maisonMedicale_ID, day).ToList();
         }
 
+        public List<DAL.Consultation> GetAllConsultations(int maisonMedicale_ID, DateTime day)
+        {
+            return context.GetAllConsultationForMMForADay(maisonMedicale_ID, day).ToList();
+        }
+
         public List<DAL.Consultation> GetAllConsultationForPatient(int id)
         {
             return context.GetAllConsultationForPatient(id).ToList();
@@ -66,8 +71,18 @@ namespace DAL.Repositories
 
         public void DeleteConsultation(DAL.Consultation consultation)
         {
-            context.Consultations.Remove(consultation);
-            context.SaveChanges();
+            try
+            {
+                context.Consultations.Attach(consultation);
+                context.Consultations.Remove(consultation);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
     }
 }

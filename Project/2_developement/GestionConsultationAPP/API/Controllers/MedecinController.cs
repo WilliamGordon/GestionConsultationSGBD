@@ -61,7 +61,16 @@ namespace API.Controllers
         public IHttpActionResult GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(DateTime day, int maisonMedicale_ID, int specialite_ID)
         {
             var medecins = MedecinService.GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(day, maisonMedicale_ID, specialite_ID);
-            return Ok(medecins);
+            if (medecins.Count >= 1)
+            {
+                return Ok(medecins);
+            }
+            else
+            {
+                return Content(HttpStatusCode.NotFound, "No medecin available for this date");
+            }
+
+            
         }
 
         // GET: api/Medecin/GetAll/5

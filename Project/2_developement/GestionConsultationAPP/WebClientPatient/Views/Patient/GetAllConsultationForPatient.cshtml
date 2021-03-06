@@ -41,31 +41,59 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Consultation_ID)
+                @Html.DisplayFor(modelItem => item.Consultation.Consultation_ID)
             </td>
             <td>
                 @item.Medecin.Firstname @item.Medecin.Lastname
             </td>
             <td>
-                @item.MaisonMedicale.Name (local : @item.Local_ID)
+                @item.MaisonMedicale.Name (local : @item.Local.Name)
             </td>
             <td>
                 @item.Specialite.Name
             </td>
             <td>
-                @item.Starting.ToString("dd/MM/yyyy")
+                @item.Consultation.Starting.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @item.Starting.ToString("hh:mm") - @item.Ending.ToString("hh:mm")
+                @item.Consultation.Starting.ToString("hh:mm") - @item.Consultation.Ending.ToString("hh:mm")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsConfirmed)
+                @Html.DisplayFor(modelItem => item.Consultation.IsConfirmed)
             </td>
             <td>
-                <a href="/Patient/EditConsultation/@item.Consultation_ID">Modifier</a> |
-                <a href="/Patient/DeleteConsultation/@item.Consultation_ID">Supprimer</a>
+                <div class="btn-group" role="group" aria-label="...">
+                    <input type="hidden" id="consultationData_@item.Consultation.Consultation_ID" value="@Json.Encode(item.Consultation)" />
+                    <button type="button" onclick="EditConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default">Modifier</button>
+                    <button type="button" onclick="DeleteConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default">Supprimer</button>
+                </div>
             </td>
         </tr>
     }
 
 </table>
+
+<script>
+
+    function DeleteConsultation(consultation_ID) {
+        console.log(consultation_ID);
+
+        var consData = $("#consultationData_" + consultation_ID).val();
+
+        console.log(consData);
+
+        var cons = JSON.parse(consData);
+
+        console.log(cons);
+
+        $.post("https://localhost:44307/api/Consultation/DeleteConsultation/", cons)
+            .done(function (data) {
+                window.location.replace("https://localhost:44349/Patient/GetAllConsultationForPatient/" + @ViewBag.Patient_ID);
+            });
+    }
+
+    function EditConsultation(consultation_ID) {
+        window.location.replace("https://localhost:44349/Patient/EditConsultation/" + consultation_ID);
+    }
+
+</script>

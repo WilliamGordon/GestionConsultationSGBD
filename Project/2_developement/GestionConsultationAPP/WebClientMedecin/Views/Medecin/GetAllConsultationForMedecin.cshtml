@@ -45,7 +45,7 @@
                 @item.Patient.Firstname @item.Patient.Lastname
             </td>
             <td>
-                @item.MaisonMedicale.Name (local : @item.Consultation.Local_ID)
+                @item.MaisonMedicale.Name (local : @item.Local.Name)
             </td>
             <td>
                 @item.Specialite.Name
@@ -89,7 +89,7 @@
 
         $.post("https://localhost:44307/api/Consultation/ConfirmConsultation/", cons)
             .done(function (data) {
-                window.location.replace("https://localhost:44301/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID);
+                window.location.replace("https://localhost:44349/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID);
             });
     }
 

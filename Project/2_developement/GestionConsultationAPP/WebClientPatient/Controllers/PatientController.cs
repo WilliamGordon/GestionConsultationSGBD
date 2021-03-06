@@ -147,10 +147,70 @@ namespace WebClientPatient.Controllers
             }
         }
 
+        // GET: Medecin/AddMedecin
+        public async Task<ActionResult> EditConsultation(int id)
+        {
+            ViewBag.ErrorMessage = "";
+            ViewBag.Patient_ID = id;
+
+            ModelView.ConsultationCreate consultationCreate = new ModelView.ConsultationCreate();
+            List<Models.MaisonMedicale> MMs = new List<Models.MaisonMedicale>();
+
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale");
+                HttpResponseMessage ResCons = await client.GetAsync("api/Consultation/" + id);
+
+                if (ResMM.IsSuccessStatusCode && ResCons.IsSuccessStatusCode)
+                {
+                    ViewBag.ErrorMessage = "";
+                    MMs = JsonConvert.DeserializeObject<List<Models.MaisonMedicale>>(ResMM.Content.ReadAsStringAsync().Result);
+                    consultationCreate = JsonConvert.DeserializeObject<ModelView.ConsultationCreate>(ResCons.Content.ReadAsStringAsync().Result);
+                    consultationCreate.listMaisonMedicales = MMs;
+                    ViewBag.Patient_ID = consultationCreate.Patient_ID;
+
+                    HttpResponseMessage ResMMbis = await client.GetAsync("api/MaisonMedicale//GetMaisonMedicaleFromMSMM/" + consultationCreate.MedecinSpecialiteMaisonMedicale_ID);
+                    HttpResponseMessage ResSpec = await client.GetAsync("api/Specialite/GetSpecialiteFromMSMM/" + consultationCreate.MedecinSpecialiteMaisonMedicale_ID);
+                    HttpResponseMessage ResMed = await client.GetAsync("api/Medecin/GetMedecinFromMSMM/" + consultationCreate.MedecinSpecialiteMaisonMedicale_ID);
+
+                    if (ResMMbis.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode && ResMed.IsSuccessStatusCode)
+                    {
+                        var MM = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMMbis.Content.ReadAsStringAsync().Result);
+                        var SP = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
+                        var MD = JsonConvert.DeserializeObject<Models.Medecin>(ResMed.Content.ReadAsStringAsync().Result);
+
+                        consultationCreate.MaisonMedicale_ID = MM.MaisonMedicale_ID;
+                        consultationCreate.Specialite_ID = SP.Specialite_ID;
+                        consultationCreate.Medecin_ID = MD.Medecin_ID;
+
+                        return View("AddConsultationForPatient", consultationCreate);
+                    }
+                    else
+                    {
+                        return View("AddConsultationForPatient", consultationCreate);
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = ResMM.Content.ReadAsAsync<string>().Result;
+
+                    ViewBag.Patient_ID = consultationCreate.Patient_ID;
+
+                    return View("AddConsultationForPatient", consultationCreate);
+                }
+            }
+        }
+        
+
         public async Task<ActionResult> GetAllConsultationForPatient(int id)
         {
             ViewBag.Patient_ID = id;
             List<ModelView.ConsultationView> consultations = new List<ModelView.ConsultationView>();
+            List<Models.Consultation> cons = new List<Models.Consultation>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
@@ -162,20 +222,24 @@ namespace WebClientPatient.Controllers
                 if (ResCons.IsSuccessStatusCode)
                 {
                     var MedResponse = ResCons.Content.ReadAsStringAsync().Result;
-                    consultations = JsonConvert.DeserializeObject<List<ModelView.ConsultationView>>(MedResponse);
+                    cons = JsonConvert.DeserializeObject <List< Models.Consultation >>(MedResponse);
 
-                    foreach (var c in consultations)
+                    foreach (var c in cons)
                     {
                         HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale//GetMaisonMedicaleFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
                         HttpResponseMessage ResMedecin = await client.GetAsync("api/Medecin/GetMedecinFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
                         HttpResponseMessage ResSpec = await client.GetAsync("api/Specialite/GetSpecialiteFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
+                        HttpResponseMessage ResLocal = await client.GetAsync("api/Local/" + c.Local_ID);
 
-                        if (ResMM.IsSuccessStatusCode && ResMedecin.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode)
+                        if (ResMM.IsSuccessStatusCode && ResMedecin.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode && ResLocal.IsSuccessStatusCode)
                         {
-                            c.Medecin = JsonConvert.DeserializeObject<Models.Medecin>(ResMedecin.Content.ReadAsStringAsync().Result);
-                            c.MaisonMedicale = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
-                            c.Specialite = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
-                            c.MaisonMedicale_ID = c.MaisonMedicale.MaisonMedicale_ID;
+                            var cView = new ModelView.ConsultationView();
+                            cView.Consultation = c;
+                            cView.Medecin = JsonConvert.DeserializeObject<Models.Medecin>(ResMedecin.Content.ReadAsStringAsync().Result);
+                            cView.MaisonMedicale = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
+                            cView.Specialite = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
+                            cView.Local = JsonConvert.DeserializeObject<Models.Local>(ResLocal.Content.ReadAsStringAsync().Result);
+                            consultations.Add(cView);
                         }
 
                     }
