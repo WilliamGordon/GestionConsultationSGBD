@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Models.Consultation>
+﻿@model IEnumerable<WebClientPatient.ModelView.ConsultationView>
 
 @{
-    ViewBag.Title = "GetConsultationForPatient";
+    ViewBag.Title = "GetAllConsultationForPatient";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
@@ -14,25 +14,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Consultation_ID)
+            ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient_ID)
+            Medecin
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
+            Maison médicale (local)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Local_ID)
+            Specialite
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Starting)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ending)
+            Plage horaire
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsConfirmed)
+            Confirmé ?
         </th>
         <th></th>
     </tr>
@@ -44,19 +44,19 @@
                 @Html.DisplayFor(modelItem => item.Consultation_ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Patient_ID)
+                @item.Medecin.Firstname @item.Medecin.Lastname
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MedecinSpecialiteMaisonMedicale_ID)
+                @item.MaisonMedicale.Name (local : @item.Local_ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Local_ID)
+                @item.Specialite.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Starting)
+                @item.Starting.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ending)
+                @item.Starting.ToString("hh:mm") - @item.Ending.ToString("hh:mm")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsConfirmed)

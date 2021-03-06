@@ -38,8 +38,14 @@ namespace BLL.BusinessServices
             List<Models.Medecin> medecins = Mapper.Map<List<Models.Medecin>>(DALmedecins);
             return medecins;
         }
-
+        public Models.Medecin GetMedecinFromMSMM(int msmm_ID)
+        {
+            DAL.Medecin DALmedecin = MedRepository.GetMedecinFromMSMM(msmm_ID);
+            Models.Medecin medecin = Mapper.Map<Models.Medecin>(DALmedecin);
+            return medecin;
+        }
         
+
 
         public Models.Medecin GetMedecinById(int id)
         {

@@ -1041,5 +1041,41 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaisonMedicale>("GetMaisonMedicaleFromMSMM", mergeOption, medecinSpecialiteMaisonMedicale_IDParameter);
         }
+    
+        public virtual ObjectResult<Medecin> GetMedecinFromMSMM(Nullable<int> medecinSpecialiteMaisonMedicale_ID)
+        {
+            var medecinSpecialiteMaisonMedicale_IDParameter = medecinSpecialiteMaisonMedicale_ID.HasValue ?
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", medecinSpecialiteMaisonMedicale_ID) :
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("GetMedecinFromMSMM", medecinSpecialiteMaisonMedicale_IDParameter);
+        }
+    
+        public virtual ObjectResult<Medecin> GetMedecinFromMSMM(Nullable<int> medecinSpecialiteMaisonMedicale_ID, MergeOption mergeOption)
+        {
+            var medecinSpecialiteMaisonMedicale_IDParameter = medecinSpecialiteMaisonMedicale_ID.HasValue ?
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", medecinSpecialiteMaisonMedicale_ID) :
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("GetMedecinFromMSMM", mergeOption, medecinSpecialiteMaisonMedicale_IDParameter);
+        }
+    
+        public virtual ObjectResult<Consultation> ConfirmConsultation(Nullable<int> consultation_ID)
+        {
+            var consultation_IDParameter = consultation_ID.HasValue ?
+                new ObjectParameter("consultation_ID", consultation_ID) :
+                new ObjectParameter("consultation_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("ConfirmConsultation", consultation_IDParameter);
+        }
+    
+        public virtual ObjectResult<Consultation> ConfirmConsultation(Nullable<int> consultation_ID, MergeOption mergeOption)
+        {
+            var consultation_IDParameter = consultation_ID.HasValue ?
+                new ObjectParameter("consultation_ID", consultation_ID) :
+                new ObjectParameter("consultation_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("ConfirmConsultation", mergeOption, consultation_IDParameter);
+        }
     }
 }

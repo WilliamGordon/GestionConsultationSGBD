@@ -249,6 +249,9 @@
     <Parameter Name="Specialite_ID" Type="int" Mode="In" />
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="ConfirmConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="consultation_ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="DeleteConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Consultation_ID" Type="int" Mode="In" />
   </Function>
@@ -338,6 +341,9 @@
   </Function>
   <Function Name="GetMedecinById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetMedecinFromMSMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
   </Function>
   <Function Name="GetMedecinSpecialiteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialite_ID" Type="int" Mode="In" />

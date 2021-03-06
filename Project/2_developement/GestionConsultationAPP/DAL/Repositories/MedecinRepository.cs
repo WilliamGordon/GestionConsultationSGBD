@@ -24,6 +24,11 @@ namespace DAL.Repositories
             return context.GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(day, maisonMedicale_ID, specialite_ID).ToList();
         }
 
+        public DAL.Medecin GetMedecinFromMSMM(int msmm_id)
+        {
+            return context.GetMedecinFromMSMM(msmm_id).FirstOrDefault();
+        }
+
         public DAL.Medecin GetMedecinbyId(int id)
         {
             return context.GetMedecinById(id).FirstOrDefault();

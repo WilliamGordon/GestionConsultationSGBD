@@ -53,6 +53,9 @@
     <Compile Include="AddMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConfirmConsultation_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Consultation.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
@@ -144,6 +147,9 @@
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetMedecinById_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetMedecinFromMSMM_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetMedecinSpecialiteById_Result.cs">

@@ -616,6 +616,7 @@ namespace WebClientMedecin.Controllers
         {
             ViewBag.Medecin_ID = id;
             List<ModelView.ConsultationView> consultations = new List<ModelView.ConsultationView>();
+            List<Models.Consultation> cons = new List<Models.Consultation>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
@@ -627,23 +628,25 @@ namespace WebClientMedecin.Controllers
                 if (ResCons.IsSuccessStatusCode)
                 {
                     var MedResponse = ResCons.Content.ReadAsStringAsync().Result;
-                    consultations = JsonConvert.DeserializeObject<List<ModelView.ConsultationView>>(MedResponse);
+                    cons = JsonConvert.DeserializeObject<List<Models.Consultation>>(MedResponse);
 
-                    foreach (var c in consultations)
+                    foreach (var c in cons)
                     {
-                        HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale//GetMaisonMedicaleFromMSMM" + c.MedecinSpecialiteMaisonMedicale_ID);
+                        HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale//GetMaisonMedicaleFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
                         HttpResponseMessage ResPatient = await client.GetAsync("api/Patient/" + c.Patient_ID);
                         HttpResponseMessage ResSpec = await client.GetAsync("api/Specialite/GetSpecialiteFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
 
                         if(ResMM.IsSuccessStatusCode && ResPatient.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode)
                         {
-                            c.Patient = JsonConvert.DeserializeObject<Models.Patient>(ResPatient.Content.ReadAsStringAsync().Result);
-                            c.MaisonMedicale = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
-                            c.Specialite = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
+                            var cView = new ConsultationView();
+                            cView.Consultation = c;
+                            cView.Patient = JsonConvert.DeserializeObject<Models.Patient>(ResPatient.Content.ReadAsStringAsync().Result);
+                            cView.MaisonMedicale = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
+                            cView.Specialite = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
+
+                            consultations.Add(cView);
                         }
-
                     }
-
                 }
                 return View(consultations);
             }

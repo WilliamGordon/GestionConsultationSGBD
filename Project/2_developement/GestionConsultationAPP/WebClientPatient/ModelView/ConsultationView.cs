@@ -14,6 +14,7 @@ namespace WebClientPatient.ModelView
         public int Local_ID { get; set; }
         public System.DateTime Starting { get; set; }
         public System.DateTime Ending { get; set; }
+        public bool IsConfirmed { get; set; }
         public Models.MaisonMedicale MaisonMedicale { get; set; }
         public Models.Medecin Medecin { get; set; }
         public Models.Specialite Specialite { get; set; }

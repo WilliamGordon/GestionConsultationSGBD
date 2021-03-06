@@ -31,8 +31,6 @@ namespace API.Controllers
 
         }
 
-
-
         // GET: api/Consultation/GetAllConsultationForMedecin/5
         [HttpGet]
         [Route("api/Consultation/GetAllConsultationForMedecin/{medecin_ID}")]
@@ -57,6 +55,15 @@ namespace API.Controllers
         public IHttpActionResult GetAllSpecialiteForMedecin(int medecin_ID, int maisonMedicale_ID, DateTime day, int specialite_ID, int patient_ID)
         {
             var cons = ConsultationService.GetAllPossibleConsultation(medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID);
+            return Ok(cons);
+        }
+
+        // POST: api/Consultation/ConfirmConsultation/5
+        [HttpPost]
+        [Route("api/Consultation/ConfirmConsultation")]
+        public IHttpActionResult ConfirmConsultation([FromBody] Models.Consultation consultation)
+        {
+            var cons = ConsultationService.ConfirmConsultation(consultation.Consultation_ID);
             return Ok(cons);
         }
     }

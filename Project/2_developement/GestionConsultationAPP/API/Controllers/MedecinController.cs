@@ -64,5 +64,13 @@ namespace API.Controllers
             return Ok(medecins);
         }
 
+        // GET: api/Medecin/GetAll/5
+        [HttpGet]
+        [Route("api/Medecin/GetMedecinFromMSMM/{msmm_ID}")]
+        public IHttpActionResult GetMedecinFromMSMM(int msmm_ID)
+        {
+            var medecin = MedecinService.GetMedecinFromMSMM(msmm_ID);
+            return Ok(medecin);
+        }
     }
 }

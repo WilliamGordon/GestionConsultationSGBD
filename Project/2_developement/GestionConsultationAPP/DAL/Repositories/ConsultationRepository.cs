@@ -14,6 +14,11 @@ namespace DAL.Repositories
             this.context = new GestionConsultationEntities();
         }
 
+        public int ConfirmConsultation(int consultation_ID)
+        {
+            return context.ConfirmConsultation(consultation_ID).FirstOrDefault().Consultation_ID;
+        }
+
         public List<DAL.Consultation> GetAllConsultations()
         {
             return context.Consultations.ToList();

@@ -78,7 +78,7 @@ namespace WebClientPatient.Controllers
                     if (Res.IsSuccessStatusCode)
                     {
                         ViewBag.ErrorMessage = "";
-                        return RedirectToAction("GetConsultationForPatient/" + Res.Content.ReadAsAsync<int>().Result);
+                        return RedirectToAction("GetAllConsultationForPatient/" + Res.Content.ReadAsAsync<int>().Result);
                     }
                     else
                     {
@@ -145,6 +145,45 @@ namespace WebClientPatient.Controllers
                     return View(consultationCreate);
                 }
             }
-        } 
+        }
+
+        public async Task<ActionResult> GetAllConsultationForPatient(int id)
+        {
+            ViewBag.Patient_ID = id;
+            List<ModelView.ConsultationView> consultations = new List<ModelView.ConsultationView>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage ResCons = await client.GetAsync("api/Consultation/GetAllConsultationForPatient/" + id);
+
+
+                if (ResCons.IsSuccessStatusCode)
+                {
+                    var MedResponse = ResCons.Content.ReadAsStringAsync().Result;
+                    consultations = JsonConvert.DeserializeObject<List<ModelView.ConsultationView>>(MedResponse);
+
+                    foreach (var c in consultations)
+                    {
+                        HttpResponseMessage ResMM = await client.GetAsync("api/MaisonMedicale//GetMaisonMedicaleFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
+                        HttpResponseMessage ResMedecin = await client.GetAsync("api/Medecin/GetMedecinFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
+                        HttpResponseMessage ResSpec = await client.GetAsync("api/Specialite/GetSpecialiteFromMSMM/" + c.MedecinSpecialiteMaisonMedicale_ID);
+
+                        if (ResMM.IsSuccessStatusCode && ResMedecin.IsSuccessStatusCode && ResSpec.IsSuccessStatusCode)
+                        {
+                            c.Medecin = JsonConvert.DeserializeObject<Models.Medecin>(ResMedecin.Content.ReadAsStringAsync().Result);
+                            c.MaisonMedicale = JsonConvert.DeserializeObject<Models.MaisonMedicale>(ResMM.Content.ReadAsStringAsync().Result);
+                            c.Specialite = JsonConvert.DeserializeObject<Models.Specialite>(ResSpec.Content.ReadAsStringAsync().Result);
+                            c.MaisonMedicale_ID = c.MaisonMedicale.MaisonMedicale_ID;
+                        }
+
+                    }
+
+                }
+                return View(consultations);
+            }
+        }
+
     }
 }

@@ -41,6 +41,18 @@ namespace BLL.BusinessServices
             return Mapper.Map<List<Models.Consultation>>(Repo.GetAllConsultations(medecin_ID, maisonMedicale_ID, day));
         }
 
+        public int ConfirmConsultation(int consultation_ID)
+        {
+            try
+            {
+                return Repo.ConfirmConsultation(consultation_ID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
         
 
         public List<Models.Consultation> GetAllConsultationForMedecin(int id)
@@ -81,7 +93,7 @@ namespace BLL.BusinessServices
                     DateTime timeTracker = DateTime.ParseExact(p.Starting.ToString("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
                     // Loopthroug the presence by the number of minutes of a consultation
-                    while (timeTracker.AddMinutes(msmm.MinimalDuration) < p.Ending)
+                    while (timeTracker.AddMinutes(msmm.MinimalDuration) <= p.Ending)
                     {
                         Models.Consultation possibleConsultation = new Models.Consultation();
                         possibleConsultation.Local_ID = 1;

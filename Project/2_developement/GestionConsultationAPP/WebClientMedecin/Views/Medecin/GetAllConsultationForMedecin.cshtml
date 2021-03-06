@@ -5,66 +5,92 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>GetAllConsultationForMedecin</h2>
+<h2>Mes consultations</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br />
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Consultation_ID)
+            ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient_ID)
+            Patient
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MaisonMedicale_ID)
+            Maison médicale (local)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MedecinSpecialiteMaisonMedicale_ID)
+            Specialite
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Local_ID)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Starting)
+            Plage horaire
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ending)
+            Confirmé ?
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Consultation_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Patient_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaisonMedicale_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MedecinSpecialiteMaisonMedicale_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Local_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Starting)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ending)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultation.Consultation_ID)
+            </td>
+            <td>
+                @item.Patient.Firstname @item.Patient.Lastname
+            </td>
+            <td>
+                @item.MaisonMedicale.Name (local : @item.Consultation.Local_ID)
+            </td>
+            <td>
+                @item.Specialite.Name
+            </td>
+            <td>
+                @item.Consultation.Starting.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @item.Consultation.Starting.ToString("hh:mm") - @item.Consultation.Ending.ToString("hh:mm")
+            </td>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.Consultation.IsConfirmed)
+            </td>
+            <td>
+               @if (!item.Consultation.IsConfirmed)
+                {
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="hidden" id="consultationData_@item.Consultation.Consultation_ID" value="@Json.Encode(item.Consultation)" />
+                        <input type="button" value="Confirmer" onclick="confirmConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default" />
+                    </div>
+                } 
+            </td>
+        </tr>
+    }
 </table>
+
+<script>
+
+    function confirmConsultation(consultation_ID) {
+        console.log(consultation_ID);
+
+        var consData = $("#consultationData_" + consultation_ID).val();
+
+        console.log(consData);
+
+        var cons = JSON.parse(consData);
+
+        console.log(cons);
+
+        cons.IsConfirmed = true;
+
+        $.post("https://localhost:44307/api/Consultation/ConfirmConsultation/", cons)
+            .done(function (data) {
+                window.location.replace("https://localhost:44301/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID);
+            });
+    }
+
+</script>
