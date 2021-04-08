@@ -11,56 +11,67 @@ namespace DAL.Repositories
         private GestionConsultationEntities context;
         public MedecinRepository()
         {
-            this.context = new GestionConsultationEntities();
+            this.context = new GestionConsultationEntities(); // "name=ConnectionStringMedecin"
         }
 
         public List<DAL.Medecin> GetAllMedecins()
         {
-            return context.Medecins.ToList();
-        }
-
-        public List<DAL.Medecin> GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(DateTime day, int maisonMedicale_ID, int specialite_ID)
-        {
-            return context.GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(day, maisonMedicale_ID, specialite_ID).ToList();
-        }
-
-        public DAL.Medecin GetMedecinFromMSMM(int msmm_id)
-        {
-            return context.GetMedecinFromMSMM(msmm_id).FirstOrDefault();
+            try
+            {
+                return context.GetAllMedecin().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DAL.Medecin GetMedecinbyId(int id)
         {
-            return context.GetMedecinById(id).FirstOrDefault();
+            try
+            {
+                return context.GetMedecinById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<DAL.Medecin> GetAllMedecinForMaisonMedicaleAndSpecialite(int maisonMedicale_ID, int specialite_ID)
+        {
+            try
+            {
+                return context.GetAllMedecinForMaisonMedicaleAndSpecialite(maisonMedicale_ID, specialite_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DAL.Medecin GetMedecinFromMSMM(int msmm_id)
+        {
+            try
+            {
+                return context.GetMedecinFromMSMM(msmm_id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public int AddMedecin(DAL.Medecin medecin)
         {
             try
             {
-                context.Medecins.Add(medecin);
-                context.SaveChanges();
-                return medecin.Medecin_ID;
+                return context.AddMedecin(medecin.Firstname, medecin.Lastname).SingleOrDefault().Medecin_ID;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
-        }
-
-        public void UpdateMedecin(DAL.Medecin medecin)
-        {
-            DAL.Medecin med = this.GetMedecinbyId(medecin.Medecin_ID);
-            med.Firstname = medecin.Firstname;
-            med.Lastname = medecin.Lastname;
-            context.SaveChanges();
-        }
-
-        public void DeleteMedecin(DAL.Medecin medecin)
-        {
-            context.Medecins.Remove(medecin);
-            context.SaveChanges();
         }
     }
 }

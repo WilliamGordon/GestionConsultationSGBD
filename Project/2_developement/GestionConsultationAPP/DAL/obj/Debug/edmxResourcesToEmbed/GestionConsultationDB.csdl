@@ -268,71 +268,10 @@
       <End Role="MedecinSpecialite" EntitySet="MedecinSpecialites" />
       <End Role="MedecinSpecialiteMaisonMedicale" EntitySet="MedecinSpecialiteMaisonMedicales" />
     </AssociationSet>
-    <FunctionImport Name="AddMaisonMedicale">
-      <Parameter Name="Name" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="AddMaisonMedicaleForMedecin">
-      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
-      <Parameter Name="IsActif" Mode="In" Type="Boolean" />
-    </FunctionImport>
-    <FunctionImport Name="AddMedecin" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
-      <Parameter Name="Firstname" Mode="In" Type="String" />
-      <Parameter Name="Lastname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="AddPatient">
-      <Parameter Name="Firstname" Mode="In" Type="String" />
-      <Parameter Name="Lastname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="AddSpecialiteForMedecin">
-      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteSpecialiteForMedecin">
-      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="GetAllMedecin" ReturnType="Collection(GestionConsultationModel.GetAllMedecin_Result)" />
-    <FunctionImport Name="GetAllSpecialite" ReturnType="Collection(GestionConsultationModel.GetAllSpecialite_Result)" />
+    <FunctionImport Name="GetAllMedecin" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)" />
+    <FunctionImport Name="GetAllSpecialite" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)" />
     <FunctionImport Name="GetAllSpecialiteForMedecin" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
       <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="UpdateMinimalDurationOfConsultation">
-      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="AddSpecialite" ReturnType="Collection(Decimal)">
-      <Parameter Name="Name" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteMaisonMedicale">
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteMedecin">
-      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeletePatient">
-      <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteSpecialite">
-      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="UpdateMaisonMedicale">
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Name" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="UpdateMedecin">
-      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Firstname" Mode="In" Type="String" />
-      <Parameter Name="Lastname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="UpdatePatient">
-      <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Firstname" Mode="In" Type="String" />
-      <Parameter Name="Lastname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="UpdateSpecialite">
-      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Name" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetMedecinById" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
       <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
@@ -343,58 +282,11 @@
     <FunctionImport Name="GetSpecialiteById" EntitySet="Specialites" ReturnType="Collection(GestionConsultationModel.Specialite)">
       <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="AddMedecinSpecialite" ReturnType="Collection(Int32)">
-      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteMedecinSpecialite">
-      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="GetMedecinSpecialiteById" EntitySet="MedecinSpecialites" ReturnType="Collection(GestionConsultationModel.MedecinSpecialite)">
       <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="UpdateMedecinSpecialite">
-      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="GetMaisonMedicaleById" EntitySet="MaisonMedicales" ReturnType="Collection(GestionConsultationModel.MaisonMedicale)">
       <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="AddConsultation" ReturnType="Collection(Decimal)">
-      <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Local_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Starting" Mode="In" Type="DateTime" />
-      <Parameter Name="Ending" Mode="In" Type="DateTime" />
-    </FunctionImport>
-    <FunctionImport Name="AddLocal" ReturnType="Collection(Decimal)">
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Name" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="AddMedecinSpecialiteMaisonMedicale" ReturnType="Collection(Decimal)">
-      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
-      <Parameter Name="IsActif" Mode="In" Type="Boolean" />
-    </FunctionImport>
-    <FunctionImport Name="AddPresence" ReturnType="Collection(Decimal)">
-      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Starting" Mode="In" Type="DateTime" />
-      <Parameter Name="Ending" Mode="In" Type="DateTime" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteConsultation" ReturnType="Collection(GestionConsultationModel.DeleteConsultation_Result)">
-      <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteLocal" ReturnType="Collection(GestionConsultationModel.DeleteLocal_Result)">
-      <Parameter Name="Local_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeleteMedecinSpecialiteMaisonMedicale" ReturnType="Collection(GestionConsultationModel.DeleteMedecinSpecialiteMaisonMedicale_Result)">
-      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DeletePresence" ReturnType="Collection(GestionConsultationModel.DeletePresence_Result)">
-      <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="GetConsultationById" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
       <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
@@ -408,7 +300,7 @@
     <FunctionImport Name="GetPresenceById" EntitySet="Presences" ReturnType="Collection(GestionConsultationModel.Presence)">
       <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="UpdateConsultation">
+    <FunctionImport Name="UpdateConsultation" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
       <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
       <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
       <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
@@ -417,19 +309,7 @@
       <Parameter Name="Ending" Mode="In" Type="DateTime" />
       <Parameter Name="IsConfirmed" Mode="In" Type="Boolean" />
     </FunctionImport>
-    <FunctionImport Name="UpdateLocal">
-      <Parameter Name="Local_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="Name" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="UpdateMedecinSpecialiteMaisonMedicale">
-      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
-      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
-      <Parameter Name="IsActif" Mode="In" Type="Boolean" />
-    </FunctionImport>
-    <FunctionImport Name="UpdatePresence">
+    <FunctionImport Name="UpdatePresence" EntitySet="Presences" ReturnType="Collection(GestionConsultationModel.Presence)">
       <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
       <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
       <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
@@ -496,9 +376,6 @@
     <FunctionImport Name="GetMedecinFromMSMM" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
       <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="ConfirmConsultation" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
-      <Parameter Name="consultation_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="GetAllConsultationForMMForADay" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
       <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
       <Parameter Name="Day" Mode="In" Type="DateTime" />
@@ -506,6 +383,53 @@
     <FunctionImport Name="GetAllLocalsForMSMM" EntitySet="Locals" ReturnType="Collection(GestionConsultationModel.Local)">
       <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="AddMedecinSpecialite" EntitySet="MedecinSpecialites" ReturnType="Collection(GestionConsultationModel.MedecinSpecialite)">
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddMedecinSpecialiteMaisonMedicale" EntitySet="MedecinSpecialiteMaisonMedicales" ReturnType="Collection(GestionConsultationModel.MedecinSpecialiteMaisonMedicale)">
+      <Parameter Name="MedecinSpecialite_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
+      <Parameter Name="IsActif" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="AddPresence" EntitySet="Presences" ReturnType="Collection(GestionConsultationModel.Presence)">
+      <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Starting" Mode="In" Type="DateTime" />
+      <Parameter Name="Ending" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ConfirmConsultation" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
+      <Parameter Name="consultation_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateMinimalDurationOfConsultation" EntitySet="MedecinSpecialiteMaisonMedicales" ReturnType="Collection(GestionConsultationModel.MedecinSpecialiteMaisonMedicale)">
+      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MinimalDuration" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddConsultation" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
+      <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+      <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Local_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Starting" Mode="In" Type="DateTime" />
+      <Parameter Name="Ending" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="AddPatient" EntitySet="Patients" ReturnType="Collection(GestionConsultationModel.Patient)">
+      <Parameter Name="Firstname" Mode="In" Type="String" />
+      <Parameter Name="Lastname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteConsultation">
+      <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllMaisonMedicale" EntitySet="MaisonMedicales" ReturnType="Collection(GestionConsultationModel.MaisonMedicale)" />
+    <FunctionImport Name="GetAllMedecinForMaisonMedicaleAndSpecialite" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddMedecin" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
+      <Parameter Name="Firstname" Mode="In" Type="String" />
+      <Parameter Name="Lastname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllPatient" EntitySet="Patients" ReturnType="Collection(GestionConsultationModel.Patient)" />
   </EntityContainer>
   <ComplexType Name="AddMedecin_Result">
     <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -769,5 +693,53 @@
     <Property Type="Int32" Name="Local_ID" Nullable="false" />
     <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllMedecin1_Result">
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ConfirmConsultation1_Result">
+    <Property Type="Int32" Name="Consultation_ID" Nullable="false" />
+    <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+    <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+    <Property Type="Int32" Name="Local_ID" Nullable="false" />
+    <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="DeletePresence1_Result">
+    <Property Type="Int32" Name="Presence_ID" Nullable="false" />
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+    <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetAllMaisonMedicale_Result">
+    <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllMedecinForMaisonMedicaleAndSpecialite_Result">
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="MedecinSpecialite_ID" Nullable="false" />
+    <Property Type="Int32" Name="Medecin_ID1" Nullable="false" />
+    <Property Type="Int32" Name="Specialite_ID" Nullable="false" />
+    <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+    <Property Type="Int32" Name="MedecinSpecialite_ID1" Nullable="false" />
+    <Property Type="Int32" Name="MaisonMedicale_ID" Nullable="false" />
+    <Property Type="Int32" Name="MinimalDuration" Nullable="false" />
+    <Property Type="Boolean" Name="IsActif" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="AddMedecin_Result1">
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetAllPatient_Result">
+    <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

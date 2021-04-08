@@ -18,21 +18,30 @@ namespace API.Controllers
         {
             MedecinService = new MedecinService();
         }
-        // GET: api/Medecin
         public IHttpActionResult Get()
         {
-            var medecins = MedecinService.GetAllMedecins();
-            return Ok(medecins);
+            try
+            {
+                return Ok(MedecinService.GetAllMedecins());
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // GET: api/Medecin/5
         public IHttpActionResult Get(int id)
         {
-            var medecin = MedecinService.GetMedecinById(id);
-            return Ok(medecin);
+            try
+            {
+                return Ok(MedecinService.GetMedecinById(id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // POST: api/Medecin
         public IHttpActionResult Post([FromBody] Models.Medecin medecin)
         {
             try
@@ -43,43 +52,42 @@ namespace API.Controllers
             {
                 return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
             }
-            
         }
 
-        // GET: api/Medecin/GetAllSpecialiteForMedecin/5
-        [HttpGet]
-        [Route("api/Medecin/GetAllSpecialiteForMedecin/{medecin_ID}")]
-        public IHttpActionResult GetAllSpecialiteForMedecin(int medecin_ID)
-        {
-            var medecins = MedecinService.GetAllSpecialiteForMedecin(medecin_ID);
-            return Ok(medecins);
-        }
-
-        // GET: api/Medecin/GetAll/5
-        [HttpGet]
-        [Route("api/Medecin/GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay/{day}/{maisonMedicale_ID}/{specialite_ID}")]
-        public IHttpActionResult GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(DateTime day, int maisonMedicale_ID, int specialite_ID)
-        {
-            var medecins = MedecinService.GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay(day, maisonMedicale_ID, specialite_ID);
-            if (medecins.Count >= 1)
-            {
-                return Ok(medecins);
-            }
-            else
-            {
-                return Content(HttpStatusCode.NotFound, "No medecin available for this date");
-            }
-
-            
-        }
-
-        // GET: api/Medecin/GetAll/5
         [HttpGet]
         [Route("api/Medecin/GetMedecinFromMSMM/{msmm_ID}")]
         public IHttpActionResult GetMedecinFromMSMM(int msmm_ID)
         {
-            var medecin = MedecinService.GetMedecinFromMSMM(msmm_ID);
-            return Ok(medecin);
+            try
+            {
+                return Ok(MedecinService.GetMedecinFromMSMM(msmm_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/Medecin/GetAllMedecinForMaisonMedicaleAndSpecialite/{maisonMedicale_ID}/{specialite_ID}")]
+        public IHttpActionResult GetAllMedecinForMaisonMedicaleAndSpecialite(int maisonMedicale_ID, int specialite_ID)
+        {
+            try
+            {
+                var medecins = MedecinService.GetAllMedecinForMaisonMedicaleAndSpecialite(maisonMedicale_ID, specialite_ID);
+                if (medecins.Count >= 1)
+                {
+                    return Ok(medecins);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Aucun médecin ne pratique cette spécialité");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
     }
 }

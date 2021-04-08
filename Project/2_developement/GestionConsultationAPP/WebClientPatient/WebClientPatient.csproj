@@ -215,12 +215,11 @@
     <Content Include="Views\Patient\GetAllPatient.cshtml" />
     <Content Include="Views\Patient\AddPatient.cshtml" />
     <Content Include="Views\Patient\AddConsultationForPatient.cshtml" />
-    <Content Include="Views\Patient\EditConsultation.cshtml" />
     <Content Include="Views\Patient\GetAllConsultationForPatient.cshtml" />
+    <Content Include="Views\Shared\ErrorNotificationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

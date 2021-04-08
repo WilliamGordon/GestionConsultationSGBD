@@ -13,40 +13,28 @@ namespace DAL.Repositories
         {
             this.context = new GestionConsultationEntities();
         }
-
-        public List<DAL.Local> GetAllLocals()
+        public DAL.Local GetLocalbyId(int id)
         {
-            return context.Locals.ToList();
+            try
+            {
+                return context.GetLocalById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.Local> GetAllLocals(int msmm_ID)
         {
-            return context.GetAllLocalsForMSMM(msmm_ID).ToList();
-        }
-
-        public DAL.Local GetLocalbyId(int id)
-        {
-            return context.GetLocalById(id).FirstOrDefault();
-        }
-
-        public int AddLocal(DAL.Local local)
-        {
-            context.Locals.Add(local);
-            context.SaveChanges();
-            return local.Local_ID;
-        }
-
-        public void UpdateLocal(DAL.Local local)
-        {
-            DAL.Local MM = this.GetLocalbyId(local.Local_ID);
-            MM.Name = local.Name;
-            context.SaveChanges();
-        }
-
-        public void DeleteLocal(DAL.Local local)
-        {
-            context.Locals.Remove(local);
-            context.SaveChanges();
+            try
+            {
+                return context.GetAllLocalsForMSMM(msmm_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -16,32 +16,38 @@ namespace DAL.Repositories
 
         public List<DAL.Patient> GetAllPatients()
         {
-            return context.Patients.ToList();
+            try
+            {
+                return context.GetAllPatient().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DAL.Patient GetPatientbyId(int id)
         {
-            return context.GetPatientById(id).FirstOrDefault();
+            try
+            {
+                return context.GetPatientById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public int AddPatient(DAL.Patient Patient)
+        public int AddPatient(DAL.Patient patient)
         {
-            int Patient_ID = context.Patients.Add(Patient).Patient_ID;
-            context.SaveChanges();
-            return Patient_ID;
-        }
-
-        public void UpdatePatient(DAL.Patient Patient)
-        {
-            DAL.Patient med = this.GetPatientbyId(Patient.Patient_ID);
-            med.Firstname = Patient.Firstname;
-            med.Lastname = Patient.Lastname;
-            context.SaveChanges();
-        }
-
-        public void DeletePatient(DAL.Patient Patient)
-        {
-            context.Patients.Remove(Patient);
+            try
+            {
+                return context.AddPatient(patient.Firstname, patient.Lastname).FirstOrDefault().Patient_ID; ;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

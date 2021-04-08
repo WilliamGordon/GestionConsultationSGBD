@@ -11,31 +11,49 @@ namespace BLL.BusinessServices
 {
     public class PatientService
     {
-        private PatientRepository Repository { get; set; }
+        private PatientRepository patientRepository { get; set; }
         private IMapper Mapper { get; set; }
         public PatientService()
         {
-            Repository = new PatientRepository();
+            patientRepository = new PatientRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
         public List<Models.Patient> GetAllPatients()
         {
-            List<DAL.Patient> DALpatients = Repository.GetAllPatients();
-            List<Models.Patient> patients = Mapper.Map<List<Models.Patient>>(DALpatients);
-            return patients;
+            try
+            {
+                return Mapper.Map<List<Models.Patient>>(patientRepository.GetAllPatients());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Models.Patient GetPatientById(int id)
+        public Models.Patient GetPatientById(int patient_ID)
         {
-            DAL.Patient DALpatient = Repository.GetPatientbyId(id);
-            Models.Patient patient = Mapper.Map<Models.Patient>(DALpatient);
-            return patient;
+            try
+            {
+                return Mapper.Map<Models.Patient>(patientRepository.GetPatientbyId(patient_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public int AddPatient(Models.Patient medecin)
+        public int AddPatient(Models.Patient patient)
         {
-            return Repository.AddPatient(Mapper.Map<DAL.Patient>(medecin));
+            try
+            {
+                return patientRepository.AddPatient(Mapper.Map<DAL.Patient>(patient));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

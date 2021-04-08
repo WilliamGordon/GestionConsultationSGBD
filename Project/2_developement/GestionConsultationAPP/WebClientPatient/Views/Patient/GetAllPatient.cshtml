@@ -4,6 +4,8 @@
     ViewBag.Title = "GetAllPatient";
 }
 
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
 <br />
 <h2>Sélectionner un patient</h2>
 <br />
@@ -20,23 +22,24 @@
         </th>
         <th></th>
     </tr>
-
-    @foreach (var item in Model)
+    @if (Model != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patient_ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                <button type="button" class="btn btn-primary" onclick="location.href='/Patient/GetAllConsultationForPatient/@Html.DisplayFor(modelItem => item.Patient_ID)';">Choisir patient</button>
-            </td>
-        </tr>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/Patient/GetAllConsultationForPatient/@Html.DisplayFor(modelItem => item.Patient_ID)';">Choisir patient</button>
+                </td>
+            </tr>
+        }
     }
-
 </table>

@@ -14,16 +14,7 @@ namespace API.Controllers
         {
             PresenceService = new BLL.BusinessServices.PresenceService();
         }
-        // GET: api/Presence/GetAllPresenceForMedecin/5
-        [HttpGet]
-        [Route("api/Presence/GetAllPresenceForMedecin/{medecin_ID}")]
-        public IHttpActionResult GetAllPresenceForMedecin(int medecin_ID)
-        {
-            var pres = PresenceService.GetAllPresenceForMedecin(medecin_ID);
-            return Ok(pres);
-        }
 
-        // POST: api/Presence
         public IHttpActionResult Post([FromBody] List<Models.Presence> presences)
         {
             try
@@ -34,7 +25,20 @@ namespace API.Controllers
             {
                 return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
             }
+        }
 
+        [HttpGet]
+        [Route("api/Presence/GetAllPresenceForMedecin/{medecin_ID}")]
+        public IHttpActionResult GetAllPresenceForMedecin(int medecin_ID)
+        {
+            try
+            {
+                return Ok(PresenceService.GetAllPresenceForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
     }
 }

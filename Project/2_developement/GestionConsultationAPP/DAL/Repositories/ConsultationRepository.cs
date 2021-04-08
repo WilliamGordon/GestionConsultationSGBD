@@ -14,75 +14,112 @@ namespace DAL.Repositories
             this.context = new GestionConsultationEntities();
         }
 
-        public int ConfirmConsultation(int consultation_ID)
+        public List<DAL.Consultation> GetAllConsultations(int maisonMedicale_ID, DateTime day)
         {
-            return context.ConfirmConsultation(consultation_ID).FirstOrDefault().Consultation_ID;
-        }
-
-        public List<DAL.Consultation> GetAllConsultations()
-        {
-            return context.Consultations.ToList();
+            try
+            {
+                return context.GetAllConsultationForMMForADay(maisonMedicale_ID, day).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.Consultation> GetAllConsultations(int medecin_ID, int maisonMedicale_ID, DateTime day)
         {
-            return context.GetAllConsultation(medecin_ID, maisonMedicale_ID, day).ToList();
-        }
-
-        public List<DAL.Consultation> GetAllConsultations(int maisonMedicale_ID, DateTime day)
-        {
-            return context.GetAllConsultationForMMForADay(maisonMedicale_ID, day).ToList();
+            try
+            {
+                return context.GetAllConsultation(medecin_ID, maisonMedicale_ID, day).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.Consultation> GetAllConsultationForPatient(int id)
         {
-            return context.GetAllConsultationForPatient(id).ToList();
+            try
+            {
+                return context.GetAllConsultationForPatient(id).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.Consultation> GetAllConsultationForMedecin(int id)
         {
-            return context.GetAllConsultationForMedecin(id).ToList();
+            try
+            {
+                return context.GetAllConsultationForMedecin(id).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         
         public DAL.Consultation GetConsultationbyId(int id)
         {
-            return context.GetConsultationById(id).FirstOrDefault();
+            try
+            {
+                return context.GetConsultationById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public int AddConsultation(DAL.Consultation consultation)
         {
-            context.Consultations.Add(consultation);
-            context.SaveChanges();
-            return consultation.Consultation_ID;
+            try
+            {
+                return context.AddConsultation(consultation.Patient_ID, consultation.MedecinSpecialiteMaisonMedicale_ID, consultation.Local_ID, consultation.Starting, consultation.Ending).SingleOrDefault().Consultation_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public void UpdateConsultation(DAL.Consultation consultation)
+        public int ConfirmConsultation(int consultation_ID)
         {
-            DAL.Consultation cons = this.GetConsultationbyId(consultation.Consultation_ID);
-            cons.Patient_ID = consultation.Patient_ID;
-            cons.MedecinSpecialiteMaisonMedicale_ID = consultation.MedecinSpecialiteMaisonMedicale_ID;
-            cons.MedecinSpecialiteMaisonMedicale_ID = consultation.MedecinSpecialiteMaisonMedicale_ID;
-            cons.Local_ID = consultation.Local_ID;
-            cons.Starting = consultation.Starting;
-            cons.Ending = consultation.Ending;
-            cons.IsConfirmed = consultation.IsConfirmed;
-            context.SaveChanges();
+            try
+            {
+                return context.ConfirmConsultation(consultation_ID).FirstOrDefault().Consultation_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int UpdateConsultation(DAL.Consultation consultation)
+        {
+            try
+            {
+                return context.UpdateConsultation(consultation.Consultation_ID, consultation.Patient_ID, consultation.MedecinSpecialiteMaisonMedicale_ID, consultation.Local_ID, consultation.Starting, consultation.Ending, consultation.IsConfirmed).FirstOrDefault().Consultation_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void DeleteConsultation(DAL.Consultation consultation)
         {
             try
             {
-                context.Consultations.Attach(consultation);
-                context.Consultations.Remove(consultation);
-                context.SaveChanges();
+                context.DeleteConsultation(consultation.Consultation_ID);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-            
         }
     }
 }

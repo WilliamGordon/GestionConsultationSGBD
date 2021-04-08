@@ -10,22 +10,21 @@ namespace BLL.BusinessServices
 {
     public class PresenceService
     {
-        public DAL.Repositories.PresenceRepository presenceRepo { get; set; }
+        public DAL.Repositories.PresenceRepository presenceRepository { get; set; }
         private IMapper Mapper { get; set; }
 
         public PresenceService()
         {
-            presenceRepo = new DAL.Repositories.PresenceRepository();
+            presenceRepository = new DAL.Repositories.PresenceRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
-        public List<Models.Presence> GetAllPresence(int medecin_ID, int maisonMedicale_ID, DateTime day)
+        public List<Models.Presence> GetAllPresenceForMedecin(int medecin_ID)
         {
             try
             {
-                List<DAL.Presence> DALPres = presenceRepo.GetAllPresences(medecin_ID, maisonMedicale_ID, day);
-                List<Models.Presence> pres = Mapper.Map<List<Models.Presence>>(DALPres);
-                return pres;
+                return Mapper.Map<List<Models.Presence>>(presenceRepository.GetAllPresenceForMedecin(medecin_ID));
             }
             catch (Exception ex)
             {
@@ -33,22 +32,16 @@ namespace BLL.BusinessServices
             }
         }
 
-        public int AddPresence(List<Models.Presence> presence)
-        {
-            foreach (var pres in presence)
-            {
-                presenceRepo.AddPresence(Mapper.Map<DAL.Presence>(pres));
-            }
-            return 0;
-        }
-
-        public List<Models.Presence> GetAllPresenceForMedecin(int Medecin_ID)
+        public int AddPresence(List<Models.Presence> presences)
         {
             try
             {
-                List<DAL.Presence> DALPres = presenceRepo.GetAllPresenceForMedecin(Medecin_ID);
-                List<Models.Presence> pres = Mapper.Map<List<Models.Presence>>(DALPres);
-                return pres;
+                var presence_ID = 0;
+                foreach (var pres in presences)
+                {
+                    presence_ID = presenceRepository.AddPresence(Mapper.Map<DAL.Presence>(pres));
+                }
+                return presence_ID;
             }
             catch (Exception ex)
             {

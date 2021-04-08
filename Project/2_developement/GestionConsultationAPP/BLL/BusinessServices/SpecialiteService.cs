@@ -11,35 +11,73 @@ namespace BLL.BusinessServices
 {
     public class SpecialiteService
     {
-        private SpecialiteRepository SpecRepository { get; set; }
+        private SpecialiteRepository specialiteRepository { get; set; }
         private IMapper Mapper { get; set; }
         public SpecialiteService()
         {
-            SpecRepository = new SpecialiteRepository();
+            specialiteRepository = new SpecialiteRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
+
         public List<Models.Specialite> GetAllSpecialites()
         {
-            List<DAL.Specialite> DALspecs = SpecRepository.GetAllSpecialites();
-            List<Models.Specialite> specs = Mapper.Map<List<Models.Specialite>>(DALspecs);
-            return specs;
+            try
+            {
+                return Mapper.Map<List<Models.Specialite>>(specialiteRepository.GetAllSpecialites());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public List<Models.Specialite> GetAllSpecialiteForMaisonMedicale(int id)
+        public List<Models.Specialite> GetAllSpecialiteForMaisonMedicale(int maisonMedicale_ID)
         {
-            List<DAL.Specialite> DALspecs = SpecRepository.GetAllSpecialiteForMaisonMedicale(id);
-            List<Models.Specialite> specs = Mapper.Map<List<Models.Specialite>>(DALspecs);
-            return specs;
+            try
+            {
+                return Mapper.Map<List<Models.Specialite>>(specialiteRepository.GetAllSpecialiteForMaisonMedicale(maisonMedicale_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        
-        public Models.Specialite GetSpecialiteFromMSMM(int id)
+        public List<Models.Specialite> GetAllSpecialiteForMedecin(int medecin_ID)
         {
-            return Mapper.Map<Models.Specialite>(SpecRepository.GetSpecialiteFromMSMM(id));
+            try
+            {
+                return Mapper.Map<List<Models.Specialite>>(specialiteRepository.GetAllSpecialiteForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public Models.Specialite GetSpecialiteById(int id)
+
+        public Models.Specialite GetSpecialiteFromMSMM(int msmm_ID)
         {
-            return Mapper.Map<Models.Specialite>(SpecRepository.GetSpecialiteById(id));
+            try
+            {
+                return Mapper.Map<Models.Specialite>(specialiteRepository.GetSpecialiteFromMSMM(msmm_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Models.Specialite GetSpecialiteById(int specialite_ID)
+        {
+            try
+            {
+                return Mapper.Map<Models.Specialite>(specialiteRepository.GetSpecialiteById(specialite_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

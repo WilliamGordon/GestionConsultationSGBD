@@ -16,27 +16,23 @@ namespace API.Controllers
             MSMMService = new MedecinSpecialiteMaisonMedicaleService();
         }
 
-        // GET: api/MedecinSpecialiteMaisonMedicale/5
         public IHttpActionResult Get(int id)
         {
-            var medecin = MSMMService.GetMSMMById(id);
-            return Ok(medecin);
-        }
-        // GET: api/Medecin/GetAllSpecialiteForMedecin/5
-        [HttpGet]
-        [Route("api/MedecinSpecialiteMaisonMedicale/GetAllMMSForMedecin/{medecin_ID}")]
-        public IHttpActionResult GetAllMMSForMedecin(int medecin_ID)
-        {
-            var MSMM = MSMMService.GetAllMSMMForMedecin(medecin_ID);
-            return Ok(MSMM);
+            try
+            {
+                return Ok(MSMMService.GetMSMMById(id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // POST: api/MedecinSpecialiteMaisonMedicale
         public IHttpActionResult Post([FromBody] Models.MedecinSpecialiteMaisonMedicale MSMM)
         {
             try
             {
-                return Ok(MSMMService.AddMSMM(MSMM));
+                return Ok(MSMMService.AddMedecinSpecialiteMaisonMedicale(MSMM));
             }
             catch (Exception ex)
             {
@@ -44,12 +40,11 @@ namespace API.Controllers
             }
         }
 
-        // PUT: api/MedecinSpecialiteMaisonMedicale/5
         public IHttpActionResult Put([FromBody] Models.MedecinSpecialiteMaisonMedicale MSMM)
         {
             try
             {
-                return Ok(MSMMService.EditMSMM(MSMM));
+                return Ok(MSMMService.UpdateMedecinSpecialiteMaisonMedicale(MSMM));
             }
             catch (Exception ex)
             {
@@ -57,9 +52,18 @@ namespace API.Controllers
             }
         }
 
-        // DELETE: api/MedecinSpecialiteMaisonMedicale/5
-        public void Delete(int id)
+        [HttpGet]
+        [Route("api/MedecinSpecialiteMaisonMedicale/GetAllMMSForMedecin/{medecin_ID}")]
+        public IHttpActionResult GetAllMMSForMedecin(int medecin_ID)
         {
+            try
+            {
+                return Ok(MSMMService.GetAllMSMMForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
     }
 }

@@ -14,47 +14,52 @@ namespace DAL.Repositories
             this.context = new GestionConsultationEntities();
         }
 
-        public List<DAL.Presence> GetAllPresences()
-        {
-            return context.Presences.ToList();
-        }
-
         public List<DAL.Presence> GetAllPresences(int medecin_ID, int maisonMedicale_ID, DateTime day)
         {
-            return context.GetAllPresence(medecin_ID, maisonMedicale_ID, day).ToList();
-        }
-
-        public List<DAL.Presence> GetAllPresenceForMedecin(int medecin_ID)
-        {
-            return context.GetAllPresenceForMedecin(medecin_ID).ToList();
+            try
+            {
+                return context.GetAllPresence(medecin_ID, maisonMedicale_ID, day).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DAL.Presence GetPresencebyId(int id)
         {
-            return context.GetPresenceById(id).FirstOrDefault();
+            try
+            {
+                return context.GetPresenceById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<DAL.Presence> GetAllPresenceForMedecin(int medecin_ID)
+        {
+            try
+            {
+                return context.GetAllPresenceForMedecin(medecin_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public int AddPresence(DAL.Presence presence)
         {
-            context.Presences.Add(presence);
-            context.SaveChanges();
-            return presence.Presence_ID;
-        }
-
-        public void UpdatePresence(DAL.Presence presence)
-        {
-            DAL.Presence pr = this.GetPresencebyId(presence.Presence_ID);
-            pr.Medecin_ID = presence.Medecin_ID;
-            pr.MaisonMedicale_ID = presence.MaisonMedicale_ID;
-            pr.Starting = presence.Starting;
-            pr.Ending = presence.Ending;
-            context.SaveChanges();
-        }
-
-        public void DeletePresence(DAL.Presence presence)
-        {
-            context.Presences.Remove(presence);
-            context.SaveChanges();
+            try
+            {
+                return context.AddPresence(presence.Medecin_ID, presence.MaisonMedicale_ID, presence.Starting, presence.Ending).SingleOrDefault().Presence_ID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

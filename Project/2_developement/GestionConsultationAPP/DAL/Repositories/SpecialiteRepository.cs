@@ -18,47 +18,62 @@ namespace DAL.Repositories
 
         public List<DAL.Specialite> GetAllSpecialites()
         {
-            return context.Specialites.ToList();
-        }
-
-        public List<DAL.Specialite> GetAllSpecialiteForMedecin(int Medecin_ID)
-        {
-            return context.GetAllSpecialiteForMedecin(Medecin_ID).ToList();
-        }
-
-        public List<DAL.Specialite> GetAllSpecialiteForMaisonMedicale(int maisonMedicale_ID)
-        {
-            return context.GetAllSpecialiteForMaisonMedicale(maisonMedicale_ID).ToList();
-        }
-
-        public DAL.Specialite GetSpecialiteFromMSMM(int id)
-        {
-            return context.GetSpecialiteFromMSMM(id).FirstOrDefault();
+            try
+            {
+                return context.GetAllSpecialite().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DAL.Specialite GetSpecialiteById(int id)
         {
-            return context.GetSpecialiteById(id).FirstOrDefault();
+            try
+            {
+                return context.GetSpecialiteById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public int AddSpecialite(DAL.Specialite specialite)
+        public List<DAL.Specialite> GetAllSpecialiteForMedecin(int Medecin_ID)
         {
-            int Specialite_ID = context.Specialites.Add(specialite).Specialite_ID;
-            context.SaveChanges();
-            return Specialite_ID;
+            try
+            {
+                return context.GetAllSpecialiteForMedecin(Medecin_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public void UpdateSpecialite(DAL.Specialite specialite)
+        public List<DAL.Specialite> GetAllSpecialiteForMaisonMedicale(int maisonMedicale_ID)
         {
-            DAL.Specialite spec = this.GetSpecialiteById(specialite.Specialite_ID);
-            spec.Name = specialite.Name;
-            context.SaveChanges();
+            try
+            {
+                return context.GetAllSpecialiteForMaisonMedicale(maisonMedicale_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public void DeleteSpecialite(DAL.Specialite specialite)
+        public DAL.Specialite GetSpecialiteFromMSMM(int id)
         {
-            context.Specialites.Remove(specialite);
-            context.SaveChanges();
+            try
+            {
+                return context.GetSpecialiteFromMSMM(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -15,11 +15,16 @@ namespace API.Controllers
             LocalService = new BLL.BusinessServices.LocaLService();
         }
 
-        // GET: api/Local/5
         public IHttpActionResult Get(int id)
         {
-            var patient = LocalService.GetLocalById(id);
-            return Ok(patient);
+            try
+            {
+                return Ok(LocalService.GetLocalById(id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
     }
 }

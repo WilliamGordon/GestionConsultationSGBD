@@ -17,14 +17,18 @@ namespace API.Controllers
             ConsultationService = new ConsultationService();
         }
 
-        // GET: api/Consultation/5
         public IHttpActionResult Get(int id)
         {
-            var medecin = ConsultationService.GetConsultationById(id);
-            return Ok(medecin);
+            try
+            {
+                return Ok(ConsultationService.GetConsultationById(id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // POST: api/Consultation
         public IHttpActionResult Post([FromBody] Models.Consultation consultation)
         {
             try
@@ -37,33 +41,13 @@ namespace API.Controllers
             }
 
         }
-
-        // GET: api/Consultation/GetAllConsultationForMedecin/5
         [HttpGet]
         [Route("api/Consultation/GetAllConsultationForMedecin/{medecin_ID}")]
         public IHttpActionResult GetAllConsultationForMedecin(int medecin_ID)
         {
-            var cons = ConsultationService.GetAllConsultationForMedecin(medecin_ID);
-            return Ok(cons);
-        }
-
-        // GET: api/Consultation/GetAllConsultationForPatient/5
-        [HttpGet]
-        [Route("api/Consultation/GetAllConsultationForPatient/{patient_ID}")]
-        public IHttpActionResult GetAllSpecialiteForMedecin(int patient_ID)
-        {
-            var cons = ConsultationService.GetAllConsultationForPatient(patient_ID);
-            return Ok(cons);
-        }
-
-        // GET: api/Consultation/GetAllConsultationForPatient/5
-        [HttpGet]
-        [Route("api/Consultation/GetAllPossibleConsultation/{medecin_ID}/{maisonMedicale_ID}/{day}/{specialite_ID}/{patient_ID}")]
-        public IHttpActionResult GetAllSpecialiteForMedecin(int medecin_ID, int maisonMedicale_ID, DateTime day, int specialite_ID, int patient_ID)
-        {
             try
             {
-                return Ok(ConsultationService.GetAllPossibleConsultation(medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID));
+                return Ok(ConsultationService.GetAllConsultationForMedecin(medecin_ID));
             }
             catch (Exception ex)
             {
@@ -71,16 +55,48 @@ namespace API.Controllers
             }
         }
 
-        // POST: api/Consultation/ConfirmConsultation/5
+        [HttpGet]
+        [Route("api/Consultation/GetAllConsultationForPatient/{patient_ID}")]
+        public IHttpActionResult GetAllConsultationForPatient(int patient_ID)
+        {
+            try
+            {
+                return Ok(ConsultationService.GetAllConsultationForPatient(patient_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
         [HttpPost]
         [Route("api/Consultation/ConfirmConsultation")]
         public IHttpActionResult ConfirmConsultation([FromBody] Models.Consultation consultation)
         {
-            var cons = ConsultationService.ConfirmConsultation(consultation.Consultation_ID);
-            return Ok(cons);
+            try
+            {
+                return Ok(ConsultationService.ConfirmConsultation(consultation.Consultation_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // POST: api/Consultation/ConfirmConsultation/5
+        [HttpPost]
+        [Route("api/Consultation/UpdateConsultation")]
+        public IHttpActionResult UpdateConsultation([FromBody] Models.Consultation consultation)
+        {
+            try
+            {
+                return Ok(ConsultationService.UpdateConsultation(consultation));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
         [HttpPost]
         [Route("api/Consultation/DeleteConsultation")]
         public IHttpActionResult DeleteConsultation([FromBody] Models.Consultation consultation)
@@ -96,5 +112,18 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Consultation/GetAllPossibleConsultation/{medecin_ID}/{maisonMedicale_ID}/{day}/{specialite_ID}/{patient_ID}/{consultation_ID}")]
+        public IHttpActionResult GetAllPossibleConsultation(int medecin_ID, int maisonMedicale_ID, DateTime day, int specialite_ID, int patient_ID, int consultation_ID)
+        {
+            try
+            {
+                return Ok(ConsultationService.GetAllPossibleConsultation(medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID, consultation_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
     }
 }

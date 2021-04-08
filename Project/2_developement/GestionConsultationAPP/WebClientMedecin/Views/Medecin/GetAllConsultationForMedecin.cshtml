@@ -89,7 +89,12 @@
 
         $.post("https://localhost:44307/api/Consultation/ConfirmConsultation/", cons)
             .done(function (data) {
-                window.location.replace("https://localhost:44349/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID);
+                window.location.replace("https://localhost:44301/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID);
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                alert(jqxhr.responseText);
+                console.log("Request Failed: " + err);
             });
     }
 

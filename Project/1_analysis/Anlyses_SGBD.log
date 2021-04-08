@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.17)  20 FEB 2021 11:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.17)  6 APR 2021 09:01
 entering extended mode
 **./Anlyses_SGBD.tex
 (Anlyses_SGBD.tex
@@ -116,6 +116,11 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks20
 \@floatcapt=\box51
 )
+(C:\Users\willi\AppData\Local\Programs\MiKTeX\tex/latex/tabto-ltx\tabto.sty
+Package: tabto 2018/12/28  v 1.4  Another tabbing mechanism
+\CurrentLineWidth=\dimen154
+\TabPrevPos=\dimen155
+)
 \@float@every@table=\toks21
 
 (C:\Users\willi\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
@@ -126,20 +131,20 @@ File: l3backend-pdftex.def 2021-02-06 L3 backend support: PDF output (pdfTeX)
 ) (Anlyses_SGBD.aux)
 \openout1 = `Anlyses_SGBD.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -177,68 +182,74 @@ LaTeX Font Info:    ... okay on input line 38.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 39.
+(Font)              <12> on input line 40.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 39.
+(Font)              <8> on input line 40.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 39.
+(Font)              <6> on input line 40.
 [1
 
 {C:/Users/willi/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 (Anlyses_SGBD.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 2.
-)
+ [2])
 \tf@toc=\write3
 \openout3 = `Anlyses_SGBD.toc'.
 
- [2] [3] [4]
-Overfull \hbox (6.66374pt too wide) in paragraph at lines 75--76
+ [3] [4]
+Overfull \hbox (6.66374pt too wide) in paragraph at lines 76--77
 \OT1/cmr/m/n/10.95 dans des maisons medicales. Cette so-lu-tion sera com-pose
  de deux ap-pli-ca-tions dis-tinctes. 
  []
 
 [5]
-Overfull \hbox (13.47717pt too wide) in paragraph at lines 98--110
+Overfull \hbox (13.47717pt too wide) in paragraph at lines 99--111
 [][] 
  []
 
 
-Overfull \hbox (13.47717pt too wide) in paragraph at lines 115--130
+Overfull \hbox (13.47717pt too wide) in paragraph at lines 116--131
 [][] 
  []
 
 
-Overfull \hbox (13.47717pt too wide) in paragraph at lines 135--142
+Overfull \hbox (13.47717pt too wide) in paragraph at lines 136--143
 [][] 
  []
 
 [6]
-Overfull \hbox (7.52556pt too wide) in paragraph at lines 156--157
+Overfull \hbox (7.52556pt too wide) in paragraph at lines 157--158
 []\OT1/cmr/m/n/10.95 Autoriser l'acces aux ta-bles de la base de donnees uniq
 ue-ment par l'utilisateur ad-min (sa) 
  []
 
-[7] [8] [9] [10] [11] [12] [13] (Anlyses_SGBD.aux) ) 
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 183--190
+
+ []
+
+[8] [9] [10] [11] [12] [13] (Anlyses_SGBD.aux) ) 
 Here is how much of TeX's memory you used:
- 2251 strings out of 479616
- 34551 string characters out of 2865001
- 335757 words of memory out of 3000000
- 19436 multiletter control sequences out of 15000+200000
- 408630 words of font info for 44 fonts, out of 3000000 for 9000
+ 2278 strings out of 479616
+ 35175 string characters out of 2865001
+ 337149 words of memory out of 3000000
+ 19458 multiletter control sequences out of 15000+200000
+ 408976 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,10n,74p,1203b,210s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\willi\AppData\Lo
-cal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/willi/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/wi
-lli/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C
-:/Users/willi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb><C:/Users/willi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmr12.pfb><C:/Users/willi/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmr17.pfb>
-Output written on Anlyses_SGBD.pdf (13 pages, 89261 bytes).
+ <C:\Users\willi\AppData\Local\
+MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/willi/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/willi/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Us
+ers/willi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Users/willi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmr12.pfb><C:/Users/willi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr17.pfb><C:/Users/willi/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmti10.pfb>
+Output written on Anlyses_SGBD.pdf (13 pages, 103436 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
+ 74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -53,6 +53,12 @@
     <Compile Include="AddMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="AddMedecin_Result1.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmConsultation1_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmConsultation_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
@@ -66,6 +72,9 @@
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DeleteMedecinSpecialiteMaisonMedicale_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeletePresence1_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DeletePresence_Result.cs">
@@ -110,6 +119,15 @@
     <Compile Include="GetAllMaisonMedicalesForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllMaisonMedicale_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllMedecin1_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllMedecinForMaisonMedicaleAndSpecialite_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
@@ -120,6 +138,9 @@
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllMMSForMedecin_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllPatient_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllPresenceForMedecin_Result.cs">

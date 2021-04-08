@@ -5,6 +5,19 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
+<div id="errorAPI">
+    <br />
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <span id="errorApiMessage"></span>
+    </div>
+    <br />
+</div>
+
+
 <h2>Mes consultations</h2>
 
 <p>
@@ -36,64 +49,70 @@
         </th>
         <th></th>
     </tr>
-
-    @foreach (var item in Model)
+    @if (Model != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consultation.Consultation_ID)
-            </td>
-            <td>
-                @item.Medecin.Firstname @item.Medecin.Lastname
-            </td>
-            <td>
-                @item.MaisonMedicale.Name (local : @item.Local.Name)
-            </td>
-            <td>
-                @item.Specialite.Name
-            </td>
-            <td>
-                @item.Consultation.Starting.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @item.Consultation.Starting.ToString("hh:mm") - @item.Consultation.Ending.ToString("hh:mm")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consultation.IsConfirmed)
-            </td>
-            <td>
-                <div class="btn-group" role="group" aria-label="...">
-                    <input type="hidden" id="consultationData_@item.Consultation.Consultation_ID" value="@Json.Encode(item.Consultation)" />
-                    <button type="button" onclick="EditConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default">Modifier</button>
-                    <button type="button" onclick="DeleteConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default">Supprimer</button>
-                </div>
-            </td>
-        </tr>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Consultation.Consultation_ID)
+                </td>
+                <td>
+                    @item.Medecin.Firstname @item.Medecin.Lastname
+                </td>
+                <td>
+                    @item.MaisonMedicale.Name (local : @item.Local.Name)
+                </td>
+                <td>
+                    @item.Specialite.Name
+                </td>
+                <td>
+                    @item.Consultation.Starting.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @item.Consultation.Starting.ToString("hh:mm") - @item.Consultation.Ending.ToString("hh:mm")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Consultation.IsConfirmed)
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        @if (item.Consultation.Starting > DateTime.Now)
+                        {
+                            <input type="hidden" id="consultationData_@item.Consultation.Consultation_ID" value="@Json.Encode(item.Consultation)" />
+                            <button type="button" onclick="UpdateConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default">Modifier</button>
+                            <button type="button" onclick="DeleteConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default">Supprimer</button>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
     }
-
 </table>
+
+@Scripts.Render("~/bundles/jquery")
 
 <script>
 
+    $(document).ready(function () {
+        $('#errorAPI').hide();
+        $('#errorApiMessage').text("");
+    });
+
     function DeleteConsultation(consultation_ID) {
-        console.log(consultation_ID);
-
-        var consData = $("#consultationData_" + consultation_ID).val();
-
-        console.log(consData);
-
-        var cons = JSON.parse(consData);
-
-        console.log(cons);
-
-        $.post("https://localhost:44307/api/Consultation/DeleteConsultation/", cons)
+        $.post("https://localhost:44307/api/Consultation/DeleteConsultation/", JSON.parse($("#consultationData_" + consultation_ID).val()))
             .done(function (data) {
                 window.location.replace("https://localhost:44349/Patient/GetAllConsultationForPatient/" + @ViewBag.Patient_ID);
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                $('#errorAPI').show()
+                $('#errorApiMessage').text("Request Failed: " + err + jqxhr.responseText)
             });
     }
 
-    function EditConsultation(consultation_ID) {
-        window.location.replace("https://localhost:44349/Patient/EditConsultation/" + consultation_ID);
+    function UpdateConsultation(consultation_ID) {
+        window.location.replace("https://localhost:44349/Patient/UpdateConsultation/" + consultation_ID);
     }
 
 </script>

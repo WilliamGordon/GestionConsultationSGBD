@@ -11,32 +11,49 @@ namespace BLL.BusinessServices
 {
     public class MedecinSpecialiteService
     {
-        private MedecinSpecialiteRepository Repository { get; set; }
+        private MedecinSpecialiteRepository medecinSpecialiteRepository { get; set; }
         private IMapper Mapper { get; set; }
         public MedecinSpecialiteService()
         {
-            Repository = new MedecinSpecialiteRepository();
+            medecinSpecialiteRepository = new MedecinSpecialiteRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
-        public int AddSpecialiteForMedecin(Models.Medecin medecin, Models.Specialite specialite)
+        public List<Models.MedecinSpecialite> GetAllMedecinSpecialiteForMedecin(int medecin_ID)
         {
-            DAL.MedecinSpecialite MS = new DAL.MedecinSpecialite();
-            MS.Medecin_ID = medecin.Medecin_ID;
-            MS.Specialite_ID = specialite.Specialite_ID;
-            return Repository.AddMedecinSpecialite(MS); ;
+            try
+            {
+                return Mapper.Map<List<Models.MedecinSpecialite>>(medecinSpecialiteRepository.GetAllMedecinSpecialiteForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Models.MedecinSpecialite GetMedecinSpecialitebyId(int id)
+        public Models.MedecinSpecialite GetMedecinSpecialitebyId(int medecinSpecialite_ID)
         {
-            return Mapper.Map<Models.MedecinSpecialite>(Repository.GetMedecinSpecialitebyId(id));
+            try
+            {
+                return Mapper.Map<Models.MedecinSpecialite>(medecinSpecialiteRepository.GetMedecinSpecialitebyId(medecinSpecialite_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public List<Models.MedecinSpecialite> GetAllMedecinSpecialiteForMedecin(int id)
+        public int AddMedecinSpecialite(Models.MedecinSpecialite medspec)
         {
-            return Mapper.Map< List<Models.MedecinSpecialite>>(Repository.GetAllMedecinSpecialiteForMedecin(id));
+            try
+            {
+                return medecinSpecialiteRepository.AddMedecinSpecialite(Mapper.Map<DAL.MedecinSpecialite>(medspec));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
-        
     }
 }

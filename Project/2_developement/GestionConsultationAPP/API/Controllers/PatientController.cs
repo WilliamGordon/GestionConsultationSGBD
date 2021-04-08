@@ -16,21 +16,30 @@ namespace API.Controllers
             PatientService = new PatientService();
         }
 
-        // GET: api/Medecin
         public IHttpActionResult Get()
         {
-            var patients = PatientService.GetAllPatients();
-            return Ok(patients);
+            try
+            {
+                return Ok(PatientService.GetAllPatients());
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // GET: api/Medecin/5
         public IHttpActionResult Get(int id)
         {
-            var patient = PatientService.GetPatientById(id);
-            return Ok(patient);
+            try
+            {
+                return Ok(PatientService.GetPatientById(id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // POST: api/Medecin
         public IHttpActionResult Post([FromBody] Models.Patient patient)
         {
             try
@@ -41,8 +50,6 @@ namespace API.Controllers
             {
                 return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
             }
-
         }
-
     }
 }

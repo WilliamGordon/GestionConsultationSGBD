@@ -10,43 +10,63 @@ namespace API.Controllers
 {
     public class MaisonMedicaleController : ApiController
     {
-        public MaisonMedicaleService MMService { get; set; }
+        public MaisonMedicaleService MaisonMedicaleService { get; set; }
 
         public MaisonMedicaleController()
         {
-            MMService = new MaisonMedicaleService();
-        }
-        // GET: api/MaisonMedicale
-        public IHttpActionResult Get()
-        {
-            var MM = MMService.GetAllMaisonMedicales();
-            return Ok(MM);
+            MaisonMedicaleService = new MaisonMedicaleService();
         }
 
-        // GET: api/MaisonMedicale/GetAllMaisonMedicaleForMedecin/5
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                return Ok(MaisonMedicaleService.GetAllMaisonMedicales());
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                return Ok(MaisonMedicaleService.GetMaisonMedicaleById(id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
         [HttpGet]
         [Route("api/MaisonMedicale/GetAllMaisonMedicaleForMedecin/{medecin_ID}")]
         public IHttpActionResult GetAllSpecialiteForMedecin(int medecin_ID)
         {
-            var MMs = MMService.GetAllMaisonMedicaleForMedecin(medecin_ID);
-            return Ok(MMs);
+            try
+            {
+                return Ok(MaisonMedicaleService.GetAllMaisonMedicaleForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // GET: api/MaisonMedicale/GetAllMaisonMedicaleForMedecin/5
         [HttpGet]
         [Route("api/MaisonMedicale/GetMaisonMedicaleFromMSMM/{MSMM_ID}")]
         public IHttpActionResult GetMaisonMedicaleFromMSMM(int MSMM_ID)
         {
-            var MMs = MMService.GetMaisonMedicaleFromMSMM(MSMM_ID);
-            return Ok(MMs);
-        }
-        
-
-        // GET: api/MaisonMedicale/5
-        public IHttpActionResult Get(int id)
-        {
-            var MM = MMService.GetMaisonMedicaleById(id);
-            return Ok(MM);
+            try
+            {
+                return Ok(MaisonMedicaleService.GetMaisonMedicaleFromMSMM(MSMM_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
     }
 }

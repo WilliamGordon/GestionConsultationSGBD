@@ -10,25 +10,39 @@ namespace BLL.BusinessServices
 {
     public class LocaLService
     {
-        private DAL.Repositories.LocalRepository Repo { get; set; }
+        private DAL.Repositories.LocalRepository localRepository { get; set; }
 
         private IMapper Mapper { get; set; }
 
         public LocaLService()
         {
-            Repo = new DAL.Repositories.LocalRepository();
+            localRepository = new DAL.Repositories.LocalRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
         public List<Models.Local> GetAllLocals(int msmm_ID)
         {
-            return Mapper.Map<List<Models.Local>>(Repo.GetAllLocals(msmm_ID));
+            try
+            {
+                return Mapper.Map<List<Models.Local>>(localRepository.GetAllLocals(msmm_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Models.Local GetLocalById(int id)
         {
-            return Mapper.Map<Models.Local>(Repo.GetLocalbyId(id));
+            try
+            {
+                return Mapper.Map<Models.Local>(localRepository.GetLocalbyId(id));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
     }
 }

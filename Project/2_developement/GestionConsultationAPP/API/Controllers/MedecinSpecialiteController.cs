@@ -10,58 +10,49 @@ namespace API.Controllers
 {
     public class MedecinSpecialiteController : ApiController
     {
-        public MedecinService MedecinService { get; set; }
-        public MedecinSpecialiteService MSService { get; set; }
+        public MedecinSpecialiteService MedecinSpecialiteService { get; set; }
         public MedecinSpecialiteController()
         {
-            MedecinService = new MedecinService();
-            MSService = new MedecinSpecialiteService();
-        }
-        // GET: api/MedecinSpecialite
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            MedecinSpecialiteService = new MedecinSpecialiteService();
         }
 
-        // GET: api/MedecinSpecialite/5
         public IHttpActionResult Get(int id)
-        {
-            Models.MedecinSpecialite MS = new Models.MedecinSpecialite();
-            MS = MSService.GetMedecinSpecialitebyId(id);
-            return Ok(MS);
-        }
-
-        // GET: api/Medecin/GetAllSpecialiteForMedecin/5
-        [HttpGet]
-        [Route("api/MedecinSpecialite/GetAllMedecinSpecialiteForMedecin/{medecin_ID}")]
-        public IHttpActionResult GetAllMedecinSpecialiteForMedecin(int medecin_ID)
-        {
-            var medecins = MSService.GetAllMedecinSpecialiteForMedecin(medecin_ID);
-            return Ok(medecins);
-        }
-
-        // POST: api/MedecinSpecialite
-        public IHttpActionResult Post([FromBody]Models.MedecinSpecialite MedecinSpecialite)
         {
             try
             {
-                return Ok(MedecinService.AddSpecialiteForMedecin(MedecinSpecialite));
+                return Ok(MedecinSpecialiteService.GetMedecinSpecialitebyId(id));
             }
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
             }
-           
         }
 
-        // PUT: api/MedecinSpecialite/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Post([FromBody] Models.MedecinSpecialite MedecinSpecialite)
         {
+            try
+            {
+                return Ok(MedecinSpecialiteService.AddMedecinSpecialite(MedecinSpecialite));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // DELETE: api/MedecinSpecialite/5
-        public void Delete(int id)
+        [HttpGet]
+        [Route("api/MedecinSpecialite/GetAllMedecinSpecialiteForMedecin/{medecin_ID}")]
+        public IHttpActionResult GetAllMedecinSpecialiteForMedecin(int medecin_ID)
         {
+            try
+            {
+                return Ok(MedecinSpecialiteService.GetAllMedecinSpecialiteForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
+
     }
 }

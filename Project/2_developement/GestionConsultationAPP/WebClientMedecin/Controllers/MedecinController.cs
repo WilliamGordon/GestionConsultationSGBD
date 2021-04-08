@@ -147,7 +147,7 @@ namespace WebClientMedecin.Controllers
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("api/Medecin/GetAllSpecialiteForMedecin/" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/Specialite/GetAllSpecialiteForMedecin/" + id);
 
                 if (Res.IsSuccessStatusCode)
                 {
@@ -334,7 +334,7 @@ namespace WebClientMedecin.Controllers
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage SpecRes = await client.GetAsync("api/Medecin/GetAllSpecialiteForMedecin/" + id);
+                HttpResponseMessage SpecRes = await client.GetAsync("api/Specialite/GetAllSpecialiteForMedecin/" + id);
                 
                 HttpResponseMessage MMRes = await client.GetAsync("api/MaisonMedicale");
 
@@ -394,7 +394,7 @@ namespace WebClientMedecin.Controllers
                         List<Models.MaisonMedicale> MM = new List<Models.MaisonMedicale>();
                         List<Models.MedecinSpecialite> MS = new List<Models.MedecinSpecialite>();
 
-                        HttpResponseMessage SpecRes = await client.GetAsync("api/Medecin/GetAllSpecialiteForMedecin/" + MSMMCreate.Medecin_ID);
+                        HttpResponseMessage SpecRes = await client.GetAsync("api/Specialite/GetAllSpecialiteForMedecin/" + MSMMCreate.Medecin_ID);
 
                         HttpResponseMessage MMRes = await client.GetAsync("api/MaisonMedicale");
 

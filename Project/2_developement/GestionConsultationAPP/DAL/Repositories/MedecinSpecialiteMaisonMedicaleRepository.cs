@@ -16,41 +16,81 @@ namespace DAL.Repositories
 
         public List<DAL.MedecinSpecialiteMaisonMedicale> GetAllMedecinSpecialiteMaisonMedicales()
         {
-            return context.MedecinSpecialiteMaisonMedicales.ToList();
-        }
-
-        public DAL.MedecinSpecialiteMaisonMedicale GetMedecinSpecialiteMaisonMedicale(int medecin_ID, int maisonMedicale_ID, int specialite_ID)
-        {
-            return context.GetMedecinSpecialiteMaisonMedicale(medecin_ID, maisonMedicale_ID, specialite_ID).FirstOrDefault();
+            try
+            {
+                return context.MedecinSpecialiteMaisonMedicales.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DAL.MedecinSpecialiteMaisonMedicale GetMedecinSpecialiteMaisonMedicalebyId(int id)
         {
-            return context.GetMedecinSpecialiteMaisonMedicaleById(id).FirstOrDefault();
+            try
+            {
+                return context.GetMedecinSpecialiteMaisonMedicaleById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DAL.MedecinSpecialiteMaisonMedicale GetMedecinSpecialiteMaisonMedicale(int medecin_ID, int maisonMedicale_ID, int specialite_ID)
+        {
+            try
+            {
+                return context.GetMedecinSpecialiteMaisonMedicale(medecin_ID, maisonMedicale_ID, specialite_ID).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.MaisonMedicale> GetAllMaisonMedicaleForMedecin(int id)
         {
-            return context.GetAllMaisonMedicaleForMedecin(id).ToList();
+            try
+            {
+                return context.GetAllMaisonMedicaleForMedecin(id).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.Specialite> GetAllSpecialiteForAMedecinAndMaisonMedicale(int Medecin_ID, int MaisonMedicale_ID)
         {
-            return context.GetAllSpecialiteForAMedecinAndMaisonMedicale(Medecin_ID, MaisonMedicale_ID).ToList();
+            try
+            {
+                return context.GetAllSpecialiteForAMedecinAndMaisonMedicale(Medecin_ID, MaisonMedicale_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.MedecinSpecialiteMaisonMedicale> GetAllMMSForMedecin(int MaisonMedicale_ID)
         {
-            return context.GetAllMMSForMedecin(MaisonMedicale_ID).ToList();
+            try
+            {
+                return context.GetAllMMSForMedecin(MaisonMedicale_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public int AddMedecinSpecialiteMaisonMedicale(DAL.MedecinSpecialiteMaisonMedicale MSMM)
         {
             try
             {
-                context.MedecinSpecialiteMaisonMedicales.Add(MSMM);
-                context.SaveChanges();
-                return MSMM.MedecinSpecialiteMaisonMedicale_ID;
+                return context.AddMedecinSpecialiteMaisonMedicale(MSMM.MedecinSpecialite_ID, MSMM.MaisonMedicale_ID, MSMM.MinimalDuration, MSMM.IsActif).SingleOrDefault().MedecinSpecialiteMaisonMedicale_ID;
             }
             catch (Exception ex)
             {
@@ -62,24 +102,12 @@ namespace DAL.Repositories
         {
             try
             {
-                DAL.MedecinSpecialiteMaisonMedicale msmm = this.GetMedecinSpecialiteMaisonMedicalebyId(MSMM.MedecinSpecialiteMaisonMedicale_ID);
-                msmm.MedecinSpecialite_ID = MSMM.MedecinSpecialite_ID;
-                msmm.MaisonMedicale_ID = MSMM.MaisonMedicale_ID;
-                msmm.MinimalDuration = MSMM.MinimalDuration;
-                msmm.IsActif = MSMM.IsActif;
-                context.SaveChanges();
-                return MSMM.MedecinSpecialiteMaisonMedicale_ID;
+                return context.UpdateMinimalDurationOfConsultation(MSMM.MedecinSpecialiteMaisonMedicale_ID, MSMM.MinimalDuration).SingleOrDefault().MedecinSpecialiteMaisonMedicale_ID;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }
-
-        public void DeleteMedecinSpecialiteMaisonMedicale(DAL.MedecinSpecialiteMaisonMedicale MSMM)
-        {
-            context.MedecinSpecialiteMaisonMedicales.Remove(MSMM);
-            context.SaveChanges();
         }
     }
 }

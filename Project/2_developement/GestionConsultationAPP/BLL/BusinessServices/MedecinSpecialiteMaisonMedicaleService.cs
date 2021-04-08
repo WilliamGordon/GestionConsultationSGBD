@@ -17,25 +17,35 @@ namespace BLL.BusinessServices
         public MedecinSpecialiteMaisonMedicaleService()
         {
             MSMMRepository = new MedecinSpecialiteMaisonMedicaleRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
-        public Models.MedecinSpecialiteMaisonMedicale GetMSMMB(int medecin_ID, int maisonMedicale_ID, int specialite_ID)
+        public Models.MedecinSpecialiteMaisonMedicale GetMSMMById(int msmm_ID)
         {
-            return Mapper.Map<Models.MedecinSpecialiteMaisonMedicale>(MSMMRepository.GetMedecinSpecialiteMaisonMedicale(medecin_ID, maisonMedicale_ID, specialite_ID));
+            try
+            {
+                return Mapper.Map<Models.MedecinSpecialiteMaisonMedicale>(MSMMRepository.GetMedecinSpecialiteMaisonMedicalebyId(msmm_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Models.MedecinSpecialiteMaisonMedicale GetMSMMById(int id)
+        public List<Models.MedecinSpecialiteMaisonMedicale> GetAllMSMMForMedecin(int medecin_ID)
         {
-            return Mapper.Map<Models.MedecinSpecialiteMaisonMedicale>(MSMMRepository.GetMedecinSpecialiteMaisonMedicalebyId(id));
+            try
+            {
+                return Mapper.Map<List<Models.MedecinSpecialiteMaisonMedicale>>(MSMMRepository.GetAllMMSForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public List<Models.MedecinSpecialiteMaisonMedicale> GetAllMSMMForMedecin(int Medecin_ID)
-        {
-            return Mapper.Map< List<Models.MedecinSpecialiteMaisonMedicale>>(MSMMRepository.GetAllMMSForMedecin(Medecin_ID));
-        }
-
-        public int AddMSMM(Models.MedecinSpecialiteMaisonMedicale MSMM)
+        public int AddMedecinSpecialiteMaisonMedicale(Models.MedecinSpecialiteMaisonMedicale MSMM)
         {
             try
             {
@@ -47,7 +57,7 @@ namespace BLL.BusinessServices
             }
         }
 
-        public int EditMSMM(Models.MedecinSpecialiteMaisonMedicale MSMM)
+        public int UpdateMedecinSpecialiteMaisonMedicale(Models.MedecinSpecialiteMaisonMedicale MSMM)
         {
             try
             {

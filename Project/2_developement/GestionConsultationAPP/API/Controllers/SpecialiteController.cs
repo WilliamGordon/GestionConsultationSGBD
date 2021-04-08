@@ -16,36 +16,70 @@ namespace API.Controllers
         {
             SpecialiteService = new SpecialiteService();
         }
-        // GET: api/Specialite
         public IHttpActionResult Get()
         {
-            var Specialites = SpecialiteService.GetAllSpecialites();
-            return Ok(Specialites);
+            try
+            {
+                return Ok(SpecialiteService.GetAllSpecialites());
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // GET: api/Specialite/5
         public IHttpActionResult Get(int id)
         {
-            var Specialite = SpecialiteService.GetSpecialiteById(id);
-            return Ok(Specialite);
+            try
+            {
+                return Ok(SpecialiteService.GetSpecialiteById(id));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // GET: api/Specialite/GetAllSpecialiteForMaisonMedicale/5
+        [HttpGet]
+        [Route("api/Specialite/GetAllSpecialiteForMedecin/{medecin_ID}")]
+        public IHttpActionResult GetAllSpecialiteForMedecin(int medecin_ID)
+        {
+            try
+            {
+                return Ok(SpecialiteService.GetAllSpecialiteForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
         [HttpGet]
         [Route("api/Specialite/GetAllSpecialiteForMaisonMedicale/{maisonMedicale_ID}")]
         public IHttpActionResult GetAllSpecialiteForMaisonMedicale(int maisonMedicale_ID)
         {
-            var Specialites = SpecialiteService.GetAllSpecialiteForMaisonMedicale(maisonMedicale_ID);
-            return Ok(Specialites);
+            try
+            {
+                return Ok(SpecialiteService.GetAllSpecialiteForMaisonMedicale(maisonMedicale_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
 
-        // GET: api/Specialite/GetAllSpecialiteForMaisonMedicale/5
         [HttpGet]
         [Route("api/Specialite/GetSpecialiteFromMSMM/{MSMM_ID}")]
         public IHttpActionResult GetSpecialiteFromMSMM(int MSMM_ID)
         {
-            var Specialites = SpecialiteService.GetSpecialiteFromMSMM(MSMM_ID);
-            return Ok(Specialites);
+            try
+            {
+                return Ok(SpecialiteService.GetSpecialiteFromMSMM(MSMM_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
         }
     }
 }

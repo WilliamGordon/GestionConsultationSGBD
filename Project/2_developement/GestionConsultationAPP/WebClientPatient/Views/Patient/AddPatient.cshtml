@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Add Medecin";
 }
+
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
 <br />
 <br />
 @using (Html.BeginForm())
@@ -12,14 +15,6 @@
     <div class="form-horizontal">
         <h4>Ajouter un nouveau patient</h4>
         <hr />
-        @if (ViewBag.ErrorMessage != "")
-        {
-            <div class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
-                @ViewBag.ErrorMessage
-            </div>
-        }
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })

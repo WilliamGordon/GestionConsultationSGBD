@@ -11,32 +11,61 @@ namespace BLL.BusinessServices
 {
     public class MaisonMedicaleService
     {
-        public MaisonMedicaleRepository MMRepository { get; set; }
+        public MaisonMedicaleRepository MaisonMedicaleRepository { get; set; }
         private IMapper Mapper { get; set; }
         public MaisonMedicaleService()
         {
-            MMRepository = new MaisonMedicaleRepository();
+            MaisonMedicaleRepository = new MaisonMedicaleRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
         public List<Models.MaisonMedicale> GetAllMaisonMedicales()
         {
-            return Mapper.Map<List<Models.MaisonMedicale>>(MMRepository.GetAllMaisonMedicales());
+            try
+            {
+                return Mapper.Map<List<Models.MaisonMedicale>>(MaisonMedicaleRepository.GetAllMaisonMedicales());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public Models.MaisonMedicale GetMaisonMedicaleFromMSMM(int id)
+
+        public Models.MaisonMedicale GetMaisonMedicaleById(int id)
         {
-            return Mapper.Map<Models.MaisonMedicale>(MMRepository.GetMaisonMedicaleFromMSMM(id));
+            try
+            {
+                return Mapper.Map<Models.MaisonMedicale>(MaisonMedicaleRepository.GetMaisonMedicalebyId(id));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Models.MaisonMedicale GetMaisonMedicaleFromMSMM(int msmm_id)
+        {
+            try
+            {
+                return Mapper.Map<Models.MaisonMedicale>(MaisonMedicaleRepository.GetMaisonMedicaleFromMSMM(msmm_id));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         
-
         public List<Models.MaisonMedicale> GetAllMaisonMedicaleForMedecin(int medecin_ID)
         {
-            return Mapper.Map<List<Models.MaisonMedicale>>(MMRepository.GetAllMaisonMedicaleForMedecin(medecin_ID));
-        }
-
-        public Models.MaisonMedicale GetMaisonMedicaleById(int id )
-        {
-            return Mapper.Map<Models.MaisonMedicale>(MMRepository.GetMaisonMedicalebyId(id)); 
+            try
+            {
+                return Mapper.Map<List<Models.MaisonMedicale>>(MaisonMedicaleRepository.GetAllMaisonMedicaleForMedecin(medecin_ID));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

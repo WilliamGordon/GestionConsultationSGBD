@@ -16,41 +16,50 @@ namespace DAL.Repositories
 
         public List<DAL.MaisonMedicale> GetAllMaisonMedicales()
         {
-            return context.MaisonMedicales.ToList();
+            try
+            {
+                return context.GetAllMaisonMedicale().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DAL.MaisonMedicale GetMaisonMedicalebyId(int id)
+        {
+            try
+            {
+                return context.GetMaisonMedicaleById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DAL.MaisonMedicale> GetAllMaisonMedicaleForMedecin(int medecin_ID)
         {
-            return context.GetAllMaisonMedicaleForMedecin(medecin_ID).ToList();
+            try
+            {
+                return context.GetAllMaisonMedicaleForMedecin(medecin_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
         public DAL.MaisonMedicale GetMaisonMedicaleFromMSMM(int id)
         {
-            return context.GetMaisonMedicaleFromMSMM(id).FirstOrDefault();
-        }
-        
-        public DAL.MaisonMedicale GetMaisonMedicalebyId(int id)
-        {
-            return context.GetMaisonMedicaleById(id).FirstOrDefault();
-        }
-
-        public int AddMaisonMedicale(DAL.MaisonMedicale maisonMedicale)
-        {
-            context.MaisonMedicales.Add(maisonMedicale);
-            context.SaveChanges();
-            return maisonMedicale.MaisonMedicale_ID;
-        }
-
-        public void UpdateMaisonMedicale(DAL.MaisonMedicale maisonMedicale)
-        {
-            DAL.MaisonMedicale MM = this.GetMaisonMedicalebyId(maisonMedicale.MaisonMedicale_ID);
-            MM.Name = maisonMedicale.Name;
-            context.SaveChanges();
-        }
-
-        public void DeleteMaisonMedicale(DAL.MaisonMedicale maisonMedicale)
-        {
-            context.MaisonMedicales.Remove(maisonMedicale);
-            context.SaveChanges();
+            try
+            {
+                return context.GetMaisonMedicaleFromMSMM(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

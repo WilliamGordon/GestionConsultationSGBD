@@ -14,49 +14,40 @@ namespace DAL.Repositories
             this.context = new GestionConsultationEntities();
         }
 
-        public List<DAL.MedecinSpecialite> GetAllMedecinSpecialites()
-        {
-            return context.MedecinSpecialites.ToList();
-        }
-
         public List<DAL.MedecinSpecialite> GetAllMedecinSpecialiteForMedecin(int medecin_ID)
         {
-            return context.GetAllMedecinSpecialiteForMedecin(medecin_ID).ToList();
+            try
+            {
+                return context.GetAllMedecinSpecialiteForMedecin(medecin_ID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DAL.MedecinSpecialite GetMedecinSpecialitebyId(int id)
         {
-            var MS = context.GetMedecinSpecialiteById(id).FirstOrDefault();
-            return MS;
+            try
+            {
+                return context.GetMedecinSpecialiteById(id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public int AddMedecinSpecialite(DAL.MedecinSpecialite medecinSpecialite)
         {
             try
             {
-                context.MedecinSpecialites.Add(medecinSpecialite);
-                context.SaveChanges();
-                return medecinSpecialite.MedecinSpecialite_ID;
+                return context.AddMedecinSpecialite(medecinSpecialite.Medecin_ID, medecinSpecialite.Specialite_ID).SingleOrDefault().MedecinSpecialite_ID;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
-        }
-
-        public void UpdateMedecinSpecialite(DAL.MedecinSpecialite medecinSpecialite)
-        {
-            DAL.MedecinSpecialite MS = this.GetMedecinSpecialitebyId(medecinSpecialite.MedecinSpecialite_ID);
-            MS.Medecin_ID = medecinSpecialite.Medecin_ID;
-            MS.Specialite_ID = medecinSpecialite.Specialite_ID;
-            context.SaveChanges();
-        }
-
-        public void DeleteMedecinSpecialite(DAL.MedecinSpecialite medecinSpecialite)
-        {
-            context.MedecinSpecialites.Remove(medecinSpecialite);
-            context.SaveChanges();
         }
     }
 }
