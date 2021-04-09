@@ -5,6 +5,18 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
+<div id="errorAPI">
+    <br />
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <span id="errorApiMessage"></span>
+    </div>
+    <br />
+</div>
+
 <h2>Mes consultations</h2>
 
 <br />
@@ -60,41 +72,39 @@
                 @Html.DisplayFor(modelItem => item.Consultation.IsConfirmed)
             </td>
             <td>
-               @if (!item.Consultation.IsConfirmed)
+                @if (!item.Consultation.IsConfirmed)
                 {
                     <div class="col-md-offset-2 col-md-10">
                         <input type="hidden" id="consultationData_@item.Consultation.Consultation_ID" value="@Json.Encode(item.Consultation)" />
                         <input type="button" value="Confirmer" onclick="confirmConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default" />
                     </div>
-                } 
+                }
             </td>
         </tr>
     }
 </table>
 
+@Scripts.Render("~/bundles/jquery")
+
 <script>
 
+    $(document).ready(function () {
+        $('#errorAPI').hide();
+        $('#errorApiMessage').text("");
+    });
+
     function confirmConsultation(consultation_ID) {
-        console.log(consultation_ID);
 
-        var consData = $("#consultationData_" + consultation_ID).val();
+        var consultation = JSON.parse($("#consultationData_" + consultation_ID).val());
+        consultation.IsConfirmed = true;
 
-        console.log(consData);
-
-        var cons = JSON.parse(consData);
-
-        console.log(cons);
-
-        cons.IsConfirmed = true;
-
-        $.post("https://localhost:44307/api/Consultation/ConfirmConsultation/", cons)
+        $.post("https://localhost:44307/api/Consultation/ConfirmConsultation/", consultation)
             .done(function (data) {
                 window.location.replace("https://localhost:44301/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID);
             })
             .fail(function (jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                alert(jqxhr.responseText);
-                console.log("Request Failed: " + err);
+                $('#errorAPI').show()
+                $('#errorApiMessage').text(jqxhr.responseText)
             });
     }
 

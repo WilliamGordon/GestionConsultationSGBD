@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
 <h2>Mes maisons médicales</h2>
 
 <p>
@@ -18,37 +20,38 @@
         <th>Temps minimum de consultation</th>
         <th></th>
     </tr>
-
-    @foreach (var item in Model)
+    @if (Model != null)
     {
-        using (Html.BeginForm("EditMedecinSpecialiteMaisonMedicale", "Medecin", FormMethod.Post))
+        foreach (var item in Model)
         {
-            @Html.AntiForgeryToken()
-            <tr>
-                <td>
-                    @item.MaisonMedicale.Name
+            using (Html.BeginForm("EditMedecinSpecialiteMaisonMedicale", "Medecin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <tr>
+                    <td>
+                        @item.MaisonMedicale.Name
 
-                </td>
-                <td>
-                    @item.Specialite.Name
+                    </td>
+                    <td>
+                        @item.Specialite.Name
 
-                </td>
-                <td>
-                    <div>
-                        <input class="form-control text-box single-line" data-val="true" data-val-number="The field MinimalDuration must be a number." data-val-required="The MinimalDuration field is required." id="MinimalDuration" name="MinimalDuration" type="number" value="@item.MSMM.MinimalDuration">
-                    </div>
-                </td>
-                <td>
-                    <input type="hidden" name="Medecin_ID" id="Medecin_ID" value="@item.Medecin.Medecin_ID" />
-                    <input type="hidden" name="MedecinSpecialiteMaisonMedicale_ID" id="MedecinSpecialiteMaisonMedicale_ID" value="@item.MSMM.MedecinSpecialiteMaisonMedicale_ID" />
-                    <input type="hidden" name="MaisonMedicale_ID" id="MaisonMedicale_ID" value="@item.MaisonMedicale.MaisonMedicale_ID" />
-                    <input type="hidden" name="MedecinSpecialite_ID" id="MedecinSpecialite_ID" value="@item.MS.MedecinSpecialite_ID" />
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Modifier temps de consultation" class="btn btn-default" />
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        <div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field MinimalDuration must be a number." data-val-required="The MinimalDuration field is required." id="MinimalDuration" name="MinimalDuration" type="number" value="@item.MSMM.MinimalDuration">
+                        </div>
+                    </td>
+                    <td>
+                        <input type="hidden" name="Medecin_ID" id="Medecin_ID" value="@item.Medecin.Medecin_ID" />
+                        <input type="hidden" name="MedecinSpecialiteMaisonMedicale_ID" id="MedecinSpecialiteMaisonMedicale_ID" value="@item.MSMM.MedecinSpecialiteMaisonMedicale_ID" />
+                        <input type="hidden" name="MaisonMedicale_ID" id="MaisonMedicale_ID" value="@item.MaisonMedicale.MaisonMedicale_ID" />
+                        <input type="hidden" name="MedecinSpecialite_ID" id="MedecinSpecialite_ID" value="@item.MS.MedecinSpecialite_ID" />
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Modifier temps de consultation" class="btn btn-default" />
+                        </div>
+                    </td>
+                </tr>
+            }
         }
     }
-
 </table>

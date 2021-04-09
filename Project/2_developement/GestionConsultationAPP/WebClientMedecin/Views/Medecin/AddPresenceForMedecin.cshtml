@@ -88,6 +88,8 @@
 
 </script>
 
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
 <br />
 <br />
 
@@ -190,7 +192,6 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/Scripts/jquery.timepicker.js")
-@Scripts.Render("~/Scripts/jquery.timepicker.js")
 <script>
 
     $(document).ready(function () {
@@ -218,9 +219,6 @@
             scrollbar: true
         });
     });
-
-   
-
 </script>
 
 <div>

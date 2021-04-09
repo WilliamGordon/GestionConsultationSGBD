@@ -69,15 +69,15 @@ namespace WebClientPatient.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    var Res = await client.PostAsJsonAsync<Models.Patient>("api/Patient/", patient);
+                    var response = await client.PostAsJsonAsync<Models.Patient>("api/Patient/", patient);
 
-                    if (Res.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("GetAllConsultationForPatient/" + Res.Content.ReadAsAsync<int>().Result);
+                        return RedirectToAction("GetAllConsultationForPatient/" + response.Content.ReadAsAsync<int>().Result);
                     }
                     else
                     {
-                        ViewBag.ErrorMessage = Res.Content.ReadAsAsync<string>().Result;
+                        ViewBag.ErrorMessage = response.Content.ReadAsAsync<string>().Result;
                         return View();
                     }
                 }

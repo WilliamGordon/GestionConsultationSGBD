@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
 <h2>Mes Présences</h2>
 
 <p>
@@ -24,18 +26,19 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Starting)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ending)
-        </td>
-        <td>
-            @item.MaisonMedicale.Name
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Starting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ending)
+            </td>
+            <td>
+                @item.MaisonMedicale.Name
+            </td>
+        </tr>
+    }
 
 </table>

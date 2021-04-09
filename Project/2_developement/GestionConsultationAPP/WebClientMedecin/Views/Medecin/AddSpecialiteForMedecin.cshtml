@@ -5,42 +5,44 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+@Html.Partial("ErrorNotificationView", new ViewDataDictionary { { "ErrorMessage", ViewBag.ErrorMessage } })
+
 <br />
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Sélectionner une spécialité</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.HiddenFor(model => model.Medecin_ID)
+    <div class="form-horizontal">
+        <h4>Sélectionner une spécialité</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @if (ViewBag.ErrorMessage != "")
-    {
-        <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
-            @ViewBag.ErrorMessage
+        @Html.HiddenFor(model => model.Medecin_ID)
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Specialite_ID">Nom</label>
+            <div class="col-md-10">
+                @if (Model.listSpecialite != null)
+                {
+                    @Html.DropDownListFor(m => m.Specialite_ID,
+                    new SelectList(Model.listSpecialite, "Specialite_ID", "Name"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Specialite_ID, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    <select id="Specialite_ID">
+                        <option value=""></option>
+                    </select>
+                }
+            </div>
         </div>
-    }
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="Specialite_ID">Nom</label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Specialite_ID,
-                new SelectList(Model.listSpecialite, "Specialite_ID", "Name"), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Specialite_ID, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ajouter" class="btn btn-default" />
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Ajouter" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 @section Scripts {
