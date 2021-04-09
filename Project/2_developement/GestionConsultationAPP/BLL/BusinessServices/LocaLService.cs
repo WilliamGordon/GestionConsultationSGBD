@@ -21,6 +21,11 @@ namespace BLL.BusinessServices
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
+        public void HandleRequestOrigin(string WebClient)
+        {
+            localRepository.HandleRequestFrom(WebClient);
+        }
+
         public List<Models.Local> GetAllLocals(int msmm_ID)
         {
             try

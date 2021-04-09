@@ -237,72 +237,6 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Presence>("GetPresenceById", mergeOption, presence_IDParameter);
         }
     
-        public virtual ObjectResult<Consultation> UpdateConsultation(Nullable<int> consultation_ID, Nullable<int> patient_ID, Nullable<int> medecinSpecialiteMaisonMedicale_ID, Nullable<int> local_ID, Nullable<System.DateTime> starting, Nullable<System.DateTime> ending, Nullable<bool> isConfirmed)
-        {
-            var consultation_IDParameter = consultation_ID.HasValue ?
-                new ObjectParameter("Consultation_ID", consultation_ID) :
-                new ObjectParameter("Consultation_ID", typeof(int));
-    
-            var patient_IDParameter = patient_ID.HasValue ?
-                new ObjectParameter("Patient_ID", patient_ID) :
-                new ObjectParameter("Patient_ID", typeof(int));
-    
-            var medecinSpecialiteMaisonMedicale_IDParameter = medecinSpecialiteMaisonMedicale_ID.HasValue ?
-                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", medecinSpecialiteMaisonMedicale_ID) :
-                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", typeof(int));
-    
-            var local_IDParameter = local_ID.HasValue ?
-                new ObjectParameter("Local_ID", local_ID) :
-                new ObjectParameter("Local_ID", typeof(int));
-    
-            var startingParameter = starting.HasValue ?
-                new ObjectParameter("Starting", starting) :
-                new ObjectParameter("Starting", typeof(System.DateTime));
-    
-            var endingParameter = ending.HasValue ?
-                new ObjectParameter("Ending", ending) :
-                new ObjectParameter("Ending", typeof(System.DateTime));
-    
-            var isConfirmedParameter = isConfirmed.HasValue ?
-                new ObjectParameter("IsConfirmed", isConfirmed) :
-                new ObjectParameter("IsConfirmed", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("UpdateConsultation", consultation_IDParameter, patient_IDParameter, medecinSpecialiteMaisonMedicale_IDParameter, local_IDParameter, startingParameter, endingParameter, isConfirmedParameter);
-        }
-    
-        public virtual ObjectResult<Consultation> UpdateConsultation(Nullable<int> consultation_ID, Nullable<int> patient_ID, Nullable<int> medecinSpecialiteMaisonMedicale_ID, Nullable<int> local_ID, Nullable<System.DateTime> starting, Nullable<System.DateTime> ending, Nullable<bool> isConfirmed, MergeOption mergeOption)
-        {
-            var consultation_IDParameter = consultation_ID.HasValue ?
-                new ObjectParameter("Consultation_ID", consultation_ID) :
-                new ObjectParameter("Consultation_ID", typeof(int));
-    
-            var patient_IDParameter = patient_ID.HasValue ?
-                new ObjectParameter("Patient_ID", patient_ID) :
-                new ObjectParameter("Patient_ID", typeof(int));
-    
-            var medecinSpecialiteMaisonMedicale_IDParameter = medecinSpecialiteMaisonMedicale_ID.HasValue ?
-                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", medecinSpecialiteMaisonMedicale_ID) :
-                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", typeof(int));
-    
-            var local_IDParameter = local_ID.HasValue ?
-                new ObjectParameter("Local_ID", local_ID) :
-                new ObjectParameter("Local_ID", typeof(int));
-    
-            var startingParameter = starting.HasValue ?
-                new ObjectParameter("Starting", starting) :
-                new ObjectParameter("Starting", typeof(System.DateTime));
-    
-            var endingParameter = ending.HasValue ?
-                new ObjectParameter("Ending", ending) :
-                new ObjectParameter("Ending", typeof(System.DateTime));
-    
-            var isConfirmedParameter = isConfirmed.HasValue ?
-                new ObjectParameter("IsConfirmed", isConfirmed) :
-                new ObjectParameter("IsConfirmed", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("UpdateConsultation", mergeOption, consultation_IDParameter, patient_IDParameter, medecinSpecialiteMaisonMedicale_IDParameter, local_IDParameter, startingParameter, endingParameter, isConfirmedParameter);
-        }
-    
         public virtual ObjectResult<Presence> UpdatePresence(Nullable<int> presence_ID, Nullable<int> medecin_ID, Nullable<int> maisonMedicale_ID, Nullable<System.DateTime> starting, Nullable<System.DateTime> ending)
         {
             var presence_IDParameter = presence_ID.HasValue ?
@@ -1075,6 +1009,72 @@ namespace DAL
         public virtual ObjectResult<Patient> GetAllPatient(MergeOption mergeOption)
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Patient>("GetAllPatient", mergeOption);
+        }
+    
+        public virtual ObjectResult<Consultation> UpdateConsultation(Nullable<int> consultation_ID, Nullable<int> patient_ID, Nullable<int> medecinSpecialiteMaisonMedicale_ID, Nullable<int> local_ID, Nullable<System.DateTime> starting, Nullable<System.DateTime> ending, Nullable<bool> isConfirmed)
+        {
+            var consultation_IDParameter = consultation_ID.HasValue ?
+                new ObjectParameter("Consultation_ID", consultation_ID) :
+                new ObjectParameter("Consultation_ID", typeof(int));
+    
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            var medecinSpecialiteMaisonMedicale_IDParameter = medecinSpecialiteMaisonMedicale_ID.HasValue ?
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", medecinSpecialiteMaisonMedicale_ID) :
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", typeof(int));
+    
+            var local_IDParameter = local_ID.HasValue ?
+                new ObjectParameter("Local_ID", local_ID) :
+                new ObjectParameter("Local_ID", typeof(int));
+    
+            var startingParameter = starting.HasValue ?
+                new ObjectParameter("Starting", starting) :
+                new ObjectParameter("Starting", typeof(System.DateTime));
+    
+            var endingParameter = ending.HasValue ?
+                new ObjectParameter("Ending", ending) :
+                new ObjectParameter("Ending", typeof(System.DateTime));
+    
+            var isConfirmedParameter = isConfirmed.HasValue ?
+                new ObjectParameter("IsConfirmed", isConfirmed) :
+                new ObjectParameter("IsConfirmed", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("UpdateConsultation", consultation_IDParameter, patient_IDParameter, medecinSpecialiteMaisonMedicale_IDParameter, local_IDParameter, startingParameter, endingParameter, isConfirmedParameter);
+        }
+    
+        public virtual ObjectResult<Consultation> UpdateConsultation(Nullable<int> consultation_ID, Nullable<int> patient_ID, Nullable<int> medecinSpecialiteMaisonMedicale_ID, Nullable<int> local_ID, Nullable<System.DateTime> starting, Nullable<System.DateTime> ending, Nullable<bool> isConfirmed, MergeOption mergeOption)
+        {
+            var consultation_IDParameter = consultation_ID.HasValue ?
+                new ObjectParameter("Consultation_ID", consultation_ID) :
+                new ObjectParameter("Consultation_ID", typeof(int));
+    
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            var medecinSpecialiteMaisonMedicale_IDParameter = medecinSpecialiteMaisonMedicale_ID.HasValue ?
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", medecinSpecialiteMaisonMedicale_ID) :
+                new ObjectParameter("MedecinSpecialiteMaisonMedicale_ID", typeof(int));
+    
+            var local_IDParameter = local_ID.HasValue ?
+                new ObjectParameter("Local_ID", local_ID) :
+                new ObjectParameter("Local_ID", typeof(int));
+    
+            var startingParameter = starting.HasValue ?
+                new ObjectParameter("Starting", starting) :
+                new ObjectParameter("Starting", typeof(System.DateTime));
+    
+            var endingParameter = ending.HasValue ?
+                new ObjectParameter("Ending", ending) :
+                new ObjectParameter("Ending", typeof(System.DateTime));
+    
+            var isConfirmedParameter = isConfirmed.HasValue ?
+                new ObjectParameter("IsConfirmed", isConfirmed) :
+                new ObjectParameter("IsConfirmed", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("UpdateConsultation", mergeOption, consultation_IDParameter, patient_IDParameter, medecinSpecialiteMaisonMedicale_IDParameter, local_IDParameter, startingParameter, endingParameter, isConfirmedParameter);
         }
     }
 }

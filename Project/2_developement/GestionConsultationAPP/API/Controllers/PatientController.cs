@@ -20,6 +20,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    PatientService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+                
                 return Ok(PatientService.GetAllPatients());
             }
             catch (Exception ex)
@@ -32,6 +41,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    PatientService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(PatientService.GetPatientById(id));
             }
             catch (Exception ex)
@@ -44,6 +62,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    PatientService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(PatientService.AddPatient(patient));
             }
             catch (Exception ex)

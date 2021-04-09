@@ -19,6 +19,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    PresenceService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(PresenceService.AddPresence(presences));
             }
             catch (Exception ex)
@@ -33,6 +42,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    PresenceService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(PresenceService.GetAllPresenceForMedecin(medecin_ID));
             }
             catch (Exception ex)

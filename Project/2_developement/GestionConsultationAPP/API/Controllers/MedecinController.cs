@@ -22,6 +22,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    MedecinService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(MedecinService.GetAllMedecins());
             }
             catch (Exception ex)
@@ -34,6 +43,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    MedecinService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(MedecinService.GetMedecinById(id));
             }
             catch (Exception ex)
@@ -46,6 +64,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    MedecinService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(MedecinService.AddMedecin(medecin));
             }
             catch (Exception ex)
@@ -60,6 +87,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    MedecinService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(MedecinService.GetMedecinFromMSMM(msmm_ID));
             }
             catch (Exception ex)
@@ -74,6 +110,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    MedecinService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 var medecins = MedecinService.GetAllMedecinForMaisonMedicaleAndSpecialite(maisonMedicale_ID, specialite_ID);
                 if (medecins.Count >= 1)
                 {

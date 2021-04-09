@@ -302,22 +302,6 @@
         <Function Name="GetSpecialiteFromMSMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
         </Function>
-        <Function Name="UpdateConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Consultation_ID" Type="int" Mode="In" />
-          <Parameter Name="Patient_ID" Type="int" Mode="In" />
-          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
-          <Parameter Name="Local_ID" Type="int" Mode="In" />
-          <Parameter Name="Starting" Type="datetime" Mode="In" />
-          <Parameter Name="Ending" Type="datetime" Mode="In" />
-          <Parameter Name="IsConfirmed" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="UpdatePresence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Presence_ID" Type="int" Mode="In" />
-          <Parameter Name="Medecin_ID" Type="int" Mode="In" />
-          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
-          <Parameter Name="Starting" Type="datetime" Mode="In" />
-          <Parameter Name="Ending" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="AddMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="medecin">
           <Parameter Name="Firstname" Type="nvarchar" Mode="In" />
           <Parameter Name="Lastname" Type="nvarchar" Mode="In" />
@@ -359,6 +343,15 @@
         </Function>
         <Function Name="DeleteConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="patient">
           <Parameter Name="Consultation_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="patient">
+          <Parameter Name="Consultation_ID" Type="int" Mode="In" />
+          <Parameter Name="Patient_ID" Type="int" Mode="In" />
+          <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Local_ID" Type="int" Mode="In" />
+          <Parameter Name="Starting" Type="datetime" Mode="In" />
+          <Parameter Name="Ending" Type="datetime" Mode="In" />
+          <Parameter Name="IsConfirmed" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="GestionConsultationModelStoreContainer">
           <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
@@ -715,15 +708,6 @@
           <FunctionImport Name="GetPresenceById" EntitySet="Presences" ReturnType="Collection(GestionConsultationModel.Presence)">
           <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UpdateConsultation" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
-            <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
-            <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
-            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
-            <Parameter Name="Local_ID" Mode="In" Type="Int32" />
-            <Parameter Name="Starting" Mode="In" Type="DateTime" />
-            <Parameter Name="Ending" Mode="In" Type="DateTime" />
-            <Parameter Name="IsConfirmed" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="UpdatePresence" EntitySet="Presences" ReturnType="Collection(GestionConsultationModel.Presence)">
             <Parameter Name="Presence_ID" Mode="In" Type="Int32" />
             <Parameter Name="Medecin_ID" Mode="In" Type="Int32" />
@@ -846,6 +830,15 @@
             <Parameter Name="Lastname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetAllPatient" EntitySet="Patients" ReturnType="Collection(GestionConsultationModel.Patient)" />
+          <FunctionImport Name="UpdateConsultation" EntitySet="Consultations" ReturnType="Collection(GestionConsultationModel.Consultation)">
+            <Parameter Name="Consultation_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Local_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Starting" Mode="In" Type="DateTime" />
+            <Parameter Name="Ending" Mode="In" Type="DateTime" />
+            <Parameter Name="IsConfirmed" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AddMedecin_Result">
           <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -1158,6 +1151,15 @@
           <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="UpdateConsultation_Result">
+          <Property Type="Int32" Name="Consultation_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="MedecinSpecialiteMaisonMedicale_ID" Nullable="false" />
+          <Property Type="Int32" Name="Local_ID" Nullable="false" />
+          <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1186,15 +1188,6 @@
                   <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" />
                   <ResultBinding Name="Consultation_ID" ColumnName="Consultation_ID" />
                 </InsertFunction>
-                <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateConsultation">
-                  <ScalarProperty Name="IsConfirmed" ParameterName="IsConfirmed" Version="Current" />
-                  <ScalarProperty Name="Ending" ParameterName="Ending" Version="Current" />
-                  <ScalarProperty Name="Starting" ParameterName="Starting" Version="Current" />
-                  <ScalarProperty Name="Local_ID" ParameterName="Local_ID" Version="Current" />
-                  <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ParameterName="MedecinSpecialiteMaisonMedicale_ID" Version="Current" />
-                  <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" Version="Current" />
-                  <ScalarProperty Name="Consultation_ID" ParameterName="Consultation_ID" Version="Current" />
-                </UpdateFunction>
                 <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteConsultation">
                   <ScalarProperty Name="Consultation_ID" ParameterName="Consultation_ID" />
                 </DeleteFunction>
@@ -1304,13 +1297,6 @@
                   <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" />
                   <ResultBinding Name="Presence_ID" ColumnName="Presence_ID" />
                 </InsertFunction>
-                <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdatePresence">
-                  <ScalarProperty Name="Ending" ParameterName="Ending" Version="Current" />
-                  <ScalarProperty Name="Starting" ParameterName="Starting" Version="Current" />
-                  <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" Version="Current" />
-                  <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" Version="Current" />
-                  <ScalarProperty Name="Presence_ID" ParameterName="Presence_ID" Version="Current" />
-                </UpdateFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1346,8 +1332,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPresenceById" FunctionName="GestionConsultationModel.Store.GetPresenceById">
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation" />
-          <FunctionImportMapping FunctionImportName="UpdatePresence" FunctionName="GestionConsultationModel.Store.UpdatePresence" />
           <FunctionImportMapping FunctionImportName="GetAllSpecialiteForAMedecinAndMaisonMedicale" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForAMedecinAndMaisonMedicale">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllMaisonMedicaleForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMaisonMedicaleForMedecin">
@@ -1398,6 +1382,8 @@
           <FunctionImportMapping FunctionImportName="AddMedecin" FunctionName="GestionConsultationModel.Store.AddMedecin">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllPatient" FunctionName="GestionConsultationModel.Store.GetAllPatient">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

@@ -9,9 +9,26 @@ namespace DAL.Repositories
     public class PatientRepository
     {
         private GestionConsultationEntities context;
+
         public PatientRepository()
         {
             this.context = new GestionConsultationEntities();
+        }
+
+        public void HandleRequestFrom(string WebClient)
+        {
+            if (WebClient == "https://localhost:44301")
+            {
+                this.context.Database.Connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionStringMedecin"].ConnectionString;
+            }
+            else if (WebClient == "https://localhost:44349")
+            {
+                this.context.Database.Connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionStringPatient"].ConnectionString;
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
 
         public List<DAL.Patient> GetAllPatients()

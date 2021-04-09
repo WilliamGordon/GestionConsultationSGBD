@@ -12,7 +12,7 @@ namespace WebClientPatient.Controllers
     public class PatientController : Controller
     {
         public string Baseurl = "https://localhost:44307/";
-        
+
         public async Task<ActionResult> GetAllPatient()
         {
             try
@@ -22,6 +22,8 @@ namespace WebClientPatient.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44349");
+
                     HttpResponseMessage response = await client.GetAsync("api/Patient");
 
                     if (response.IsSuccessStatusCode)
@@ -69,6 +71,7 @@ namespace WebClientPatient.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44349");
                     var response = await client.PostAsJsonAsync<Models.Patient>("api/Patient/", patient);
 
                     if (response.IsSuccessStatusCode)
@@ -99,6 +102,7 @@ namespace WebClientPatient.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44349");
                     HttpResponseMessage response = await client.GetAsync("api/Consultation/GetAllConsultationForPatient/" + id);
 
                     if (response.IsSuccessStatusCode)
@@ -136,6 +140,7 @@ namespace WebClientPatient.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44349");
                     HttpResponseMessage response = await client.GetAsync("api/MaisonMedicale");
 
                     if (response.IsSuccessStatusCode)
@@ -147,7 +152,7 @@ namespace WebClientPatient.Controllers
                     else
                     {
                         ViewBag.ErrorMessage = response.Content.ReadAsAsync<string>().Result;
-                        return View(consultationCreate);
+                        return View();
                     }
                 }
             }
@@ -173,6 +178,7 @@ namespace WebClientPatient.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44349");
                     HttpResponseMessage responseMaisonMedicale = await client.GetAsync("api/MaisonMedicale");
                     HttpResponseMessage responseConsultation = await client.GetAsync("api/Consultation/" + id);
 
@@ -233,6 +239,7 @@ namespace WebClientPatient.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44349");
                     HttpResponseMessage responseConsultation = await client.GetAsync("api/Consultation/GetAllConsultationForPatient/" + id);
 
                     if (responseConsultation.IsSuccessStatusCode)

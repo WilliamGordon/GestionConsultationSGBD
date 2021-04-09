@@ -21,6 +21,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(ConsultationService.GetConsultationById(id));
             }
             catch (Exception ex)
@@ -33,6 +42,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(ConsultationService.AddConsultation(consultation));
             }
             catch (Exception ex)
@@ -41,12 +59,22 @@ namespace API.Controllers
             }
 
         }
+
         [HttpGet]
         [Route("api/Consultation/GetAllConsultationForMedecin/{medecin_ID}")]
         public IHttpActionResult GetAllConsultationForMedecin(int medecin_ID)
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(ConsultationService.GetAllConsultationForMedecin(medecin_ID));
             }
             catch (Exception ex)
@@ -61,6 +89,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(ConsultationService.GetAllConsultationForPatient(patient_ID));
             }
             catch (Exception ex)
@@ -75,6 +112,16 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
+                var WebClient = Request.Headers.GetValues("Origin").ToList()[0];
                 return Ok(ConsultationService.ConfirmConsultation(consultation.Consultation_ID));
             }
             catch (Exception ex)
@@ -89,6 +136,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(ConsultationService.UpdateConsultation(consultation));
             }
             catch (Exception ex)
@@ -103,6 +159,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 ConsultationService.DeleteConsultation(consultation);
                 return Ok();
             }
@@ -118,6 +183,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(ConsultationService.GetAllPossibleConsultation(medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID, consultation_ID));
             }
             catch (Exception ex)

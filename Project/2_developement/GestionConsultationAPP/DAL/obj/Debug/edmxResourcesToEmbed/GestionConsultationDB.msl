@@ -23,15 +23,6 @@
             <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" />
             <ResultBinding Name="Consultation_ID" ColumnName="Consultation_ID" />
           </InsertFunction>
-          <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdateConsultation">
-            <ScalarProperty Name="IsConfirmed" ParameterName="IsConfirmed" Version="Current" />
-            <ScalarProperty Name="Ending" ParameterName="Ending" Version="Current" />
-            <ScalarProperty Name="Starting" ParameterName="Starting" Version="Current" />
-            <ScalarProperty Name="Local_ID" ParameterName="Local_ID" Version="Current" />
-            <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ParameterName="MedecinSpecialiteMaisonMedicale_ID" Version="Current" />
-            <ScalarProperty Name="Patient_ID" ParameterName="Patient_ID" Version="Current" />
-            <ScalarProperty Name="Consultation_ID" ParameterName="Consultation_ID" Version="Current" />
-          </UpdateFunction>
           <DeleteFunction FunctionName="GestionConsultationModel.Store.DeleteConsultation">
             <ScalarProperty Name="Consultation_ID" ParameterName="Consultation_ID" />
           </DeleteFunction>
@@ -141,13 +132,6 @@
             <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" />
             <ResultBinding Name="Presence_ID" ColumnName="Presence_ID" />
           </InsertFunction>
-          <UpdateFunction FunctionName="GestionConsultationModel.Store.UpdatePresence">
-            <ScalarProperty Name="Ending" ParameterName="Ending" Version="Current" />
-            <ScalarProperty Name="Starting" ParameterName="Starting" Version="Current" />
-            <ScalarProperty Name="MaisonMedicale_ID" ParameterName="MaisonMedicale_ID" Version="Current" />
-            <ScalarProperty Name="Medecin_ID" ParameterName="Medecin_ID" Version="Current" />
-            <ScalarProperty Name="Presence_ID" ParameterName="Presence_ID" Version="Current" />
-          </UpdateFunction>
         </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -171,8 +155,6 @@
     <FunctionImportMapping FunctionImportName="GetLocalById" FunctionName="GestionConsultationModel.Store.GetLocalById" />
     <FunctionImportMapping FunctionImportName="GetMedecinSpecialiteMaisonMedicaleById" FunctionName="GestionConsultationModel.Store.GetMedecinSpecialiteMaisonMedicaleById" />
     <FunctionImportMapping FunctionImportName="GetPresenceById" FunctionName="GestionConsultationModel.Store.GetPresenceById" />
-    <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation" />
-    <FunctionImportMapping FunctionImportName="UpdatePresence" FunctionName="GestionConsultationModel.Store.UpdatePresence" />
     <FunctionImportMapping FunctionImportName="GetAllSpecialiteForAMedecinAndMaisonMedicale" FunctionName="GestionConsultationModel.Store.GetAllSpecialiteForAMedecinAndMaisonMedicale" />
     <FunctionImportMapping FunctionImportName="GetAllMaisonMedicaleForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMaisonMedicaleForMedecin" />
     <FunctionImportMapping FunctionImportName="GetAllMMSForMedecin" FunctionName="GestionConsultationModel.Store.GetAllMMSForMedecin" />
@@ -202,5 +184,6 @@
     <FunctionImportMapping FunctionImportName="GetAllMedecinForMaisonMedicaleAndSpecialite" FunctionName="GestionConsultationModel.Store.GetAllMedecinForMaisonMedicaleAndSpecialite" />
     <FunctionImportMapping FunctionImportName="AddMedecin" FunctionName="GestionConsultationModel.Store.AddMedecin" />
     <FunctionImportMapping FunctionImportName="GetAllPatient" FunctionName="GestionConsultationModel.Store.GetAllPatient" />
+    <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation" />
   </EntityContainerMapping>
 </Mapping>

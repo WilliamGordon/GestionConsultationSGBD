@@ -31,6 +31,11 @@ namespace BLL.BusinessServices
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
+        public void HandleRequestOrigin(string WebClient)
+        {
+            consultationRepository.HandleRequestFrom(WebClient);
+        }
+
         public List<Models.Consultation> GetAllConsultations(int maisonMedicale_ID, DateTime day)
         {
             try

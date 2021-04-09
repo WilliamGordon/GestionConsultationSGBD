@@ -20,6 +20,10 @@ namespace BLL.BusinessServices
 
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
+        public void HandleRequestOrigin(string WebClient)
+        {
+            MSMMRepository.HandleRequestFrom(WebClient);
+        }
 
         public Models.MedecinSpecialiteMaisonMedicale GetMSMMById(int msmm_ID)
         {

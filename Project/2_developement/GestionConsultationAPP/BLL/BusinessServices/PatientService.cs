@@ -13,11 +13,17 @@ namespace BLL.BusinessServices
     {
         private PatientRepository patientRepository { get; set; }
         private IMapper Mapper { get; set; }
+
         public PatientService()
         {
             patientRepository = new PatientRepository();
 
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
+        }
+
+        public void HandleRequestOrigin(string WebClient)
+        {
+            patientRepository.HandleRequestFrom(WebClient);
         }
 
         public List<Models.Patient> GetAllPatients()

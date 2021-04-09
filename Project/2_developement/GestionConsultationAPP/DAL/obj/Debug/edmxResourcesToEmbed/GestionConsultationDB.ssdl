@@ -297,22 +297,6 @@
   <Function Name="GetSpecialiteFromMSMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
   </Function>
-  <Function Name="UpdateConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Consultation_ID" Type="int" Mode="In" />
-    <Parameter Name="Patient_ID" Type="int" Mode="In" />
-    <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
-    <Parameter Name="Local_ID" Type="int" Mode="In" />
-    <Parameter Name="Starting" Type="datetime" Mode="In" />
-    <Parameter Name="Ending" Type="datetime" Mode="In" />
-    <Parameter Name="IsConfirmed" Type="bit" Mode="In" />
-  </Function>
-  <Function Name="UpdatePresence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Presence_ID" Type="int" Mode="In" />
-    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
-    <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
-    <Parameter Name="Starting" Type="datetime" Mode="In" />
-    <Parameter Name="Ending" Type="datetime" Mode="In" />
-  </Function>
   <Function Name="AddMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="medecin">
     <Parameter Name="Firstname" Type="nvarchar" Mode="In" />
     <Parameter Name="Lastname" Type="nvarchar" Mode="In" />
@@ -354,6 +338,15 @@
   </Function>
   <Function Name="DeleteConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="patient">
     <Parameter Name="Consultation_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateConsultation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="patient">
+    <Parameter Name="Consultation_ID" Type="int" Mode="In" />
+    <Parameter Name="Patient_ID" Type="int" Mode="In" />
+    <Parameter Name="MedecinSpecialiteMaisonMedicale_ID" Type="int" Mode="In" />
+    <Parameter Name="Local_ID" Type="int" Mode="In" />
+    <Parameter Name="Starting" Type="datetime" Mode="In" />
+    <Parameter Name="Ending" Type="datetime" Mode="In" />
+    <Parameter Name="IsConfirmed" Type="bit" Mode="In" />
   </Function>
   <EntityContainer Name="GestionConsultationModelStoreContainer">
     <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />

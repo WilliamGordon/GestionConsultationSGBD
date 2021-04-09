@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -232,6 +233,9 @@
     <Compile Include="Repositories\PresenceRepository.cs" />
     <Compile Include="Repositories\SpecialiteRepository.cs" />
     <Compile Include="Specialite.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateConsultation_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
   </ItemGroup>

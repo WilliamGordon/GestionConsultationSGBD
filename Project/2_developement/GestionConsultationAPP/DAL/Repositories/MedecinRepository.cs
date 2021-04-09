@@ -14,6 +14,22 @@ namespace DAL.Repositories
             this.context = new GestionConsultationEntities(); // "name=ConnectionStringMedecin"
         }
 
+        public void HandleRequestFrom(string WebClient)
+        {
+            if (WebClient == "https://localhost:44301")
+            {
+                this.context.Database.Connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionStringMedecin"].ConnectionString;
+            }
+            else if (WebClient == "https://localhost:44349")
+            {
+                this.context.Database.Connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionStringPatient"].ConnectionString;
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+
         public List<DAL.Medecin> GetAllMedecins()
         {
             try

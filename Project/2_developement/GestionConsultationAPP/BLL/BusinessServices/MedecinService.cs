@@ -20,6 +20,11 @@ namespace BLL.BusinessServices
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
+        public void HandleRequestOrigin(string WebClient)
+        {
+            medecinRepository.HandleRequestFrom(WebClient);
+        }
+
         public List<Models.Medecin> GetAllMedecins()
         {
             try

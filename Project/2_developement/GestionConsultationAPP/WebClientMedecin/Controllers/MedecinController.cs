@@ -24,6 +24,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301"); 
                     HttpResponseMessage response = await client.GetAsync("api/Medecin");
 
                     if (response.IsSuccessStatusCode)
@@ -71,6 +72,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     var response = await client.PostAsJsonAsync<Models.Medecin>("api/Medecin/", medecin);
 
                     if (response.IsSuccessStatusCode)
@@ -102,6 +104,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     HttpResponseMessage response = await client.GetAsync("api/Specialite/GetAllSpecialiteForMedecin/" + id);
 
                     if (response.IsSuccessStatusCode)
@@ -135,6 +138,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     HttpResponseMessage response = await client.GetAsync("api/Specialite");
 
                     if (response.IsSuccessStatusCode)
@@ -173,6 +177,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     var response = client.PostAsJsonAsync<Models.MedecinSpecialite>("api/MedecinSpecialite/", medspec);
 
                     if (response.Result.IsSuccessStatusCode)
@@ -206,6 +211,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     HttpResponseMessage responseMSMM = await client.GetAsync("api/MedecinSpecialiteMaisonMedicale/GetAllMMSForMedecin/" + id);
 
                     // Loop though the list an construct MaisonMedicaleForMedecinView
@@ -277,6 +283,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     HttpResponseMessage responseSpecialite = await client.GetAsync("api/Specialite/GetAllSpecialiteForMedecin/" + id);
                     HttpResponseMessage responseMaisonMedicale = await client.GetAsync("api/MaisonMedicale");
                     HttpResponseMessage responseMedecinSpecialite = await client.GetAsync("api/MedecinSpecialite/GetAllMedecinSpecialiteForMedecin/" + id);
@@ -331,6 +338,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     var response = client.PostAsJsonAsync<Models.MedecinSpecialiteMaisonMedicale>("api/MedecinSpecialiteMaisonMedicale/", MSMM);
 
                     if (response.Result.IsSuccessStatusCode)
@@ -370,6 +378,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     var response = await client.PutAsJsonAsync<Models.MedecinSpecialiteMaisonMedicale>("api/MedecinSpecialiteMaisonMedicale/", MSMM);
 
                     if (response.IsSuccessStatusCode)
@@ -404,6 +413,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
 
                     HttpResponseMessage responsePresence = await client.GetAsync("api/Presence/GetAllPresenceForMedecin/" + id);
 
@@ -459,6 +469,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     HttpResponseMessage response = await client.GetAsync("api/MaisonMedicale/GetAllMaisonMedicaleForMedecin/" + id);
 
                     if (response.IsSuccessStatusCode)
@@ -512,7 +523,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     var response = await client.PostAsJsonAsync<List<Models.Presence>>("api/Presence/", presences);
 
                     if (response.IsSuccessStatusCode)
@@ -546,6 +557,7 @@ namespace WebClientMedecin.Controllers
                     client.BaseAddress = new Uri(Baseurl);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
                     HttpResponseMessage responseConsultation = await client.GetAsync("api/Consultation/GetAllConsultationForMedecin/" + id);
 
                     if (responseConsultation.IsSuccessStatusCode)
@@ -570,7 +582,7 @@ namespace WebClientMedecin.Controllers
                             }
                             else
                             {
-                                ViewBag.ErrorMessage = responseMaisonMedicale.Content.ReadAsAsync<string>().Result + " " + responsePatient.Content.ReadAsAsync<string>().Result + " " + responseSpecialite.Content.ReadAsAsync<string>().Result + " " + responseLocale.Content.ReadAsAsync<string>().Result;
+                                ViewBag.ErrorMessage = "There was en issue try again";
                                 return View();
                             }
                         }

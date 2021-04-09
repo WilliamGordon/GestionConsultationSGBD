@@ -20,6 +20,11 @@ namespace BLL.BusinessServices
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
+        public void HandleRequestOrigin(string WebClient)
+        {
+            specialiteRepository.HandleRequestFrom(WebClient);
+        }
+
         public List<Models.Specialite> GetAllSpecialites()
         {
             try

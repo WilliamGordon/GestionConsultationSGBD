@@ -19,6 +19,15 @@ namespace API.Controllers
         {
             try
             {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    LocalService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
                 return Ok(LocalService.GetLocalById(id));
             }
             catch (Exception ex)
