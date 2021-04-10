@@ -79,6 +79,7 @@
 
                     <select class="form-control" data-val="true" data-val-number="The field schedule must be a number." data-val-required="The schedule field is required." id="Medecin_ID" name="Medecin_ID">
                         <option value=""></option>
+                        <option value="0">Pas de préférence</option>
                     </select>
 
                 </div>
@@ -109,12 +110,6 @@
             </div>
         </div>
     }
-
-
-
-
-
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
@@ -188,6 +183,10 @@
                             value: "",
                             text: ""
                         }));
+                        $('#Medecin_ID').append($('<option>', {
+                            value: "0",
+                            text: "Pas de préférence"
+                        }));
 
                         $.each(data, function (i, item) {
 
@@ -228,11 +227,82 @@
                         var EndHours = "@Model.Ending.Hour"
                         var EndMinutes = "@Model.Ending.Minute"
 
+                        var MedecinSpecialiteMaisonMedicale_ID = "@Model.MedecinSpecialiteMaisonMedicale_ID"
+
                         var StartDate = new Date(StartYear, (StartMonth - 1), StartDay, StartHours, StartMinutes)
                         var EndDate = new Date(EndYear, (EndMonth - 1), EndDay, EndHours, EndMinutes)
 
                         if (FormattedDay !== "" && MaisonMedicale_ID !== "" && Specialite_ID !== "" && Medecin_ID !== "" && Patient_ID !== "") {
-                            $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + Medecin_ID + "/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + Specialite_ID + "/" + Patient_ID + "/" + Consultation_ID)
+
+                            if (Medecin_ID === "0") {
+
+                                $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + Specialite_ID + "/" + Patient_ID + "/" + Consultation_ID)
+                                    .done(function (data) {
+                                        console.log(data)
+
+                                        $('#schedule').empty()
+                                        $('#schedule').append($('<option>', {
+                                            value: "",
+                                            text: ""
+                                        }));
+
+                                        var hasBeenAdded = false;
+
+                                        $.each(data, function (i, item) {
+
+                                            var obj = item;
+                                            var date = new Date(obj.Starting)
+
+                                            if (Consultation_ID !== 0) {
+                                                if (new Date(item.Ending).getTime() === StartDate.getTime() && item.MedecinSpecialiteMaisonMedicale_ID == MedecinSpecialiteMaisonMedicale_ID) {
+                                                    console.log("HIT")
+                                                    hasBeenAdded = true;
+                                                     $('#schedule').append($('<option>', {
+                                                        value: "@Json.Encode(@Model)",
+                                                         text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2) + " avec le docteur " + item.MedecinSpecialiteMaisonMedicale_ID,
+                                                        selected: true,
+                                                        style: "background:lightgreen;",
+                                                        disabled: true
+                                                    }));
+                                                }
+                                            }
+
+                                            $('#schedule').append($('<option>', {
+                                                value: JSON.stringify(item),
+                                                text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2) + " avec le docteur " + item.MedecinSpecialiteMaisonMedicale_ID
+                                            }));
+
+                                            console.log("1 " + hasBeenAdded);
+
+                                            if (Consultation_ID !== 0 && !hasBeenAdded) {
+                                                if (new Date(item.Starting).getTime() === EndDate.getTime() && item.MedecinSpecialiteMaisonMedicale_ID == MedecinSpecialiteMaisonMedicale_ID) {
+                                                    console.log("HIT")
+                                                     $('#schedule').append($('<option>', {
+                                                        value: "@Json.Encode(@Model)",
+                                                         text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2) + " avec le docteur " + item.MedecinSpecialiteMaisonMedicale_ID,
+                                                        selected: true,
+                                                        style: "background:lightgreen;",
+                                                        disabled: true
+                                                    }));
+                                                }
+                                            }
+                                        });
+
+                                    })
+                                    .fail(function (jqxhr, textStatus, error) {
+                                        $('#schedule').empty()
+                                        $('#schedule').append($('<option>', {
+                                            value: "",
+                                            text: ""
+                                        }));
+
+                                        $('#errorAPI').show()
+                                        $('#errorApiMessage').text(jqxhr.responseText)
+                                    });
+
+                            } else {
+
+                                $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + Medecin_ID + "/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + Specialite_ID + "/" + Patient_ID + "/" + Consultation_ID)
                                 .done(function (data) {
                                     console.log(data)
 
@@ -242,14 +312,17 @@
                                         text: ""
                                     }));
 
+                                    var hasBeenAdded = false;
+
                                     $.each(data, function (i, item) {
 
                                         var obj = item;
                                         var date = new Date(obj.Starting)
 
                                         if (Consultation_ID !== 0) {
-                                            if (new Date(item.Starting).getTime() === EndDate.getTime()) {
+                                            if (new Date(item.Ending).getTime() === StartDate.getTime() && MedecinSpecialiteMaisonMedicale_ID == item.MedecinSpecialiteMaisonMedicale_ID) {
                                                 console.log("HIT")
+                                                hasBeenAdded = true;
                                                  $('#schedule').append($('<option>', {
                                                     value: "@Json.Encode(@Model)",
                                                     text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2),
@@ -265,10 +338,12 @@
                                             text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2)
                                         }));
 
-                                        if (Consultation_ID !== 0) {
-                                            if (new Date(item.Ending).getTime() === StartDate.getTime()) {
+                                        console.log("2 " + hasBeenAdded);
+
+                                        if (Consultation_ID !== 0 && !hasBeenAdded) {
+                                            if (new Date(item.Starting).getTime() === EndDate.getTime() && MedecinSpecialiteMaisonMedicale_ID == item.MedecinSpecialiteMaisonMedicale_ID) {
                                                 console.log("HIT")
-                                                 $('#schedule').append($('<option>', {
+                                                $('#schedule').append($('<option>', {
                                                     value: "@Json.Encode(@Model)",
                                                     text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2),
                                                     selected: true,
@@ -289,6 +364,8 @@
                                     $('#errorAPI').show()
                                     $('#errorApiMessage').text(jqxhr.responseText)
                                 });
+
+                            }
                         }
                     })
                     .fail(function (jqxhr, textStatus, error) {
@@ -297,6 +374,10 @@
                         $('#Medecin_ID').append($('<option>', {
                             value: "",
                             text: ""
+                        }));
+                        $('#Medecin_ID').append($('<option>', {
+                            value: "0",
+                            text: "Pas de préférence"
                         }));
 
                         $("#div_schedule").hide();
@@ -452,6 +533,10 @@
                     value: "",
                     text: ""
                 }));
+                $('#Medecin_ID').append($('<option>', {
+                    value: "0",
+                    text: "Pas de préférence"
+                }));
 
                 $.each(data, function (i, item) {
                     $('#Medecin_ID').append($('<option>', {
@@ -466,6 +551,10 @@
                 $('#Medecin_ID').append($('<option>', {
                     value: "",
                     text: ""
+                }));
+                $('#Medecin_ID').append($('<option>', {
+                    value: "0",
+                    text: "Pas de préférence"
                 }));
 
                 $("#div_schedule").hide();
@@ -507,11 +596,80 @@
 
             var StartDate = new Date(StartYear, (StartMonth - 1), StartDay, StartHours, StartMinutes)
             var EndDate = new Date(EndYear, (EndMonth - 1), EndDay, EndHours, EndMinutes)
+
+            var MedecinSpecialiteMaisonMedicale_ID = "@Model.MedecinSpecialiteMaisonMedicale_ID"
         }
 
         if (FormattedDay !== "" && MaisonMedicale_ID !== "" && Specialite_ID !== "" && Medecin_ID !== "" && Patient_ID !== "")
 
-            $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + Medecin_ID + "/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + Specialite_ID + "/" + Patient_ID + "/" + Consultation_ID)
+            if (Medecin_ID === "0") {
+
+                $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + Specialite_ID + "/" + Patient_ID + "/" + Consultation_ID)
+                    .done(function (data) {
+                        console.log(data)
+
+                        $('#schedule').empty()
+                        $('#schedule').append($('<option>', {
+                            value: "",
+                            text: ""
+                        }));
+
+                        var hasBeenAdded = false;
+
+                        $.each(data, function (i, item) {
+
+                            var obj = item;
+                            var date = new Date(obj.Starting)
+
+                            if (Consultation_ID !== 0) {
+                                if (new Date(item.Ending).getTime() === StartDate.getTime() && MedecinSpecialiteMaisonMedicale_ID == item.MedecinSpecialiteMaisonMedicale_ID) {
+                                    console.log("HIT")
+                                    hasBeenAdded = true;
+                                     $('#schedule').append($('<option>', {
+                                        value: "@Json.Encode(@Model)",
+                                         text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2) + " avec le docteur " + item.MedecinSpecialiteMaisonMedicale_ID,
+                                        selected: true,
+                                        style: "background:lightgreen;",
+                                        disabled: true
+                                    }));
+                                }
+                            }
+
+                            $('#schedule').append($('<option>', {
+                                value: JSON.stringify(item),
+                                text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2) + " avec le docteur " + item.MedecinSpecialiteMaisonMedicale_ID
+                            }));
+
+                            console.log("3 " + hasBeenAdded);
+
+                            if (Consultation_ID !== 0 && !hasBeenAdded) {
+                                if (new Date(item.Starting).getTime() === EndDate.getTime() && MedecinSpecialiteMaisonMedicale_ID == item.MedecinSpecialiteMaisonMedicale_ID) {
+                                    console.log("HIT")
+                                     $('#schedule').append($('<option>', {
+                                        value: "@Json.Encode(@Model)",
+                                         text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2) + " avec le docteur " + item.MedecinSpecialiteMaisonMedicale_ID,
+                                        selected: true,
+                                        style: "background:lightgreen;",
+                                        disabled: true
+                                    }));
+                                }
+                            }
+                        });
+                    })
+                    .fail(function (jqxhr, textStatus, error) {
+                        $('#schedule').empty()
+                        $('#schedule').append($('<option>', {
+                            value: "",
+                            text: ""
+                        }));
+
+                        $('#errorAPI').show()
+                        $('#errorApiMessage').text(jqxhr.responseText)
+                    });
+
+            } else {
+
+                $.getJSON("https://localhost:44307/api/Consultation/GetAllPossibleConsultation/" + Medecin_ID + "/" + MaisonMedicale_ID + "/" + FormattedDay + "/" + Specialite_ID + "/" + Patient_ID + "/" + Consultation_ID)
                 .done(function (data) {
                     console.log(data)
 
@@ -521,14 +679,17 @@
                         text: ""
                     }));
 
+                    var hasBeenAdded = false;
+
                     $.each(data, function (i, item) {
 
                         var obj = item;
                         var date = new Date(obj.Starting)
 
                         if (Consultation_ID !== 0) {
-                            if (new Date(item.Starting).getTime() === EndDate.getTime()) {
-                                console.log("HIT")
+                            if (new Date(item.Ending).getTime() === StartDate.getTime() && MedecinSpecialiteMaisonMedicale_ID == item.MedecinSpecialiteMaisonMedicale_ID) {
+                                console.log("HIT 1")
+                                hasBeenAdded = true;
                                  $('#schedule').append($('<option>', {
                                     value: "@Json.Encode(@Model)",
                                     text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2),
@@ -544,9 +705,11 @@
                             text: "De " + padLeft(new Date(item.Starting).getHours(), 2) + ":" + padLeft(new Date(item.Starting).getMinutes(), 2) + " à " + padLeft(new Date(item.Ending).getHours(), 2) + ":" + padLeft(new Date(item.Ending).getMinutes(), 2)
                         }));
 
-                        if (Consultation_ID !== 0) {
-                            if (new Date(item.Ending).getTime() === StartDate.getTime()) {
-                                console.log("HIT")
+                        console.log("4 " + hasBeenAdded);
+
+                        if (Consultation_ID !== 0 && !hasBeenAdded) {
+                            if (new Date(item.Starting).getTime() === EndDate.getTime() && MedecinSpecialiteMaisonMedicale_ID == item.MedecinSpecialiteMaisonMedicale_ID) {
+                                console.log("HIT 2")
                                  $('#schedule').append($('<option>', {
                                     value: "@Json.Encode(@Model)",
                                     text: "De " + padLeft(StartDate.getHours(), 2) + ":" + padLeft(StartDate.getMinutes(), 2) + " à " + padLeft(EndDate.getHours(), 2) + ":" + padLeft(EndDate.getMinutes(), 2),
@@ -568,6 +731,7 @@
                     $('#errorAPI').show()
                     $('#errorApiMessage').text(jqxhr.responseText)
                 });
+            }
     }
 
     // HELPERS

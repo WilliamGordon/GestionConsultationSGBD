@@ -16,6 +16,8 @@
           <Property Name="Starting" Type="datetime" Nullable="false" />
           <Property Name="Ending" Type="datetime" Nullable="false" />
           <Property Name="IsConfirmed" Type="bit" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Local">
           <Key>
@@ -235,6 +237,11 @@
           <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
           <Parameter Name="Specialite_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetAllMedecinPresentInMaisonMedicaleWithSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+          <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+          <Parameter Name="Day" Type="date" Mode="In" />
+        </Function>
         <Function Name="GetAllMedecinSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Medecin_ID" Type="int" Mode="In" />
         </Function>
@@ -422,6 +429,8 @@
           <NavigationProperty Name="Local" Relationship="Self.FK_Consultation_Local" FromRole="Consultation" ToRole="Local" />
           <NavigationProperty Name="MedecinSpecialiteMaisonMedicale" Relationship="Self.FK_Consultation_MedecinSpecialiteMaisonMedicale" FromRole="Consultation" ToRole="MedecinSpecialiteMaisonMedicale" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Consultation_Patient" FromRole="Consultation" ToRole="Patient" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Local">
           <Key>
@@ -839,6 +848,11 @@
             <Parameter Name="Ending" Mode="In" Type="DateTime" />
             <Parameter Name="IsConfirmed" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="GetAllMedecinPresentInMaisonMedicaleWithSpecialite" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
+            <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Day" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AddMedecin_Result">
           <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -1160,6 +1174,11 @@
           <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
           <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="GetAllMedecinPresentInMaisonMedicaleWithSpecialite_Result">
+          <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+          <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1169,6 +1188,8 @@
           <EntitySetMapping Name="Consultations">
             <EntityTypeMapping TypeName="GestionConsultationModel.Consultation">
               <MappingFragment StoreEntitySet="Consultation">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
                 <ScalarProperty Name="Consultation_ID" ColumnName="Consultation_ID" />
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
                 <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ColumnName="MedecinSpecialiteMaisonMedicale_ID" />
@@ -1384,6 +1405,8 @@
           <FunctionImportMapping FunctionImportName="GetAllPatient" FunctionName="GestionConsultationModel.Store.GetAllPatient">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllMedecinPresentInMaisonMedicaleWithSpecialite" FunctionName="GestionConsultationModel.Store.GetAllMedecinPresentInMaisonMedicaleWithSpecialite">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

@@ -66,6 +66,18 @@ namespace DAL.Repositories
             }
         }
 
+        public List<DAL.Medecin> GetAllMedecinPresentInMaisonMedicaleWithSpecialite(int maisonMedicale_ID, int specialite_ID, DateTime day)
+        {
+            try
+            {
+                return context.GetAllMedecinPresentInMaisonMedicaleWithSpecialite(maisonMedicale_ID, specialite_ID, day).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public DAL.Medecin GetMedecinFromMSMM(int msmm_id)
         {
             try

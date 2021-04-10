@@ -11,6 +11,8 @@
     <Property Name="Starting" Type="datetime" Nullable="false" />
     <Property Name="Ending" Type="datetime" Nullable="false" />
     <Property Name="IsConfirmed" Type="bit" Nullable="false" />
+    <Property Name="LastModified" Type="datetime" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Local">
     <Key>
@@ -229,6 +231,11 @@
     <Parameter Name="day" Type="datetime" Mode="In" />
     <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
     <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllMedecinPresentInMaisonMedicaleWithSpecialite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
+    <Parameter Name="Specialite_ID" Type="int" Mode="In" />
+    <Parameter Name="Day" Type="date" Mode="In" />
   </Function>
   <Function Name="GetAllMedecinSpecialiteForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />

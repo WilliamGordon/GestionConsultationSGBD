@@ -16,6 +16,7 @@ namespace BLL.BusinessServices
         private DAL.Repositories.LocalRepository locaRepository { get; set; }
         private DAL.Repositories.MaisonMedicaleRepository maisRepository { get; set; }
         private DAL.Repositories.SpecialiteRepository specRepository { get; set; }
+        private DAL.Repositories.MedecinRepository medeRepository { get; set; }
         private IMapper Mapper { get; set; }
 
         public ConsultationService()
@@ -27,7 +28,8 @@ namespace BLL.BusinessServices
             locaRepository = new DAL.Repositories.LocalRepository();
             maisRepository = new DAL.Repositories.MaisonMedicaleRepository();
             specRepository = new DAL.Repositories.SpecialiteRepository();
-            
+            medeRepository = new DAL.Repositories.MedecinRepository();
+
             Mapper = new MapperConfiguration(mc => mc.AddProfile(new AutoMapperProfileConfiguration())).CreateMapper();
         }
 
@@ -137,6 +139,27 @@ namespace BLL.BusinessServices
             try
             {
                 consultationRepository.DeleteConsultation(Mapper.Map<DAL.Consultation>(consultation));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Models.Consultation> GetAllPossibleConsultation(int maisonMedicale_ID, DateTime day, int specialite_ID, int patient_ID, int consultation_ID = 0)
+        {
+            try
+            {
+                List<Models.Consultation> listeOfPossibleConsultation = new List<Models.Consultation>();
+
+                foreach (var medecin in medeRepository.GetAllMedecinPresentInMaisonMedicaleWithSpecialite(maisonMedicale_ID, specialite_ID, day))
+                {
+                    foreach (var consultation in GetAllPossibleConsultation(medecin.Medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID, consultation_ID))
+                    {
+                        listeOfPossibleConsultation.Add(consultation);
+                    }
+                }
+                return listeOfPossibleConsultation;
             }
             catch (Exception ex)
             {

@@ -132,6 +132,9 @@
     <Compile Include="GetAllMedecinPresentForMaisonMedicaleAndSpecialiteAndDay_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllMedecinPresentInMaisonMedicaleWithSpecialite_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllMedecinSpecialiteForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>

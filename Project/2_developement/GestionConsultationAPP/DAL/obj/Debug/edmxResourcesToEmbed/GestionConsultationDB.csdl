@@ -14,6 +14,8 @@
     <NavigationProperty Name="Local" Relationship="Self.FK_Consultation_Local" FromRole="Consultation" ToRole="Local" />
     <NavigationProperty Name="MedecinSpecialiteMaisonMedicale" Relationship="Self.FK_Consultation_MedecinSpecialiteMaisonMedicale" FromRole="Consultation" ToRole="MedecinSpecialiteMaisonMedicale" />
     <NavigationProperty Name="Patient" Relationship="Self.FK_Consultation_Patient" FromRole="Consultation" ToRole="Patient" />
+    <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="Local">
     <Key>
@@ -430,6 +432,11 @@
       <Parameter Name="Ending" Mode="In" Type="DateTime" />
       <Parameter Name="IsConfirmed" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="GetAllMedecinPresentInMaisonMedicaleWithSpecialite" EntitySet="Medecins" ReturnType="Collection(GestionConsultationModel.Medecin)">
+      <Parameter Name="MaisonMedicale_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Specialite_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Day" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AddMedecin_Result">
     <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
@@ -750,5 +757,10 @@
     <Property Type="DateTime" Name="Starting" Nullable="false" Precision="23" />
     <Property Type="DateTime" Name="Ending" Nullable="false" Precision="23" />
     <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetAllMedecinPresentInMaisonMedicaleWithSpecialite_Result">
+    <Property Type="Int32" Name="Medecin_ID" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

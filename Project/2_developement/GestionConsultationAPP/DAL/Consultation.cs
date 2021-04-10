@@ -21,6 +21,8 @@ namespace DAL
         public System.DateTime Starting { get; set; }
         public System.DateTime Ending { get; set; }
         public bool IsConfirmed { get; set; }
+        public System.DateTime LastModified { get; set; }
+        public System.DateTime Created { get; set; }
     
         public virtual Local Local { get; set; }
         public virtual MedecinSpecialiteMaisonMedicale MedecinSpecialiteMaisonMedicale { get; set; }

@@ -121,7 +121,6 @@ namespace API.Controllers
                     return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
                 }
 
-                var WebClient = Request.Headers.GetValues("Origin").ToList()[0];
                 return Ok(ConsultationService.ConfirmConsultation(consultation.Consultation_ID));
             }
             catch (Exception ex)
@@ -193,6 +192,29 @@ namespace API.Controllers
                 }
 
                 return Ok(ConsultationService.GetAllPossibleConsultation(medecin_ID, maisonMedicale_ID, day, specialite_ID, patient_ID, consultation_ID));
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.NotFound, ex.GetBaseException().Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/Consultation/GetAllPossibleConsultation/{maisonMedicale_ID}/{day}/{specialite_ID}/{patient_ID}/{consultation_ID}")]
+        public IHttpActionResult GetAllPossibleConsultation(int maisonMedicale_ID, DateTime day, int specialite_ID, int patient_ID, int consultation_ID)
+        {
+            try
+            {
+                if (Request.Headers.Contains("Origin"))
+                {
+                    ConsultationService.HandleRequestOrigin(Request.Headers.GetValues("Origin").ToList()[0]);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, "Vous n'avez pas les droits pour effectuer cette requète");
+                }
+
+                return Ok(ConsultationService.GetAllPossibleConsultation(maisonMedicale_ID, day, specialite_ID, patient_ID, consultation_ID));
             }
             catch (Exception ex)
             {

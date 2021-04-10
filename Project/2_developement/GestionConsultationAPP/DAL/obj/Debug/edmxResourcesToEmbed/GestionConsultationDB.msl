@@ -4,6 +4,8 @@
     <EntitySetMapping Name="Consultations">
       <EntityTypeMapping TypeName="GestionConsultationModel.Consultation">
         <MappingFragment StoreEntitySet="Consultation">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="LastModified" ColumnName="LastModified" />
           <ScalarProperty Name="Consultation_ID" ColumnName="Consultation_ID" />
           <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
           <ScalarProperty Name="MedecinSpecialiteMaisonMedicale_ID" ColumnName="MedecinSpecialiteMaisonMedicale_ID" />
@@ -185,5 +187,6 @@
     <FunctionImportMapping FunctionImportName="AddMedecin" FunctionName="GestionConsultationModel.Store.AddMedecin" />
     <FunctionImportMapping FunctionImportName="GetAllPatient" FunctionName="GestionConsultationModel.Store.GetAllPatient" />
     <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation" />
+    <FunctionImportMapping FunctionImportName="GetAllMedecinPresentInMaisonMedicaleWithSpecialite" FunctionName="GestionConsultationModel.Store.GetAllMedecinPresentInMaisonMedicaleWithSpecialite" />
   </EntityContainerMapping>
 </Mapping>
