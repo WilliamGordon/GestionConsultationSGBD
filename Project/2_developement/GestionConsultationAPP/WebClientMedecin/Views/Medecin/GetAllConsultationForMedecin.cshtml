@@ -21,6 +21,13 @@
 
 <br />
 
+<div class="form-group">
+    <label class="control-label col-md-2">Veuillez Sélectionner une date</label>
+    <div class="col-md-10">
+        <input type="text" class="form-control" data-val="true" data-val-number="The field day must be a number." autocomplete="off" data-val-required="The day field is required." id="Day" name="Day" />
+    </div>
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -46,52 +53,95 @@
         </th>
         <th></th>
     </tr>
-
-    @foreach (var item in Model)
+    @if (Model != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consultation.Consultation_ID)
-            </td>
-            <td>
-                @item.Patient.Firstname @item.Patient.Lastname
-            </td>
-            <td>
-                @item.MaisonMedicale.Name (local : @item.Local.Name)
-            </td>
-            <td>
-                @item.Specialite.Name
-            </td>
-            <td>
-                @item.Consultation.Starting.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @item.Consultation.Starting.ToString("hh:mm") - @item.Consultation.Ending.ToString("hh:mm")
-            </td>
-            <td style="text-align:center;">
-                @Html.DisplayFor(modelItem => item.Consultation.IsConfirmed)
-            </td>
-            <td>
-                @if (!item.Consultation.IsConfirmed)
-                {
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="hidden" id="consultationData_@item.Consultation.Consultation_ID" value="@Json.Encode(item.Consultation)" />
-                        <input type="button" value="Confirmer" onclick="confirmConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default" />
-                    </div>
-                }
-            </td>
-        </tr>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Consultation.Consultation_ID)
+                </td>
+                <td>
+                    @item.Patient.Firstname @item.Patient.Lastname
+                </td>
+                <td>
+                    @item.MaisonMedicale.Name (local : @item.Local.Name)
+                </td>
+                <td>
+                    @item.Specialite.Name
+                </td>
+                <td>
+                    @item.Consultation.Starting.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @item.Consultation.Starting.ToString("hh:mm") - @item.Consultation.Ending.ToString("hh:mm")
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.Consultation.IsConfirmed)
+                </td>
+                <td>
+                    @if (!item.Consultation.IsConfirmed)
+                    {
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="hidden" id="consultationData_@item.Consultation.Consultation_ID" value="@Json.Encode(item.Consultation)" />
+                            <input type="button" value="Confirmer" onclick="confirmConsultation('@item.Consultation.Consultation_ID')" class="btn btn-default" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
     }
 </table>
 
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
 
 <script>
 
     $(document).ready(function () {
         $('#errorAPI').hide();
         $('#errorApiMessage').text("");
+
+        $('#Day').datepicker({
+            minDate: new Date(),
+            dateFormat: 'dd/mm/yy',
+            onSelect: function (dateText, inst) {
+                window.location.replace("https://localhost:44301/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID + "?day=" + getFormattedDay());
+            }
+        });
+        var Year = "@ViewBag.Day.Year"
+        var Month = "@ViewBag.Day.Month"
+        var Day = "@ViewBag.Day.Day"
+        $('#Day').datepicker("setDate", new Date(Year, (Month - 1), Day));
+
     });
+
+    function getFormattedDay() {
+        
+        return FormattedDay;
+    }
+
+    function getFormattedDay() {
+
+        var date = $('#Day').datepicker('getDate');
+
+        var formattedDate = "";
+
+        var day = date.getDate();       // yields date
+        var month = date.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
+        var year = date.getUTCFullYear();  // yields year
+
+        // After this construct a string with the above results as below
+        formattedDate = padLeft(month, 2) + "-" + padLeft(day, 2) + "-" + year
+
+        console.log(formattedDate);
+
+        return formattedDate
+    }
+
+    function padLeft(nr, n, str) {
+        return Array(n - String(nr).length + 1).join(str || '0') + nr;
+    }
 
     function confirmConsultation(consultation_ID) {
 
@@ -100,7 +150,7 @@
 
         $.post("https://localhost:44307/api/Consultation/ConfirmConsultation/", consultation)
             .done(function (data) {
-                window.location.replace("https://localhost:44301/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID);
+                window.location.replace("https://localhost:44301/Medecin/GetAllConsultationForMedecin/" + @ViewBag.Medecin_ID + "/" + getFormattedDay);
             })
             .fail(function (jqxhr, textStatus, error) {
                 $('#errorAPI').show()

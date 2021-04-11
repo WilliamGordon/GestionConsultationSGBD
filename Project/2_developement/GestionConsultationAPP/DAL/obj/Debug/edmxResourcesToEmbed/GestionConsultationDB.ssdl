@@ -208,6 +208,10 @@
   <Function Name="GetAllConsultationForMedecin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Medecin_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetAllConsultationForMedecinForDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Medecin_ID" Type="int" Mode="In" />
+    <Parameter Name="Day" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="GetAllConsultationForMMForADay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaisonMedicale_ID" Type="int" Mode="In" />
     <Parameter Name="Day" Type="date" Mode="In" />

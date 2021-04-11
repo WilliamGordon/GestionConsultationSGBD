@@ -188,5 +188,6 @@
     <FunctionImportMapping FunctionImportName="GetAllPatient" FunctionName="GestionConsultationModel.Store.GetAllPatient" />
     <FunctionImportMapping FunctionImportName="UpdateConsultation" FunctionName="GestionConsultationModel.Store.UpdateConsultation" />
     <FunctionImportMapping FunctionImportName="GetAllMedecinPresentInMaisonMedicaleWithSpecialite" FunctionName="GestionConsultationModel.Store.GetAllMedecinPresentInMaisonMedicaleWithSpecialite" />
+    <FunctionImportMapping FunctionImportName="GetAllConsultationForMedecinForDay" FunctionName="GestionConsultationModel.Store.GetAllConsultationForMedecinForDay" />
   </EntityContainerMapping>
 </Mapping>

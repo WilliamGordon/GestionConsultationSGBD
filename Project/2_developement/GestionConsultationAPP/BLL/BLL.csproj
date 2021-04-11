@@ -57,6 +57,7 @@
     <Compile Include="BusinessServices\PresenceService.cs" />
     <Compile Include="BusinessServices\SpecialiteService.cs" />
     <Compile Include="CustomErrors\NoAvailabilityForMedecin.cs" />
+    <Compile Include="CustomErrors\NoLocalAvailable.cs" />
     <Compile Include="CustomErrors\PatientAlreadyHasAConsultationForSameSpecialiteInSameMaisonMedicale.cs" />
     <Compile Include="CustomErrors\PatientAlreadyHasAConsultationInAnotherMaisonMedicaleException.cs" />
     <Compile Include="Mappings\AutoMapperProfileConfiguration.cs" />

@@ -1110,5 +1110,31 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Medecin>("GetAllMedecinPresentInMaisonMedicaleWithSpecialite", mergeOption, maisonMedicale_IDParameter, specialite_IDParameter, dayParameter);
         }
+    
+        public virtual ObjectResult<Consultation> GetAllConsultationForMedecinForDay(Nullable<int> medecin_ID, Nullable<System.DateTime> day)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("GetAllConsultationForMedecinForDay", medecin_IDParameter, dayParameter);
+        }
+    
+        public virtual ObjectResult<Consultation> GetAllConsultationForMedecinForDay(Nullable<int> medecin_ID, Nullable<System.DateTime> day, MergeOption mergeOption)
+        {
+            var medecin_IDParameter = medecin_ID.HasValue ?
+                new ObjectParameter("Medecin_ID", medecin_ID) :
+                new ObjectParameter("Medecin_ID", typeof(int));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultation>("GetAllConsultationForMedecinForDay", mergeOption, medecin_IDParameter, dayParameter);
+        }
     }
 }

@@ -96,6 +96,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GestionConsultationDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GetAllConsultationForMedecinForDay_Result.cs">
+      <DependentUpon>GestionConsultationDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllConsultationForMedecin_Result.cs">
       <DependentUpon>GestionConsultationDB.tt</DependentUpon>
     </Compile>

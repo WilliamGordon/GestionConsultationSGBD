@@ -86,6 +86,18 @@ namespace BLL.BusinessServices
             }
         }
 
+        public List<Models.Consultation> GetAllConsultationForMedecin(int medecin_ID, DateTime day)
+        {
+            try
+            {
+                return Mapper.Map<List<Models.Consultation>>(consultationRepository.GetAllConsultationForMedecin(medecin_ID, day));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Models.Consultation GetConsultationById(int consultation_ID)
         {
             try
@@ -361,7 +373,7 @@ namespace BLL.BusinessServices
             }
             else
             {
-                return null;
+                throw new BLL.CustomErrors.NoLocalAvailable("Aucun local disponible dans cette maison médicale pour ce crénaux horaire");
             }
         }
     }

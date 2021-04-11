@@ -77,7 +77,19 @@ namespace DAL.Repositories
                 throw ex;
             }
         }
-        
+
+        public List<DAL.Consultation> GetAllConsultationForMedecin(int id, DateTime day)
+        {
+            try
+            {
+                return context.GetAllConsultationForMedecinForDay(id, day).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public DAL.Consultation GetConsultationbyId(int id)
         {
             try

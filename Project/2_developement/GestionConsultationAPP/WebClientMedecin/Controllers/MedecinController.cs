@@ -544,9 +544,10 @@ namespace WebClientMedecin.Controllers
             }
         }
 
-        public async Task<ActionResult> GetAllConsultationForMedecin(int id)
+        public async Task<ActionResult> GetAllConsultationForMedecin(int id, string day)
         {
             ViewBag.Medecin_ID = id;
+            ViewBag.Day = DateTime.ParseExact(day, "MM-dd-yyyy", CultureInfo.InvariantCulture);
 
             List<ModelView.ConsultationView> consultations = new List<ModelView.ConsultationView>();
 
@@ -558,7 +559,7 @@ namespace WebClientMedecin.Controllers
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.Add("Origin", "https://localhost:44301");
-                    HttpResponseMessage responseConsultation = await client.GetAsync("api/Consultation/GetAllConsultationForMedecin/" + id);
+                    HttpResponseMessage responseConsultation = await client.GetAsync("api/Consultation/GetAllConsultationForMedecin/" + id + "/" + day);
 
                     if (responseConsultation.IsSuccessStatusCode)
                     {
